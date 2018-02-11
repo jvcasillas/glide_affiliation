@@ -25,18 +25,19 @@ and fills in the already segmented textgrid.
 	- The 'normalizeScalePeakIntensity.praat' normalizes the peak intensity 
 	of all of the files in at the same level
 	- This was hand applied to every wav folder and then placed back in scripts
-4. '3_createTextGrids.praat'
+4. '3a_createTextGrids_syllabified.praat' and '3a_createTextGrids_carrier.praat'
 	- The 'createTextGrids.praat' file reads in every .wav file from the 
 	selected folder ('carrier' or 'syllabified') for each participant and creates a 
 	corresponding textgrid.
 	- The textgrid labels onset and offset of each segment of the target word
-5. '4_extractVals.praat'
-	- The '4_extractVals.praat' file will read in all .wav files and their corresponding textgrids 
+5. '4a_extractVals_syllabified.praat' and '4b_extractVals_carrier.praat'
+	- These files will read in all .wav files and their corresponding textgrids 
 	in order to extraxt labeled information from (4).
 	- This will create a .csv for each each participant for each session
 	- All the .csv files will then be read into R and ajoined
-6. After generating participant/session data file, it is necessary to append the following:
-   "prefix,f1,f2,vot,ri,cog,sd,sk,kt,labID"
+	- Note that the output .csv does not contain a header. They are added later 
+	in R.
+   
 
 
 
