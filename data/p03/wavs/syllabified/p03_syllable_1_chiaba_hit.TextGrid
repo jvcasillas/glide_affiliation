@@ -1,0 +1,102 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0 
+xmax = 1.630702947845805 
+tiers? <exists> 
+size = 7 
+item []: 
+    item [1]:
+        class = "IntervalTier" 
+        name = "syll1" 
+        xmin = 0 
+        xmax = 1.630702947845805 
+        intervals: size = 3 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.3133663657321454 
+            text = "" 
+        intervals [2]:
+            xmin = 0.3133663657321454 
+            xmax = 0.8503086541590277 
+            text = "chia" 
+        intervals [3]:
+            xmin = 0.8503086541590277 
+            xmax = 1.630702947845805 
+            text = "" 
+    item [2]:
+        class = "IntervalTier" 
+        name = "syll2" 
+        xmin = 0 
+        xmax = 1.630702947845805 
+        intervals: size = 3 
+        intervals [1]:
+            xmin = 0 
+            xmax = 1.0502637251096634 
+            text = "" 
+        intervals [2]:
+            xmin = 1.0502637251096634 
+            xmax = 1.3145400076947695 
+            text = "ba" 
+        intervals [3]:
+            xmin = 1.3145400076947695 
+            xmax = 1.630702947845805 
+            text = "" 
+    item [3]:
+        class = "IntervalTier" 
+        name = "syll3" 
+        xmin = 0 
+        xmax = 1.630702947845805 
+        intervals: size = 1 
+        intervals [1]:
+            xmin = 0 
+            xmax = 1.630702947845805 
+            text = "" 
+    item [4]:
+        class = "IntervalTier" 
+        name = "syll4" 
+        xmin = 0 
+        xmax = 1.630702947845805 
+        intervals: size = 1 
+        intervals [1]:
+            xmin = 0 
+            xmax = 1.630702947845805 
+            text = "" 
+    item [5]:
+        class = "IntervalTier" 
+        name = "syll5" 
+        xmin = 0 
+        xmax = 1.630702947845805 
+        intervals: size = 1 
+        intervals [1]:
+            xmin = 0 
+            xmax = 1.630702947845805 
+            text = "" 
+    item [6]:
+        class = "IntervalTier" 
+        name = "crit-onset" 
+        xmin = 0 
+        xmax = 1.630702947845805 
+        intervals: size = 3 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.3147646529415904 
+            text = "" 
+        intervals [2]:
+            xmin = 0.3147646529415904 
+            xmax = 0.47416939481832104 
+            text = "ch" 
+        intervals [3]:
+            xmin = 0.47416939481832104 
+            xmax = 1.630702947845805 
+            text = "" 
+    item [7]:
+        class = "IntervalTier" 
+        name = "notes" 
+        xmin = 0 
+        xmax = 1.630702947845805 
+        intervals: size = 1 
+        intervals [1]:
+            xmin = 0 
+            xmax = 1.630702947845805 
+            text = "[S]" 

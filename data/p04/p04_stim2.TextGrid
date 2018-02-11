@@ -1,0 +1,1634 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0 
+xmax = 530.8125170068028 
+tiers? <exists> 
+size = 1 
+item []: 
+    item [1]:
+        class = "IntervalTier" 
+        name = "silences" 
+        xmin = 0 
+        xmax = 530.8125170068028 
+        intervals: size = 405 
+        intervals [1]:
+            xmin = 0 
+            xmax = 14.048202614379058 
+            text = "xxx" 
+        intervals [2]:
+            xmin = 14.048202614379058 
+            xmax = 16.080418653948033 
+            text = "carrier_1_palufauto" 
+        intervals [3]:
+            xmin = 16.080418653948033 
+            xmax = 17.1608373078961 
+            text = "xxx" 
+        intervals [4]:
+            xmin = 17.1608373078961 
+            xmax = 18.987259318141636 
+            text = "carrier_1_lakapiaisto" 
+        intervals [5]:
+            xmin = 18.987259318141636 
+            xmax = 20.093402225755128 
+            text = "xxx" 
+        intervals [6]:
+            xmin = 20.093402225755128 
+            xmax = 21.714030206677222 
+            text = "carrier_1_paluparo" 
+        intervals [7]:
+            xmin = 21.714030206677222 
+            xmax = 22.845897367956148 
+            text = "xxx" 
+        intervals [8]:
+            xmin = 22.845897367956148 
+            xmax = 24.543698109874533 
+            text = "carrier_1_lakabiaisto" 
+        intervals [9]:
+            xmin = 24.543698109874533 
+            xmax = 25.521219749160878 
+            text = "xxx" 
+        intervals [10]:
+            xmin = 25.521219749160878 
+            xmax = 27.270468998410124 
+            text = "carrier_1_palufaro" 
+        intervals [11]:
+            xmin = 27.270468998410124 
+            xmax = 28.247990637696464 
+            text = "xxx" 
+        intervals [12]:
+            xmin = 28.247990637696464 
+            xmax = 30.12829135978715 
+            text = "carrier_1_lakafiaisto" 
+        intervals [13]:
+            xmin = 30.12829135978715 
+            xmax = 30.822846208753763 
+            text = "xxx" 
+        intervals [14]:
+            xmin = 30.822846208753763 
+            xmax = 33.70396261928193 
+            text = "carrier_1_palulapi" 
+        intervals [15]:
+            xmin = 33.70396261928193 
+            xmax = 34.038377916932525 
+            text = "xxx" 
+        intervals [16]:
+            xmin = 34.038377916932525 
+            xmax = 36.45645776148295 
+            text = "carrier_1_lakatiaisto" 
+        intervals [17]:
+            xmin = 36.45645776148295 
+            xmax = 36.94521858112612 
+            text = "xxx" 
+        intervals [18]:
+            xmin = 36.94521858112612 
+            xmax = 38.77164059137166 
+            text = "carrier_1_palutrauco" 
+        intervals [19]:
+            xmin = 38.77164059137166 
+            xmax = 39.56909245499999 
+            text = "xxx" 
+        intervals [20]:
+            xmin = 39.56909245499999 
+            xmax = 41.54985998723811 
+            text = "carrier_1_lakadiaisto" 
+        intervals [21]:
+            xmin = 41.54985998723811 
+            xmax = 43.89574057370693 
+            text = "xxx" 
+        intervals [22]:
+            xmin = 43.89574057370693 
+            xmax = 45.04046986181857 
+            text = "carrier_1_falumaisto" 
+        intervals [23]:
+            xmin = 45.04046986181857 
+            xmax = 47.85230213526848 
+            text = "carrier_1_lakakiaisto" 
+        intervals [24]:
+            xmin = 47.85230213526848 
+            xmax = 49.08706631120912 
+            text = "xxx" 
+        intervals [25]:
+            xmin = 49.08706631120912 
+            xmax = 51.14500660444353 
+            text = "carrier_1_falukiago" 
+        intervals [26]:
+            xmin = 51.14500660444353 
+            xmax = 52.199701004726165 
+            text = "xxx" 
+        intervals [27]:
+            xmin = 52.199701004726165 
+            xmax = 54.18589619992139 
+            text = "carrier_1_lakagiaisto" 
+        intervals [28]:
+            xmin = 54.18589619992139 
+            xmax = 55.03479657088058 
+            text = "xxx" 
+        intervals [29]:
+            xmin = 55.03479657088058 
+            xmax = 56.80977007379526 
+            text = "carrier_1_faluguato" 
+        intervals [30]:
+            xmin = 56.80977007379526 
+            xmax = 58.01880999607047 
+            text = "xxx" 
+        intervals [31]:
+            xmin = 58.01880999607047 
+            xmax = 59.896680513646864 
+            text = "carrier_1_lakapuaisto" 
+        intervals [32]:
+            xmin = 59.896680513646864 
+            xmax = 60.77130513827149 
+            text = "xxx" 
+        intervals [33]:
+            xmin = 60.77130513827149 
+            xmax = 63.0864879681602 
+            text = "carrier_1_falutarlo" 
+        intervals [34]:
+            xmin = 63.0864879681602 
+            xmax = 64.86146147107488 
+            text = "xxx" 
+        intervals [35]:
+            xmin = 64.86146147107488 
+            xmax = 66.94512601797472 
+            text = "carrier_1_lakabuaisto" 
+        intervals [36]:
+            xmin = 66.94512601797472 
+            xmax = 67.61395661327589 
+            text = "xxx" 
+        intervals [37]:
+            xmin = 67.61395661327589 
+            xmax = 69.54327563818315 
+            text = "carrier_1_falubiko" 
+        intervals [38]:
+            xmin = 69.54327563818315 
+            xmax = 70.40133128206236 
+            text = "xxx" 
+        intervals [39]:
+            xmin = 70.40133128206236 
+            xmax = 72.20202903864246 
+            text = "carrier_1_lakafuaisto" 
+        intervals [40]:
+            xmin = 72.20202903864246 
+            xmax = 72.92230814127451 
+            text = "xxx" 
+        intervals [41]:
+            xmin = 72.92230814127451 
+            xmax = 74.69728164418919 
+            text = "carrier_1_faluduako" 
+        intervals [42]:
+            xmin = 74.69728164418919 
+            xmax = 75.52045776148294 
+            text = "xxx" 
+        intervals [43]:
+            xmin = 75.52045776148294 
+            xmax = 78.06715887436053 
+            text = "carrier_1_lakatuaisto" 
+        intervals [44]:
+            xmin = 78.06715887436053 
+            xmax = 78.7488515964944 
+            text = "xxx" 
+        intervals [45]:
+            xmin = 78.7488515964944 
+            xmax = 80.58813573357267 
+            text = "carrier_1_falufialo" 
+        intervals [46]:
+            xmin = 80.58813573357267 
+            xmax = 81.39844972403371 
+            text = "xxx" 
+        intervals [47]:
+            xmin = 81.39844972403371 
+            xmax = 83.43066576360269 
+            text = "carrier_1_lakaduaisto" 
+        intervals [48]:
+            xmin = 83.43066576360269 
+            xmax = 84.30924675636018 
+            text = "xxx" 
+        intervals [49]:
+            xmin = 84.30924675636018 
+            xmax = 86.05849600560943 
+            text = "carrier_1_falutraigo" 
+        intervals [50]:
+            xmin = 86.05849600560943 
+            xmax = 86.8173614887396 
+            text = "xxx" 
+        intervals [51]:
+            xmin = 86.8173614887396 
+            xmax = 89.17113069912646 
+            text = "carrier_1_lakakuaisto" 
+        intervals [52]:
+            xmin = 89.17113069912646 
+            xmax = 89.72420215293322 
+            text = "xxx" 
+        intervals [53]:
+            xmin = 89.72420215293322 
+            xmax = 91.51203778268061 
+            text = "carrier_1_falupiro" 
+        intervals [54]:
+            xmin = 91.51203778268061 
+            xmax = 92.38666240730522 
+            text = "xxx" 
+        intervals [55]:
+            xmin = 92.38666240730522 
+            xmax = 94.26453292488162 
+            text = "carrier_1_lakaguaisto" 
+        intervals [56]:
+            xmin = 94.26453292488162 
+            xmax = 95.30794049421567 
+            text = "xxx" 
+        intervals [57]:
+            xmin = 95.30794049421567 
+            xmax = 96.88998209463962 
+            text = "carrier_1_flauro" 
+        intervals [58]:
+            xmin = 96.88998209463962 
+            xmax = 97.58453694360622 
+            text = "xxx" 
+        intervals [59]:
+            xmin = 97.58453694360622 
+            xmax = 99.1022679098666 
+            text = "carrier_1_chiaba" 
+        intervals [60]:
+            xmin = 99.1022679098666 
+            xmax = 99.97689253449123 
+            text = "xxx" 
+        intervals [61]:
+            xmin = 99.97689253449123 
+            xmax = 101.46889924708617 
+            text = "carrier_1_lifro" 
+        intervals [62]:
+            xmin = 101.46889924708617 
+            xmax = 102.20204047655093 
+            text = "xxx" 
+        intervals [63]:
+            xmin = 102.20204047655093 
+            xmax = 104.00273823313103 
+            text = "carrier_1_mebochiana" 
+        intervals [64]:
+            xmin = 104.00273823313103 
+            xmax = 104.782666573023 
+            text = "xxx" 
+        intervals [65]:
+            xmin = 104.782666573023 
+            xmax = 106.37757030027966 
+            text = "carrier_1_farloto" 
+        intervals [66]:
+            xmin = 106.37757030027966 
+            xmax = 107.1878842907407 
+            text = "xxx" 
+        intervals [67]:
+            xmin = 107.1878842907407 
+            xmax = 108.79565014483009 
+            text = "carrier_1_pachialo" 
+        intervals [68]:
+            xmin = 108.79565014483009 
+            xmax = 109.6702747694547 
+            text = "xxx" 
+        intervals [69]:
+            xmin = 109.6702747694547 
+            xmax = 111.1236951015515 
+            text = "carrier_1_tulaifo" 
+        intervals [70]:
+            xmin = 111.1236951015515 
+            xmax = 112.15148425856829 
+            text = "xxx" 
+        intervals [71]:
+            xmin = 112.15148425856829 
+            xmax = 113.54059395650151 
+            text = "carrier_1_lliape" 
+        intervals [72]:
+            xmin = 113.54059395650151 
+            xmax = 114.31232156646442 
+            text = "xxx" 
+        intervals [73]:
+            xmin = 114.31232156646442 
+            xmax = 115.85577678639022 
+            text = "carrier_1_crobo" 
+        intervals [74]:
+            xmin = 115.85577678639022 
+            xmax = 116.65322865001855 
+            text = "xxx" 
+        intervals [75]:
+            xmin = 116.65322865001855 
+            xmax = 118.26099450410793 
+            text = "carrier_1_ruyiola" 
+        intervals [76]:
+            xmin = 118.26099450410793 
+            xmax = 118.99413573357269 
+            text = "xxx" 
+        intervals [77]:
+            xmin = 118.99413573357269 
+            xmax = 120.60190158766207 
+            text = "carrier_1_polafo" 
+        intervals [78]:
+            xmin = 120.60190158766207 
+            xmax = 121.28359430979597 
+            text = "xxx" 
+        intervals [79]:
+            xmin = 121.28359430979597 
+            xmax = 122.77560102239092 
+            text = "carrier_1_manhiala" 
+        intervals [80]:
+            xmin = 122.77560102239092 
+            xmax = 123.63652418084348 
+            text = "xxx" 
+        intervals [81]:
+            xmin = 123.63652418084348 
+            xmax = 125.03849600560942 
+            text = "carrier_1_rausto" 
+        intervals [82]:
+            xmin = 125.03849600560942 
+            xmax = 125.7844993619069 
+            text = "xxx" 
+        intervals [83]:
+            xmin = 125.7844993619069 
+            xmax = 127.48230010382528 
+            text = "carrier_1_costonhialo" 
+        intervals [84]:
+            xmin = 127.48230010382528 
+            xmax = 128.4212353626135 
+            text = "xxx" 
+        intervals [85]:
+            xmin = 128.4212353626135 
+            xmax = 129.83606931421212 
+            text = "carrier_1_liamo" 
+        intervals [86]:
+            xmin = 129.83606931421212 
+            xmax = 130.62065905100775 
+            text = "xxx" 
+        intervals [87]:
+            xmin = 130.62065905100775 
+            xmax = 131.9454581147774 
+            text = "carrier_1_matio" 
+        intervals [88]:
+            xmin = 131.9454581147774 
+            xmax = 132.640012963744 
+            text = "xxx" 
+        intervals [89]:
+            xmin = 132.640012963744 
+            xmax = 134.25942778492163 
+            text = "carrier_1_nhiape" 
+        intervals [90]:
+            xmin = 134.25942778492163 
+            xmax = 142.56731599167477 
+            text = "xxx" 
+        intervals [91]:
+            xmin = 142.56731599167477 
+            xmax = 144.03942119550518 
+            text = "syllable_1_palufauto" 
+        intervals [92]:
+            xmin = 144.03942119550518 
+            xmax = 145.05552921528968 
+            text = "xxx" 
+        intervals [93]:
+            xmin = 145.05552921528968 
+            xmax = 146.93339973286606 
+            text = "syllable_1_lakapiaisto" 
+        intervals [94]:
+            xmin = 146.93339973286606 
+            xmax = 148.20675028930486 
+            text = "xxx" 
+        intervals [95]:
+            xmin = 148.20675028930486 
+            xmax = 149.58299786040536 
+            text = "syllable_1_paluparo" 
+        intervals [96]:
+            xmin = 149.58299786040536 
+            xmax = 150.93352117784045 
+            text = "xxx" 
+        intervals [97]:
+            xmin = 150.93352117784045 
+            xmax = 152.46411427093352 
+            text = "syllable_1_lakabiaisto" 
+        intervals [98]:
+            xmin = 152.46411427093352 
+            xmax = 153.6665590686725 
+            text = "xxx" 
+        intervals [99]:
+            xmin = 153.6665590686725 
+            xmax = 155.45439469841992 
+            text = "syllable_1_palufauro " 
+        intervals [100]:
+            xmin = 155.45439469841992 
+            xmax = 156.5605376060334 
+            text = "xxx" 
+        intervals [101]:
+            xmin = 156.5605376060334 
+            xmax = 158.5927536456024 
+            text = "syllable_1_lakafiaisto" 
+        intervals [102]:
+            xmin = 158.5927536456024 
+            xmax = 159.68603442638315 
+            text = "xxx" 
+        intervals [103]:
+            xmin = 159.68603442638315 
+            xmax = 161.31952453413797 
+            text = "syllable_1_palufasti" 
+        intervals [104]:
+            xmin = 161.31952453413797 
+            xmax = 162.45139169541687 
+            text = "xxx" 
+        intervals [105]:
+            xmin = 162.45139169541687 
+            xmax = 164.1254549065678 
+            text = "syllable_1_lakatiaisto" 
+        intervals [106]:
+            xmin = 164.1254549065678 
+            xmax = 165.14156292635226 
+            text = "xxx" 
+        intervals [107]:
+            xmin = 165.14156292635226 
+            xmax = 166.76219090727437 
+            text = "syllable_1_palutrauco" 
+        intervals [108]:
+            xmin = 166.76219090727437 
+            xmax = 167.85547168805516 
+            text = "xxx" 
+        intervals [109]:
+            xmin = 167.85547168805516 
+            xmax = 169.65616944463525 
+            text = "syllable_1_lakadiaisto" 
+        intervals [110]:
+            xmin = 169.65616944463525 
+            xmax = 170.86520936691048 
+            text = "xxx" 
+        intervals [111]:
+            xmin = 170.86520936691048 
+            xmax = 172.67876925032328 
+            text = "syllable_1_palumaisto" 
+        intervals [112]:
+            xmin = 172.67876925032328 
+            xmax = 173.74632577743864 
+            text = "xxx" 
+        intervals [113]:
+            xmin = 173.74632577743864 
+            xmax = 176.03049600560942 
+            text = "syllable_1_lakakiaisto" 
+        intervals [114]:
+            xmin = 176.03049600560942 
+            xmax = 177.0337418985612 
+            text = "xxx" 
+        intervals [115]:
+            xmin = 177.0337418985612 
+            xmax = 178.73154264047957 
+            text = "syllable_1_palufago " 
+        intervals [116]:
+            xmin = 178.73154264047957 
+            xmax = 179.6833400261005 
+            text = "xxx" 
+        intervals [117]:
+            xmin = 179.6833400261005 
+            xmax = 182.07569561698548 
+            text = "syllable_1_lakagiaisto" 
+        intervals [118]:
+            xmin = 182.07569561698548 
+            xmax = 183.09180363676998 
+            text = "xxx" 
+        intervals [119]:
+            xmin = 183.09180363676998 
+            xmax = 184.07425850340132 
+            text = "syllable_1_paluguato" 
+        intervals [120]:
+            xmin = 184.07425850340132 
+            xmax = 185.6680109323008 
+            text = "xxx" 
+        intervals [121]:
+            xmin = 185.6680109323008 
+            xmax = 187.3915359278846 
+            text = "syllable_1_lakapuaisto" 
+        intervals [122]:
+            xmin = 187.3915359278846 
+            xmax = 188.44623032816725 
+            text = "xxx" 
+        intervals [123]:
+            xmin = 188.44623032816725 
+            xmax = 189.97682342126035 
+            text = "syllable_1_palutarlo" 
+        intervals [124]:
+            xmin = 189.97682342126035 
+            xmax = 190.99293144104482 
+            text = "xxx" 
+        intervals [125]:
+            xmin = 190.99293144104482 
+            xmax = 192.69073218296322 
+            text = "syllable_1_lakabuaisto" 
+        intervals [126]:
+            xmin = 192.69073218296322 
+            xmax = 193.68111594908228 
+            text = "xxx" 
+        intervals [127]:
+            xmin = 193.68111594908228 
+            xmax = 195.07941448291027 
+            text = "syllable_1_falubiko" 
+        intervals [128]:
+            xmin = 195.07941448291027 
+            xmax = 196.0440739953639 
+            text = "xxx" 
+        intervals [129]:
+            xmin = 196.0440739953639 
+            xmax = 197.574667088457 
+            text = "syllable_1_lakafuaisto" 
+        intervals [130]:
+            xmin = 197.574667088457 
+            xmax = 198.80943126439763 
+            text = "xxx" 
+        intervals [131]:
+            xmin = 198.80943126439763 
+            xmax = 200.3914728648216 
+            text = "syllable_1_faluduako" 
+        intervals [132]:
+            xmin = 200.3914728648216 
+            xmax = 201.31754599677706 
+            text = "xxx" 
+        intervals [133]:
+            xmin = 201.31754599677706 
+            xmax = 203.15683013385532 
+            text = "syllable_1_lakatuaisto" 
+        intervals [134]:
+            xmin = 203.15683013385532 
+            xmax = 204.10862751947624 
+            text = "xxx" 
+        intervals [135]:
+            xmin = 204.10862751947624 
+            xmax = 205.94791165655448 
+            text = "syllable_1_falufaisto " 
+        intervals [136]:
+            xmin = 205.94791165655448 
+            xmax = 206.7661115770632 
+            text = "xxx" 
+        intervals [137]:
+            xmin = 206.7661115770632 
+            xmax = 208.50249869947976 
+            text = "syllable_1_lakaduaisto" 
+        intervals [138]:
+            xmin = 208.50249869947976 
+            xmax = 209.40284757776982 
+            text = "xxx" 
+        intervals [139]:
+            xmin = 209.40284757776982 
+            xmax = 210.99775130502647 
+            text = "syllable_1_falutraigo" 
+        intervals [140]:
+            xmin = 210.99775130502647 
+            xmax = 211.92382443698196 
+            text = "xxx" 
+        intervals [141]:
+            xmin = 211.92382443698196 
+            xmax = 213.72452219356205 
+            text = "syllable_1_lakakuaisto" 
+        intervals [142]:
+            xmin = 213.72452219356205 
+            xmax = 214.58628469135397 
+            text = "xxx" 
+        intervals [143]:
+            xmin = 214.58628469135397 
+            xmax = 216.28020683408494 
+            text = "syllable_1_falupiro" 
+        intervals [144]:
+            xmin = 216.28020683408494 
+            xmax = 217.090520824546 
+            text = "xxx" 
+        intervals [145]:
+            xmin = 217.090520824546 
+            xmax = 219.26422025927482 
+            text = "syllable_1_lakaguaisto" 
+        intervals [146]:
+            xmin = 219.26422025927482 
+            xmax = 220.29319040589203 
+            text = "xxx" 
+        intervals [147]:
+            xmin = 220.29319040589203 
+            xmax = 221.43791969400368 
+            text = "syllable_1_flauro" 
+        intervals [148]:
+            xmin = 221.43791969400368 
+            xmax = 222.42830346012272 
+            text = "xxx" 
+        intervals [149]:
+            xmin = 222.42830346012272 
+            xmax = 223.7659646507251 
+            text = "syllable_1_chiaba" 
+        intervals [150]:
+            xmin = 223.7659646507251 
+            xmax = 224.73062416317873 
+            text = "xxx" 
+        intervals [151]:
+            xmin = 224.73062416317873 
+            xmax = 226.02969897328293 
+            text = "syllable_1_lifro" 
+        intervals [152]:
+            xmin = 226.02969897328293 
+            xmax = 227.288555712375 
+            text = "xxx" 
+        intervals [153]:
+            xmin = 227.288555712375 
+            xmax = 229.37222025927483 
+            text = "syllable_1_mebochiana" 
+        intervals [154]:
+            xmin = 229.37222025927483 
+            xmax = 230.14394786923773 
+            text = "xxx" 
+        intervals [155]:
+            xmin = 230.14394786923773 
+            xmax = 231.52019544033826 
+            text = "syllable_1_falotro" 
+        intervals [156]:
+            xmin = 231.52019544033826 
+            xmax = 232.74209748944617 
+            text = "xxx" 
+        intervals [157]:
+            xmin = 232.74209748944617 
+            xmax = 234.25982845570655 
+            text = "syllable_1_pachialo" 
+        intervals [158]:
+            xmin = 234.25982845570655 
+            xmax = 236.38207938310453 
+            text = "xxx" 
+        intervals [159]:
+            xmin = 236.38207938310453 
+            xmax = 237.8774560833342 
+            text = "syllable_1_tuliafo" 
+        intervals [160]:
+            xmin = 237.8774560833342 
+            xmax = 238.94501261044954 
+            text = "xxx" 
+        intervals [161]:
+            xmin = 238.94501261044954 
+            xmax = 240.11546615222662 
+            text = "syllable_1_lliape" 
+        intervals [162]:
+            xmin = 240.11546615222662 
+            xmax = 240.9515043963531 
+            text = "xxx" 
+        intervals [163]:
+            xmin = 240.9515043963531 
+            xmax = 242.31488984062088 
+            text = "syllable_1_crobo" 
+        intervals [164]:
+            xmin = 242.31488984062088 
+            xmax = 243.5239297628961 
+            text = "xxx" 
+        intervals [165]:
+            xmin = 243.5239297628961 
+            xmax = 245.09310923648735 
+            text = "syllable_1_ruyiola" 
+        intervals [166]:
+            xmin = 245.09310923648735 
+            xmax = 246.12207938310453 
+            text = "xxx" 
+        intervals [167]:
+            xmin = 246.12207938310453 
+            xmax = 247.5831803369996 
+            text = "syllable_1_polafo" 
+        intervals [168]:
+            xmin = 247.5831803369996 
+            xmax = 248.5992883567841 
+            text = "xxx" 
+        intervals [169]:
+            xmin = 248.5992883567841 
+            xmax = 250.24564059137163 
+            text = "syllable_1_payielo" 
+        intervals [170]:
+            xmin = 250.24564059137163 
+            xmax = 251.2746107379888 
+            text = "xxx" 
+        intervals [171]:
+            xmin = 251.2746107379888 
+            xmax = 252.47078853343132 
+            text = "syllable_1_rausto" 
+        intervals [172]:
+            xmin = 252.47078853343132 
+            xmax = 253.5640693142121 
+            text = "xxx" 
+        intervals [173]:
+            xmin = 253.5640693142121 
+            xmax = 255.22328367563233 
+            text = "syllable_1_manhiala" 
+        intervals [174]:
+            xmin = 255.22328367563233 
+            xmax = 256.43232359790755 
+            text = "xxx" 
+        intervals [175]:
+            xmin = 256.43232359790755 
+            xmax = 257.8918016053268 
+            text = "syllable_1_liamo" 
+        intervals [176]:
+            xmin = 257.8918016053268 
+            xmax = 258.9079096251113 
+            text = "xxx" 
+        intervals [177]:
+            xmin = 258.9079096251113 
+            xmax = 261.043022679342 
+            text = "syllable_1_costonhialo" 
+        intervals [178]:
+            xmin = 261.043022679342 
+            xmax = 262.02054431862837 
+            text = "xxx" 
+        intervals [179]:
+            xmin = 262.02054431862837 
+            xmax = 263.345343382398 
+            text = "syllable_1_matio" 
+        intervals [180]:
+            xmin = 263.345343382398 
+            xmax = 264.0398982313646 
+            text = "xxx" 
+        intervals [181]:
+            xmin = 264.0398982313646 
+            xmax = 265.36469729513425 
+            text = "syllable_1_nhiape" 
+        intervals [182]:
+            xmin = 265.36469729513425 
+            xmax = 269.33591130326005 
+            text = "xxx" 
+        intervals [183]:
+            xmin = 269.33591130326005 
+            xmax = 270.91795290368395 
+            text = "carrier_2_milla" 
+        intervals [184]:
+            xmin = 270.91795290368395 
+            xmax = 271.5739213721524 
+            text = "xxx" 
+        intervals [185]:
+            xmin = 271.5739213721524 
+            xmax = 273.11737659207824 
+            text = "carrier_2_puerta" 
+        intervals [186]:
+            xmin = 273.11737659207824 
+            xmax = 273.6833101727177 
+            text = "xxx" 
+        intervals [187]:
+            xmin = 273.6833101727177 
+            xmax = 275.25248964630896 
+            text = "carrier_2_silla" 
+        intervals [188]:
+            xmin = 275.25248964630896 
+            xmax = 275.92132024161015 
+            text = "xxx" 
+        intervals [189]:
+            xmin = 275.92132024161015 
+            xmax = 277.3104299395434 
+            text = "carrier_2_taco" 
+        intervals [190]:
+            xmin = 277.3104299395434 
+            xmax = 277.95353628117914 
+            text = "xxx" 
+        intervals [191]:
+            xmin = 277.95353628117914 
+            xmax = 279.4969915011049 
+            text = "carrier_2_grillo" 
+        intervals [192]:
+            xmin = 279.4969915011049 
+            xmax = 280.04045440518547 
+            text = "xxx" 
+        intervals [193]:
+            xmin = 280.04045440518547 
+            xmax = 281.5839096251113 
+            text = "carrier_2_flaco" 
+        intervals [194]:
+            xmin = 281.5839096251113 
+            xmax = 282.3427751082415 
+            text = "xxx" 
+        intervals [195]:
+            xmin = 282.3427751082415 
+            xmax = 283.84764394766916 
+            text = "carrier_2_chillo" 
+        intervals [196]:
+            xmin = 283.84764394766916 
+            xmax = 284.4907502893049 
+            text = "xxx" 
+        intervals [197]:
+            xmin = 284.4907502893049 
+            xmax = 286.13710252389245 
+            text = "carrier_2_aguacate" 
+        intervals [198]:
+            xmin = 286.13710252389245 
+            xmax = 286.8445194996918 
+            text = "xxx" 
+        intervals [199]:
+            xmin = 286.8445194996918 
+            xmax = 288.323664085454 
+            text = "carrier_2_pille" 
+        intervals [200]:
+            xmin = 288.323664085454 
+            xmax = 288.8767355392608 
+            text = "xxx" 
+        intervals [201]:
+            xmin = 288.8767355392608 
+            xmax = 290.9807650393491 
+            text = "carrier_2_fruta" 
+        intervals [202]:
+            xmin = 290.9807650393491 
+            xmax = 292.4341853714459 
+            text = "carrier_2_vello" 
+        intervals [203]:
+            xmin = 292.4341853714459 
+            xmax = 293.0515674594162 
+            text = "xxx" 
+        intervals [204]:
+            xmin = 293.0515674594162 
+            xmax = 294.4792635378476 
+            text = "carrier_2_piano" 
+        intervals [205]:
+            xmin = 294.4792635378476 
+            xmax = 295.1609562599815 
+            text = "xxx" 
+        intervals [206]:
+            xmin = 295.1609562599815 
+            xmax = 296.65296297257646 
+            text = "carrier_2_sella" 
+        intervals [207]:
+            xmin = 296.65296297257646 
+            xmax = 297.32179356787765 
+            text = "xxx" 
+        intervals [208]:
+            xmin = 297.32179356787765 
+            xmax = 298.80093815363983 
+            text = "carrier_2_conejo" 
+        intervals [209]:
+            xmin = 298.80093815363983 
+            xmax = 299.3025611001157 
+            text = "xxx" 
+        intervals [210]:
+            xmin = 299.3025611001157 
+            xmax = 300.7302571785471 
+            text = "carrier_2_bella" 
+        intervals [211]:
+            xmin = 300.7302571785471 
+            xmax = 301.318799927178 
+            text = "xxx" 
+        intervals [212]:
+            xmin = 301.318799927178 
+            xmax = 302.6564611177804 
+            text = "carrier_2_balon" 
+        intervals [213]:
+            xmin = 302.6564611177804 
+            xmax = 303.4024644740779 
+            text = "xxx" 
+        intervals [214]:
+            xmin = 303.4024644740779 
+            xmax = 305.0230924549999 
+            text = "carrier_2_centella" 
+        intervals [215]:
+            xmin = 305.0230924549999 
+            xmax = 305.64047454297025 
+            text = "xxx" 
+        intervals [216]:
+            xmin = 305.64047454297025 
+            xmax = 307.2225161433942 
+            text = "carrier_2_flauta" 
+        intervals [217]:
+            xmin = 307.2225161433942 
+            xmax = 308.27721054367686 
+            text = "xxx" 
+        intervals [218]:
+            xmin = 308.27721054367686 
+            xmax = 309.71776874894095 
+            text = "carrier_2_ella" 
+        intervals [219]:
+            xmin = 309.71776874894095 
+            xmax = 310.55380699306744 
+            text = "xxx" 
+        intervals [220]:
+            xmin = 310.55380699306744 
+            xmax = 312.00576671749775 
+            text = "carrier_2_dedo" 
+        intervals [221]:
+            xmin = 312.00576671749775 
+            xmax = 312.7517700737952 
+            text = "xxx" 
+        intervals [222]:
+            xmin = 312.7517700737952 
+            xmax = 314.1794661522266 
+            text = "carrier_2_estrella" 
+        intervals [223]:
+            xmin = 314.1794661522266 
+            xmax = 315.0283665231858 
+            text = "xxx" 
+        intervals [224]:
+            xmin = 315.0283665231858 
+            xmax = 316.3660277137882 
+            text = "carrier_2_luna" 
+        intervals [225]:
+            xmin = 316.3660277137882 
+            xmax = 317.2020659579146 
+            text = "xxx" 
+        intervals [226]:
+            xmin = 317.2020659579146 
+            xmax = 318.719796924175 
+            text = "carrier_2_cabello" 
+        intervals [227]:
+            xmin = 318.719796924175 
+            xmax = 319.45293815363976 
+            text = "xxx" 
+        intervals [228]:
+            xmin = 319.45293815363976 
+            xmax = 321.0864282613946 
+            text = "carrier_2_dinosaurio" 
+        intervals [229]:
+            xmin = 321.0864282613946 
+            xmax = 321.79888816247217 
+            text = "xxx" 
+        intervals [230]:
+            xmin = 321.79888816247217 
+            xmax = 323.16227360674 
+            text = "carrier_2_leyes" 
+        intervals [231]:
+            xmin = 323.16227360674 
+            xmax = 323.8439663288738 
+            text = "xxx" 
+        intervals [232]:
+            xmin = 323.8439663288738 
+            xmax = 325.5417670707922 
+            text = "carrier_2_microfono" 
+        intervals [233]:
+            xmin = 325.5417670707922 
+            xmax = 326.274908300257 
+            text = "xxx" 
+        intervals [234]:
+            xmin = 326.274908300257 
+            xmax = 327.8055013933501 
+            text = "carrier_2_cuchillo" 
+        intervals [235]:
+            xmin = 327.8055013933501 
+            xmax = 328.44860773498584 
+            text = "xxx" 
+        intervals [236]:
+            xmin = 328.44860773498584 
+            xmax = 330.0306493354098 
+            text = "carrier_2_bolsa" 
+        intervals [237]:
+            xmin = 330.0306493354098 
+            xmax = 330.81700589785464 
+            text = "xxx" 
+        intervals [238]:
+            xmin = 330.81700589785464 
+            xmax = 332.3861853714459 
+            text = "carrier_2_portillo" 
+        intervals [239]:
+            xmin = 332.3861853714459 
+            xmax = 333.1450508545761 
+            text = "xxx" 
+        intervals [240]:
+            xmin = 333.1450508545761 
+            xmax = 334.6756439476692 
+            text = "carrier_2_lapiz" 
+        intervals [241]:
+            xmin = 334.6756439476692 
+            xmax = 335.31875028930494 
+            text = "xxx" 
+        intervals [242]:
+            xmin = 335.31875028930494 
+            xmax = 337.0422752848887 
+            text = "carrier_2_costilla" 
+        intervals [243]:
+            xmin = 337.0422752848887 
+            xmax = 337.8911756558479 
+            text = "xxx" 
+        intervals [244]:
+            xmin = 337.8911756558479 
+            xmax = 339.331733861112 
+            text = "carrier_2_sol" 
+        intervals [245]:
+            xmin = 339.331733861112 
+            xmax = 340.14204785157307 
+            text = "xxx" 
+        intervals [246]:
+            xmin = 340.14204785157307 
+            xmax = 341.7939445129403 
+            text = "carrier_2_billete" 
+        intervals [247]:
+            xmin = 341.7939445129403 
+            xmax = 342.4627751082415 
+            text = "xxx" 
+        intervals [248]:
+            xmin = 342.4627751082415 
+            xmax = 343.9547818208364 
+            text = "carrier_2_espejo" 
+        intervals [249]:
+            xmin = 343.9547818208364 
+            xmax = 344.7522336844647 
+            text = "xxx" 
+        intervals [250]:
+            xmin = 344.7522336844647 
+            xmax = 346.46289655321584 
+            text = "carrier_2_sencillez" 
+        intervals [251]:
+            xmin = 346.46289655321584 
+            xmax = 347.0931407680189 
+            text = "xxx" 
+        intervals [252]:
+            xmin = 347.0931407680189 
+            xmax = 348.623733861112 
+            text = "carrier_2_ropa" 
+        intervals [253]:
+            xmin = 348.623733861112 
+            xmax = 349.18966744175145 
+            text = "xxx" 
+        intervals [254]:
+            xmin = 349.18966744175145 
+            xmax = 350.78404246383235 
+            text = "carrier_2_velludo" 
+        intervals [255]:
+            xmin = 350.78404246383235 
+            xmax = 351.38856242496996 
+            text = "xxx" 
+        intervals [256]:
+            xmin = 351.38856242496996 
+            xmax = 352.99632827905936 
+            text = "carrier_2_reloj" 
+        intervals [257]:
+            xmin = 352.99632827905936 
+            xmax = 353.6522967475278 
+            text = "xxx" 
+        intervals [258]:
+            xmin = 353.6522967475278 
+            xmax = 355.24720047478445 
+            text = "carrier_2_bellota" 
+        intervals [259]:
+            xmin = 355.24720047478445 
+            xmax = 355.7874098017585 
+            text = "xxx" 
+        intervals [260]:
+            xmin = 355.7874098017585 
+            xmax = 357.3951756558479 
+            text = "carrier_2_pistola" 
+        intervals [261]:
+            xmin = 357.3951756558479 
+            xmax = 358.0125577438182 
+            text = "xxx" 
+        intervals [262]:
+            xmin = 358.0125577438182 
+            xmax = 360.67455840624535 
+            text = "carrier_2_belleza" 
+        intervals [263]:
+            xmin = 360.67455840624535 
+            xmax = 361.4848723967064 
+            text = "xxx" 
+        intervals [264]:
+            xmin = 361.4848723967064 
+            xmax = 362.97687910930136 
+            text = "carrier_2_pan" 
+        intervals [265]:
+            xmin = 362.97687910930136 
+            xmax = 363.63284757776984 
+            text = "xxx" 
+        intervals [266]:
+            xmin = 363.63284757776984 
+            xmax = 365.2791998123573 
+            text = "carrier_2_leyenda" 
+        intervals [267]:
+            xmin = 365.2791998123573 
+            xmax = 366.0123410418221 
+            text = "xxx" 
+        intervals [268]:
+            xmin = 366.0123410418221 
+            xmax = 367.59438264224605 
+            text = "carrier_2_relleno" 
+        intervals [269]:
+            xmin = 367.59438264224605 
+            xmax = 368.18604047655094 
+            text = "xxx" 
+        intervals [270]:
+            xmin = 368.18604047655094 
+            xmax = 369.9095654721348 
+            text = "carrier_2_lavadora" 
+        intervals [271]:
+            xmin = 369.9095654721348 
+            xmax = 370.52614613367865 
+            text = "xxx" 
+        intervals [272]:
+            xmin = 370.52614613367865 
+            xmax = 372.23680900242977 
+            text = "carrier_2_oyendo" 
+        intervals [273]:
+            xmin = 372.23680900242977 
+            xmax = 372.7770183294038 
+            text = "xxx" 
+        intervals [274]:
+            xmin = 372.7770183294038 
+            xmax = 374.3847841834932 
+            text = "carrier_2_naranja" 
+        intervals [275]:
+            xmin = 374.3847841834932 
+            xmax = 374.8220964958055 
+            text = "xxx" 
+        intervals [276]:
+            xmin = 374.8220964958055 
+            xmax = 376.72569126704735 
+            text = "carrier_2_ayer" 
+        intervals [277]:
+            xmin = 376.72569126704735 
+            xmax = 377.1887278330251 
+            text = "xxx" 
+        intervals [278]:
+            xmin = 377.1887278330251 
+            xmax = 378.98942558960516 
+            text = "carrier_2_fortuna" 
+        intervals [279]:
+            xmin = 378.98942558960516 
+            xmax = 379.5573165320182 
+            text = "xxx" 
+        intervals [280]:
+            xmin = 379.5573165320182 
+            xmax = 381.3451521617656 
+            text = "carrier_2_toller" 
+        intervals [281]:
+            xmin = 381.3451521617656 
+            xmax = 381.89822361557236 
+            text = "xxx" 
+        intervals [282]:
+            xmin = 381.89822361557236 
+            xmax = 383.45454096233084 
+            text = "carrier_2_traje" 
+        intervals [283]:
+            xmin = 383.45454096233084 
+            xmax = 384.1105094307993 
+            text = "xxx" 
+        intervals [284]:
+            xmin = 384.1105094307993 
+            xmax = 386.0398284557066 
+            text = "carrier_2_patilludo" 
+        intervals [285]:
+            xmin = 386.0398284557066 
+            xmax = 386.5543135290152 
+            text = "xxx" 
+        intervals [286]:
+            xmin = 386.5543135290152 
+            xmax = 388.31642490509716 
+            text = "carrier_2_teclado" 
+        intervals [287]:
+            xmin = 388.31642490509716 
+            xmax = 388.9595312467329 
+            text = "xxx" 
+        intervals [288]:
+            xmin = 388.9595312467329 
+            xmax = 390.74287641543106 
+            text = "carrier_2_silleta" 
+        intervals [289]:
+            xmin = 390.74287641543106 
+            xmax = 391.3988448838995 
+            text = "xxx" 
+        intervals [290]:
+            xmin = 391.3988448838995 
+            xmax = 393.0066107379889 
+            text = "carrier_2_toalla" 
+        intervals [291]:
+            xmin = 393.0066107379889 
+            xmax = 393.61113069912653 
+            text = "xxx" 
+        intervals [292]:
+            xmin = 393.61113069912653 
+            xmax = 395.4118284557066 
+            text = "carrier_2_estrellita" 
+        intervals [293]:
+            xmin = 395.4118284557066 
+            xmax = 396.05382306796594 
+            text = "xxx" 
+        intervals [294]:
+            xmin = 396.05382306796594 
+            xmax = 397.75162380988434 
+            text = "carrier_2_heroe" 
+        intervals [295]:
+            xmin = 397.75162380988434 
+            xmax = 398.1632118685312 
+            text = "xxx" 
+        intervals [296]:
+            xmin = 398.1632118685312 
+            xmax = 400.0796687666058 
+            text = "carrier_2_sellito" 
+        intervals [297]:
+            xmin = 400.0796687666058 
+            xmax = 400.73563723507425 
+            text = "xxx" 
+        intervals [298]:
+            xmin = 400.73563723507425 
+            xmax = 402.5234728648216 
+            text = "carrier_2_programa" 
+        intervals [299]:
+            xmin = 402.5234728648216 
+            xmax = 403.08940644546107 
+            text = "xxx" 
+        intervals [300]:
+            xmin = 403.08940644546107 
+            xmax = 404.87724207520847 
+            text = "carrier_2_ballena" 
+        intervals [301]:
+            xmin = 404.87724207520847 
+            xmax = 405.37886502168436 
+            text = "xxx" 
+        intervals [302]:
+            xmin = 405.37886502168436 
+            xmax = 407.0895278904355 
+            text = "carrier_2_video" 
+        intervals [303]:
+            xmin = 407.0895278904355 
+            xmax = 407.66832359790766 
+            text = "xxx" 
+        intervals [304]:
+            xmin = 407.66832359790766 
+            xmax = 409.3849361221966 
+            text = "carrier_2_bulle" 
+        intervals [305]:
+            xmin = 409.3849361221966 
+            xmax = 409.9380075760034 
+            text = "xxx" 
+        intervals [306]:
+            xmin = 409.9380075760034 
+            xmax = 411.71298107891806 
+            text = "carrier_2_descanso" 
+        intervals [307]:
+            xmin = 411.71298107891806 
+            xmax = 412.2531904058921 
+            text = "xxx" 
+        intervals [308]:
+            xmin = 412.2531904058921 
+            xmax = 413.9509911478105 
+            text = "carrier_2_calle" 
+        intervals [309]:
+            xmin = 413.9509911478105 
+            xmax = 414.5555111089481 
+            text = "xxx" 
+        intervals [310]:
+            xmin = 414.5555111089481 
+            xmax = 416.3819331191936 
+            text = "carrier_2_edificio" 
+        intervals [311]:
+            xmin = 416.3819331191936 
+            xmax = 416.8287200826276 
+            text = "xxx" 
+        intervals [312]:
+            xmin = 416.8287200826276 
+            xmax = 418.46221019038245 
+            text = "carrier_2_valle" 
+        intervals [313]:
+            xmin = 418.46221019038245 
+            xmax = 418.9638331368583 
+            text = "xxx" 
+        intervals [314]:
+            xmin = 418.9638331368583 
+            xmax = 420.9317385422637 
+            text = "carrier_2_pantalon" 
+        intervals [315]:
+            xmin = 420.9317385422637 
+            xmax = 421.31760234724516 
+            text = "xxx" 
+        intervals [316]:
+            xmin = 421.31760234724516 
+            xmax = 423.27264562581786 
+            text = "carrier_2_callejero" 
+        intervals [317]:
+            xmin = 423.27264562581786 
+            xmax = 423.68423368446474 
+            text = "xxx" 
+        intervals [318]:
+            xmin = 423.68423368446474 
+            xmax = 425.38203442638314 
+            text = "carrier_2_libra" 
+        intervals [319]:
+            xmin = 425.38203442638314 
+            xmax = 425.8579331191936 
+            text = "xxx" 
+        intervals [320]:
+            xmin = 425.8579331191936 
+            xmax = 427.6200444952755 
+            text = "carrier_2_caballero" 
+        intervals [321]:
+            xmin = 427.6200444952755 
+            xmax = 428.1969361221965 
+            text = "xxx" 
+        intervals [322]:
+            xmin = 428.1969361221965 
+            xmax = 430.2806006690964 
+            text = "carrier_2_numeracion" 
+        intervals [323]:
+            xmin = 430.2806006690964 
+            xmax = 430.7179129814087 
+            text = "xxx" 
+        intervals [324]:
+            xmin = 430.7179129814087 
+            xmax = 432.4028515964944 
+            text = "carrier_2_gallina" 
+        intervals [325]:
+            xmin = 432.4028515964944 
+            xmax = 433.11026857229365 
+            text = "xxx" 
+        intervals [326]:
+            xmin = 433.11026857229365 
+            xmax = 434.7566208068812 
+            text = "carrier_2_flor" 
+        intervals [327]:
+            xmin = 434.7566208068812 
+            xmax = 435.3482786411861 
+            text = "xxx" 
+        intervals [328]:
+            xmin = 435.3482786411861 
+            xmax = 437.1618385245989 
+            text = "carrier_2_bollito" 
+        intervals [329]:
+            xmin = 437.1618385245989 
+            xmax = 437.5278190492412 
+            text = "xxx" 
+        intervals [330]:
+            xmin = 437.5278190492412 
+            xmax = 439.26420617165775 
+            text = "carrier_2_paleta" 
+        intervals [331]:
+            xmin = 439.26420617165775 
+            xmax = 439.5600350888102 
+            text = "xxx" 
+        intervals [332]:
+            xmin = 439.5600350888102 
+            xmax = 441.5150783673829 
+            text = "carrier_2_pollito" 
+        intervals [333]:
+            xmin = 441.5150783673829 
+            xmax = 441.74659665037177 
+            text = "xxx" 
+        intervals [334]:
+            xmin = 441.74659665037177 
+            xmax = 443.6244671679481 
+            text = "carrier_2_perrito" 
+        intervals [335]:
+            xmin = 443.6244671679481 
+            xmax = 443.855985450937 
+            text = "xxx" 
+        intervals [336]:
+            xmin = 443.855985450937 
+            xmax = 445.708131714848 
+            text = "carrier_2_caballito" 
+        intervals [337]:
+            xmin = 445.708131714848 
+            xmax = 446.0425470124986 
+            text = "xxx" 
+        intervals [338]:
+            xmin = 446.0425470124986 
+            xmax = 447.98472816423856 
+            text = "carrier_2_logro" 
+        intervals [339]:
+            xmin = 447.98472816423856 
+            xmax = 448.42231149757197 
+            text = "xxx" 
+        intervals [340]:
+            xmin = 448.42231149757197 
+            xmax = 450.26159563465023 
+            text = "carrier_2_bullicio" 
+        intervals [341]:
+            xmin = 450.26159563465023 
+            xmax = 450.6474594396317 
+            text = "xxx" 
+        intervals [342]:
+            xmin = 450.6474594396317 
+            xmax = 452.4610193230445 
+            text = "carrier_2_refran" 
+        intervals [343]:
+            xmin = 452.4610193230445 
+            xmax = 452.756848240197 
+            text = "xxx" 
+        intervals [344]:
+            xmin = 452.756848240197 
+            xmax = 454.4932353626135 
+            text = "carrier_2_montoya" 
+        intervals [345]:
+            xmin = 454.4932353626135 
+            xmax = 454.91768554809306 
+            text = "xxx" 
+        intervals [346]:
+            xmin = 454.91768554809306 
+            xmax = 456.5511756558479 
+            text = "carrier_2_lider" 
+        intervals [347]:
+            xmin = 456.5511756558479 
+            xmax = 456.9113152071639 
+            text = "xxx" 
+        intervals [348]:
+            xmin = 456.9113152071639 
+            xmax = 458.63484020274774 
+            text = "carrier_2_cholla" 
+        intervals [349]:
+            xmin = 458.63484020274774 
+            xmax = 459.0465708157136 
+            text = "xxx" 
+        intervals [350]:
+            xmin = 459.0465708157136 
+            xmax = 460.8858549527919 
+            text = "carrier_2_profeta" 
+        intervals [351]:
+            xmin = 460.8858549527919 
+            xmax = 461.3231672651042 
+            text = "xxx" 
+        intervals [352]:
+            xmin = 461.3231672651042 
+            xmax = 462.8794846118627 
+            text = "carrier_2_gallo" 
+        intervals [353]:
+            xmin = 462.8794846118627 
+            xmax = 463.14958927534974 
+            text = "xxx" 
+        intervals [354]:
+            xmin = 463.14958927534974 
+            xmax = 464.95028703192986 
+            text = "carrier_2_dinero" 
+        intervals [355]:
+            xmin = 464.95028703192986 
+            xmax = 465.2203916954169 
+            text = "xxx" 
+        intervals [356]:
+            xmin = 465.2203916954169 
+            xmax = 466.931054564168 
+            text = "carrier_2_olla" 
+        intervals [357]:
+            xmin = 466.931054564168 
+            xmax = 467.1497107203241 
+            text = "xxx" 
+        intervals [358]:
+            xmin = 467.1497107203241 
+            xmax = 468.96327060373693 
+            text = "carrier_2_isla" 
+        intervals [359]:
+            xmin = 468.96327060373693 
+            xmax = 469.2523530979959 
+            text = "xxx" 
+        intervals [360]:
+            xmin = 469.2523530979959 
+            xmax = 471.0016023472452 
+            text = "carrier_2_cebolla" 
+        intervals [361]:
+            xmin = 471.0016023472452 
+            xmax = 471.3746040253939 
+            text = "xxx" 
+        intervals [362]:
+            xmin = 471.3746040253939 
+            xmax = 473.1367154014759 
+            text = "carrier_2_bandera" 
+        intervals [363]:
+            xmin = 473.1367154014759 
+            xmax = 473.36823368446477 
+            text = "xxx" 
+        intervals [364]:
+            xmin = 473.36823368446477 
+            xmax = 475.16893144104483 
+            text = "carrier_2_ayuda" 
+        intervals [365]:
+            xmin = 475.16893144104483 
+            xmax = 475.42617397769914 
+            text = "xxx" 
+        intervals [366]:
+            xmin = 475.42617397769914 
+            xmax = 477.0853883391194 
+            text = "carrier_2_concha" 
+        intervals [367]:
+            xmin = 477.0853883391194 
+            xmax = 477.4799118552534 
+            text = "xxx" 
+        intervals [368]:
+            xmin = 477.4799118552534 
+            xmax = 479.21629897766996 
+            text = "carrier_2_apellido" 
+        intervals [369]:
+            xmin = 479.21629897766996 
+            xmax = 479.47354151432427 
+            text = "xxx" 
+        intervals [370]:
+            xmin = 479.47354151432427 
+            xmax = 481.31001428859827 
+            text = "carrier_2_negocio" 
+        intervals [371]:
+            xmin = 481.31001428859827 
+            xmax = 481.63156745941615 
+            text = "xxx" 
+        intervals [372]:
+            xmin = 481.63156745941615 
+            xmax = 483.43226521599627 
+            text = "carrier_2_sellito" 
+        intervals [373]:
+            xmin = 483.43226521599627 
+            xmax = 483.7280941331487 
+            text = "xxx" 
+        intervals [374]:
+            xmin = 483.7280941331487 
+            xmax = 485.5287918897288 
+            text = "carrier_2_juguete" 
+        intervals [375]:
+            xmin = 485.5287918897288 
+            xmax = 485.7860344263831 
+            text = "xxx" 
+        intervals [376]:
+            xmin = 485.7860344263831 
+            xmax = 487.7410777049558 
+            text = "carrier_2_tullito" 
+        intervals [377]:
+            xmin = 487.7410777049558 
+            xmax = 487.9908247461146 
+            text = "xxx" 
+        intervals [378]:
+            xmin = 487.9908247461146 
+            xmax = 489.6114527270367 
+            text = "carrier_2_ley" 
+        intervals [379]:
+            xmin = 489.6114527270367 
+            xmax = 490.0359029125163 
+            text = "xxx" 
+        intervals [380]:
+            xmin = 490.0359029125163 
+            xmax = 491.810876415431 
+            text = "carrier_2_rollizo" 
+        intervals [381]:
+            xmin = 491.810876415431 
+            xmax = 492.13242958624886 
+            text = "xxx" 
+        intervals [382]:
+            xmin = 492.13242958624886 
+            xmax = 494.0360243574907 
+            text = "carrier_2_palabra" 
+        intervals [383]:
+            xmin = 494.0360243574907 
+            xmax = 494.3575775283085 
+            text = "xxx" 
+        intervals [384]:
+            xmin = 494.3575775283085 
+            xmax = 496.24831017271765 
+            text = "carrier_2_bellisima" 
+        intervals [385]:
+            xmin = 496.24831017271765 
+            xmax = 496.4798284557065 
+            text = "xxx" 
+        intervals [386]:
+            xmin = 496.4798284557065 
+            xmax = 498.46059598794466 
+            text = "carrier_2_baile" 
+        intervals [387]:
+            xmin = 498.46059598794466 
+            xmax = 498.8631353802782 
+            text = "xxx" 
+        intervals [388]:
+            xmin = 498.8631353802782 
+            xmax = 500.6638331368583 
+            text = "carrier_2_tuya" 
+        intervals [389]:
+            xmin = 500.6638331368583 
+            xmax = 501.1011454491706 
+            text = "xxx" 
+        intervals [390]:
+            xmin = 501.1011454491706 
+            xmax = 502.798946191089 
+            text = "carrier_2_manzana" 
+        intervals [391]:
+            xmin = 502.798946191089 
+            xmax = 503.2362585034013 
+            text = "xxx" 
+        intervals [392]:
+            xmin = 503.2362585034013 
+            xmax = 505.13985327464314 
+            text = "carrier_2_coyunda" 
+        intervals [393]:
+            xmin = 505.13985327464314 
+            xmax = 505.47426857229374 
+            text = "xxx" 
+        intervals [394]:
+            xmin = 505.47426857229374 
+            xmax = 507.2878284557066 
+            text = "carrier_2_principe" 
+        intervals [395]:
+            xmin = 507.2878284557066 
+            xmax = 507.68655438752074 
+            text = "xxx" 
+        intervals [396]:
+            xmin = 507.68655438752074 
+            xmax = 509.34576874894094 
+            text = "carrier_2_tuyo" 
+        intervals [397]:
+            xmin = 509.34576874894094 
+            xmax = 509.69304617342425 
+            text = "xxx" 
+        intervals [398]:
+            xmin = 509.69304617342425 
+            xmax = 511.31587138098485 
+            text = "carrier_2_rueda" 
+        intervals [399]:
+            xmin = 511.31587138098485 
+            xmax = 511.8560807079589 
+            text = "xxx" 
+        intervals [400]:
+            xmin = 511.8560807079589 
+            xmax = 513.386673801052 
+            text = "carrier_2_baya" 
+        intervals [401]:
+            xmin = 513.386673801052 
+            xmax = 513.9526073816915 
+            text = "xxx" 
+        intervals [402]:
+            xmin = 513.9526073816915 
+            xmax = 515.7147187577734 
+            text = "carrier_2_dedo" 
+        intervals [403]:
+            xmin = 515.7147187577734 
+            xmax = 516.1906174505839 
+            text = "xxx" 
+        intervals [404]:
+            xmin = 516.1906174505839 
+            xmax = 517.8755560656696 
+            text = "carrier_2_poyo" 
+        intervals [405]:
+            xmin = 517.8755560656696 
+            xmax = 530.8125170068028 
+            text = "xxx" 
