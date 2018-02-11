@@ -30,13 +30,13 @@ with 'stim2.pptx'
 
 ## Descriptives
 
-|  id | age | gender |   born  | years_in_SW | grew_up_in_son | years_in_US | parents_from_son | eng_use |
-| :-- | :-- | :----- | :------ | :---------- | :------------- | :---------- | :--------------- | :------ |
-| p01 | 28  | m      | nog_az  | 28          | n              | 28          | y                | 50      |
-| p02 | 27  | f      | nog_az  | 27          | n              | 28          | y                | 60      |
-| p03 | 24  | m      | nog_az  | 25          | n              | 25          | y                | 40      |
-| p04 | 25  | m      | nog_son | 25          | y              | 13          | y                | 30      |
-| p05 | 25  | f      | nog_az  | 25          | n              | 25          | y                | 50      |
-| p06 | 46  | f      | nog_son | 46          | y              | 30          | y                | 30      |
-| p07 | 27  | m      | nog_az  | 27          | n              | 27          | y                | 50      |
-| p08 | 25  | f      | nog_az  | 25          | n              | 25          | y                | 70      |
+|  id | age | gender |   born  | yrs_in_SW | grew_up_son | years_in_US | parents_son | eng_use |
+| :-- | :-- | :----- | :------ | :-------- | :---------- | :---------- | :---------- | :------ |
+| p01 | 28  | m      | nog_az  | 28        | n           | 28          | y           | 50      |
+| p02 | 27  | f      | nog_az  | 27        | n           | 28          | y           | 60      |
+| p03 | 24  | m      | nog_az  | 25        | n           | 25          | y           | 40      |
+| p04 | 25  | m      | nog_son | 25        | y           | 13          | y           | 30      |
+| p05 | 25  | f      | nog_az  | 25        | n           | 25          | y           | 50      |
+| p06 | 46  | f      | nog_son | 46        | y           | 30          | y           | 30      |
+| p07 | 27  | m      | nog_az  | 27        | n           | 27          | y           | 50      |
+| p08 | 25  | f      | nog_az  | 25        | n           | 25          | y           | 70      |
