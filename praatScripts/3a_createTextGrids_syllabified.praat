@@ -9,8 +9,8 @@
 
 form Enter information
 	comment Folders where files are kept:
-	sentence dirFiles ../data/p0X/syllabified/
-	sentence newDir ../data/p0X/syllabified/
+	sentence dirFiles ../data/p0X/wavs/syllabified/
+	sentence newDir ../data/p0X/wavs/syllabified/
 	positive number 1
 endform
 
