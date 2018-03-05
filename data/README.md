@@ -28,6 +28,20 @@ with 'stim2.pptx'
 	- includes real and nonce words
 	- includes syllabification task
 
+## Coding
+
+### Syllabification task
+
+- each syllable is segmented and the duration is calculated
+- if a hiatus is pronounced in critical syllables then the final column
+is coded as 'extra' (extra syllable)
+- if the syllable is altered in a way that reduces the phonotactic 
+structure (to avoid illegal phonotactics) the final column is coded 
+as 'error'
+- if the participant produced something that has nothing to do with the 
+item then the final column is coded as 'wayoff'
+- otherwise the final column in coded as NA
+
 ## Descriptives
 
 |  id | age | gender |   born  | yrs_in_SW | grew_up_son | years_in_US | parents_son | eng_use |

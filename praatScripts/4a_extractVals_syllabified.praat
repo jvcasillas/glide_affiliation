@@ -1,4 +1,4 @@
-filePath$ = "../data/p04/wavs/syllabified/"
+filePath$ = "../data/p06/wavs/syllabified/"
 
 Create Strings as file list... dirFiles 'filePath$'/*.wav
 select Strings dirFiles
@@ -108,7 +108,7 @@ for i to numberOfFiles
 	endif
 
 
-	printline 'prefix$','syll1Lab$','syll1Dur:2', 'syll2Lab$', 'syll2Dur:2', 'syll3Lab$', 'syll3Dur:2', 'syll4Lab$', 'syll4Dur:2', 'syll5Lab$', 'syll5Dur:2', 'critOnsetLab$', 'critOnsetDur:2', 'labID$'
+	printline 'prefix$','syll1Lab$','syll1Dur:2','syll2Lab$','syll2Dur:2','syll3Lab$','syll3Dur:2','syll4Lab$','syll4Dur:2','syll5Lab$','syll5Dur:2','critOnsetLab$','critOnsetDur:2','labID$'
 	select all
 	minus Strings dirFiles
 	Remove

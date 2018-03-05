@@ -19,7 +19,7 @@ syllabified_cols <- c(
 # a folder (excludes p01 and p02 because they 
 # didn't complete the task, and 'tidy' because 
 # that is where tidy data will be saved)
-folders <- dir(path = here("data"), pattern = "^[^.]+$")[-c(1, 2, 9)]
+folders <- dir(path = here("data"), pattern = "^[^.]+$")[-c(1, 2, 3)]
 
 # Store number of folders
 participant_length <- length(folders)
@@ -34,7 +34,7 @@ children <- vector("character", length = participant_length)
 # Search only for .csv files 
 for (i in 1:participant_length) {
   
-  # List .Rmd files in each folder of 'folders'
+  # List .csv files in each folder of 'folders'
   # store output in 'children'
   children[i] <- list.files(path = path_to_data[i], 
                             pattern = ".csv", 
@@ -47,6 +47,32 @@ map(.x = children, .f = read_csv, col_names = syllabified_cols) %>%
   separate(., col = prefix, 
               into = c('participant', 'exp', 'x', 'item', 'status')) %>% 
   select(-x) %>% 
-  write_csv(., path = here("data", "tidy", "syllable_clean.csv"))
+  write_csv(., path = here("data", "dataframes", "raw", "syllable_raw.csv"))
+
+syl_df <- read_csv(here("data", "dataframes", "raw", "./syllable_raw.csv"))
+
+
+head(syl_df)
+
+
+# Get vector of unique words
+unique(syl_df$item)
+
+# Get critical items
+critical_items <- c(
+  "costonhialo", "lakabiaisto", "lakabuaisto", 
+  "lakadiaisto", "lakaduaisto", "lakafiaisto", 
+  "lakafuaisto", "lakagiaisto", "lakaguaisto", 
+  "lakakiaisto", "lakakuaisto", "lakapiaisto", 
+  "lakapuaisto", "lakatiaisto", "lakatuaisto"
+)
+
+
+# extra = hiato
+# error = simplification
+# NA = glide
+
+syl_df %>% 
+  filter(., item %in% critical_items) %>% View
 
 
