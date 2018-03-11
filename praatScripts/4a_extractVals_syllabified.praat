@@ -1,4 +1,4 @@
-filePath$ = "../data/p06/wavs/syllabified/"
+filePath$ = "../data/p07/wavs/syllabified/"
 
 Create Strings as file list... dirFiles 'filePath$'/*.wav
 select Strings dirFiles
