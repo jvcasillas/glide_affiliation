@@ -1,0 +1,41 @@
+---
+output: pdf_document
+---
+
+
+Predictions:
+
+\begin{enumerate}
+
+\item The first hypothesis relies on a well-known restriction on the Spanish 
+rhyme, namely that Spanish only allows a maximum of three rhyme segments 
+(Harris 1983).  Thus if a sequence of CGVGC:  
+
+\begin{center}Consonant + Glide + Vowel + Glide + Consonant\end{center}
+
+is allowed (e.g., nonce word la.ca.puais.to) the glide should be in the onset, 
+because otherwise the rhyme would contain four segments and would be illicit. 
+Stimuli in this group consisted of four-syllable nonce words that contained a 
+postconsonantal high vocoid followed by a triphthong (four segment rhyme or 
+complex onset + three segment rhyme). Four syllable words were created to 
+avoid a glide + vowel sequence too close to the beginning or end of the word, 
+positions known to favor hiatuses in some dialects (Hualde 1999, 2005).
+ 
+O sea, que no debería haber hiato en estas secuencias y el vocoide que sigue 
+al ataque debería ser una deslizada, lo mismo que el que precede a la coda
+ 
+\item The second set of stimuli was designed around the hypothesis that, if the 
+glide is in the onset, there should be onset co-occurrence restrictions, i.e., 
+only some combinations of consonant + glide should be possible as complex 
+clusters. For instance, a palatal consonant + homorganic glide [j] (e.g., 
+\*ch[j]aba) should be disallowed because their articulations are too similar. 
+For the second set of stimuli, subjects were also given a grammaticality 
+judgment task. Oral production data will be analyzed by two judges first 
+impressionistically and then with Praat according to duration and F1/F2 
+values.
+
+O sea, que sí debería haber hiato en estas secuencias y el vocoide que sigue 
+al ataque debería ser una vocal
+
+\end{enumerate}
+

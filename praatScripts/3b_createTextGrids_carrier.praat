@@ -9,8 +9,8 @@
 
 form Enter information
 	comment Folders where files are kept:
-	sentence dirFiles ../data/p0X/syllabified/
-	sentence newDir ../data/p0X/syllabified/
+	sentence dirFiles ../data/p03/wavs/carrier/
+	sentence newDir ../data/p03/wavs/carrier/
 	positive number 1
 endform
 
@@ -28,7 +28,7 @@ for i from number to numberOfFiles
 	prefix$ = fileName$ - ".wav"
 	Read from file... 'dirFiles$'/'fileName$'
 	nameSound$ = selected$("Sound")
-        To TextGrid: "syll1-on syll1-off syll2-on syll2-off syll3-on syll3-off syll4-on syll4-off syll5-on syll5-off", ""
+        To TextGrid: "totalDur notes", ""
 	select TextGrid 'nameSound$'
         select Sound 'nameSound$'
 	plus TextGrid 'nameSound$'
