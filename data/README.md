@@ -22,8 +22,7 @@ Total missing: 594
 - p01 and p02 did a different version of the experiment
 	- no carrier sentences
 	- less items
-- p03:p08 completed an updated version of the experiment administered 
-with 'stim2.pptx'
+- p03:p08 completed an updated version of the experiment administered with 'stim2.pptx'
 	- includes carrier sentences
 	- includes real and nonce words
 	- includes syllabification task

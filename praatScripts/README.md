@@ -30,14 +30,17 @@ and fills in the already segmented textgrid.
 	selected folder ('carrier' or 'syllabified') for each participant and creates a 
 	corresponding textgrid.
 	- The textgrid labels onset and offset of each segment of the target word
-5. '4a_extractVals_syllabified.praat' and '4b_extractVals_carrier.praat'
+5. '3b_createTextGrids_carrier.praat'
+6. '4a_extractVals_syllabified.praat' and '4b_extractVals_carrier.praat'
 	- These files will read in all .wav files and their corresponding textgrids 
 	in order to extraxt labeled information from (4).
 	- This will create a .csv for each each participant for each session
 	- All the .csv files will then be read into R and ajoined
 	- Note that the output .csv does not contain a header. They are added later 
 	in R.
-   
+7. '4b_extractVals_carrier.praat'
+8. '5_check_grids.praat'
+
 
 
 
