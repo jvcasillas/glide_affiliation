@@ -9,8 +9,8 @@
 
 form Enter information
 	comment Folders where files are kept:
-	sentence dirFiles ../data/p07/wavs/carrier/
-	sentence newDir ../data/p07/wavs/carrier/
+	sentence dirFiles ../data/p08/wavs/carrier/
+	sentence newDir ../data/p08/wavs/carrier/
 	positive number 1
 endform
 

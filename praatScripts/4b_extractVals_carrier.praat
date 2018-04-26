@@ -19,13 +19,13 @@
 
 form Get pitch formants and duration from labeled segments in files
 	comment Directory of sound files. Be sure to include the final "/"
-	text sound_directory ../data/p06/wavs/carrier/
+	text sound_directory ../data/p07/wavs/carrier/
 	sentence Sound_file_extension .wav
 	comment Directory of TextGrid files. Be sure to include the final "/"
-	text textGrid_directory ../data/p06/wavs/carrier/
+	text textGrid_directory ../data/p07/wavs/carrier/
 	sentence TextGrid_file_extension .TextGrid
 	comment Full path of the resulting text file:
-	text resultsfile ../data/p06/data/carrier/p06_carrier.csv
+	text resultsfile ../data/p07/data/carrier/p07_carrier.csv
 	comment Which tier do you want to analyze?
 	integer Tier 1
 	comment Formant analysis parameters
