@@ -1,7 +1,8 @@
 ####################################
-# Praat script to create textgrids #
+# Praat script to check text grids #
+# to check segemtation             #
 # Created by                       #
-# Joseph V. Casillas 10/26/2015    #
+# Joseph V. Casillas 04/25/2018    #
 ####################################
 
 
@@ -9,9 +10,8 @@
 
 form Enter information
 	comment Folders where files are kept:
-	sentence dirFiles ../data/p03/wavs/carrier/
-	sentence newDir ../data/p03/wavs/carrier/
-	positive number 1
+	sentence dirFiles ../data/p04/wavs/carrier/
+	sentence dirNew ../data/p04/wavs/carrier/
 endform
 
 
@@ -19,25 +19,26 @@ endform
 Create Strings as file list: "allFiles", dirFiles$ + "/*.wav"
 select Strings allFiles
 numberOfFiles = Get number of strings
-clearinfo
+writeInfoLine: numberOfFiles
+
 #### Begin loop
 
-for i from number to numberOfFiles
+for i to numberOfFiles
 	select Strings allFiles
 	fileName$ = Get string... i
 	prefix$ = fileName$ - ".wav"
+	tgName$ = prefix$ + ".TextGrid"
 	Read from file... 'dirFiles$'/'fileName$'
 	nameSound$ = selected$("Sound")
-        To TextGrid: "totalDur notes", ""
-	select TextGrid 'nameSound$'
+	Read from file... 'dirFiles$'/'tgName$'
         select Sound 'nameSound$'
 	plus TextGrid 'nameSound$'
 	Edit
 	pause Continue?
 	select Sound 'nameSound$'
-	Write to WAV file... 'newDir$'/'nameSound$'.wav
+	Write to WAV file... 'dirNew$'/'nameSound$'.wav
 	select TextGrid 'nameSound$'
-	Write to binary file... 'newDir$'/'nameSound$'.TextGrid
+	Write to binary file... 'dirNew$'/'nameSound$'.TextGrid
 	select all
 	minus Strings allFiles
 	Remove
