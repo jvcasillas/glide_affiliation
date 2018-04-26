@@ -1,4 +1,4 @@
-1.  [data](./data/README.md)
-2.  [praatScripts](./praatScripts/README.md)
-3.  [rScripts](./rScripts/README.md)
-4.  [sources](./sources/README.md)
+1.  [data](./data/)
+2.  [praatScripts](./praatScripts/)
+3.  [rScripts](./rScripts/)
+4.  [sources](./sources/)
