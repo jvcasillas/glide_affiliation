@@ -47,10 +47,10 @@ syl_tidy <- syl_df %>%
               into = c('participant', 'exp', 'task', 'item', 'status')) %>% 
   select(., -ends_with('Dur'), -critOnsetLab) %>% 
   filter( item %in% critical_items) %>% 
-  mutate(., response = if_else(syll3Lab %in% critical_syllables, 'tripthong', 
+  mutate(., response = if_else(syll3Lab %in% critical_syllables, 'Tripthong', 
                                if_else(!(syll3Lab %in% critical_syllables) & 
-                                         labID == 'extra', 'hiato', 'simplification')), 
-            response = if_else(is.na(response), 'simplification', response), 
+                                         labID == 'extra', 'Hiatus', 'Simplification')), 
+            response = if_else(is.na(response), 'Simplification', response), 
             item = as.factor(item), 
             response = as.factor(response)) %>% 
   write_csv(., path = here("data", "dataframes", "tidy", "syllabified_tripthong_tidy.csv"))

@@ -1,6 +1,50 @@
 source(here::here("./rScripts/03_load_data.R"))
 
-xtabs(~ item + response, data = syllabified_trip)
 
-ggplot(syllabified_trip, aes(x = item, y = response)) + 
-  geom_jitter()
+# Syllabification task ---------------------------------------------------------
+syllabified_props <- xtabs(~ participant + response, data = syllabified_trip) %>% 
+  as.tibble(.) %>% 
+  arrange(., participant) %>% 
+  mutate(., prop = n / 14, 
+            response_simp = if_else(response == 'Tripthong', 
+                                    'Tripthong', 'Hiatus/\nSimplification')) 
+
+syllabified_props %>% 
+  group_by(., response) %>% 
+  summarize(., count = sum(n)) %>% 
+  ungroup(.) %>% 
+  mutate(., prop = count / sum(count)) %>% 
+  ggplot(., aes(x = response, y = prop, fill = response)) + 
+    geom_bar(stat = 'identity', width = 0.3, show.legend = F) + 
+    ylim(0, 1) + 
+    scale_fill_grey(start = 0.45, end = 0.75) + 
+    stat_summary(data = syllabified_props, aes(x = response, y = prop),
+                 fun.data = mean_se, geom = 'pointrange', 
+                 pch = 21, size = 1.25, fill = 'white', color = 'grey30') + 
+    labs(y = 'Proportion', x = 'Response', caption = 'Mean +/- SE') +
+    theme_test(base_size = 16, base_family = 'Times')
+
+simp_props <- syllabified_props %>% 
+  group_by(., participant, response_simp) %>% 
+  summarize(., count = sum(n)) %>% 
+  mutate(., prop = count / sum(count)) %>% 
+  ungroup(.) 
+
+simp_props %>% 
+  group_by(., response_simp) %>% 
+  summarize(., count = sum(count)) %>% 
+  ungroup(.) %>% 
+  mutate(., prop = count / sum(count)) %>%
+  ggplot(., aes(x = response_simp, y = prop, fill = response_simp)) + 
+    geom_bar(stat = 'identity', width = 0.3, show.legend = F) + 
+    ylim(0, 1) + 
+    scale_fill_grey(start = 0.45, end = 0.75) + 
+    stat_summary(data = simp_props, aes(x = response_simp, y = prop),
+                 fun.data = mean_se, geom = 'pointrange', 
+                 pch = 21, size = 1.25, fill = 'white', color = 'grey30') + 
+    labs(y = 'Proportion', x = 'Response', caption = 'Mean +/- SE') +
+    theme_test(base_size = 16, base_family = 'Times')
+
+
+
+
