@@ -30,3 +30,21 @@ source("./rScripts/04_exploratory_plots.R")
 ```{r, 'hls_syllabification_p1', fig.retina=2}
 hls_syllabification_p1
 ```
+
+```{r, 'hls_syllabification_p2', fig.retina=2}
+hls_syllabification_p2
+```
+
+## Carrier sentence task
+
+```{r, 'hls_carrier_dur_p1', fig.retina=2}
+hls_carrier_dur_p1
+```
+
+```{r, 'hls_carrier_f1_p2', fig.retina=2}
+hls_carrier_f1_p2
+```
+
+```{r, 'hls_carrier_int_p3', fig.retina=2}
+hls_carrier_int_p3
+```
