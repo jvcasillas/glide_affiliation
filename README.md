@@ -82,3 +82,7 @@ Carrier sentence task
     hls_carrier_int_p3
 
 <img src="README_files/figure-markdown_strict/hls_carrier_int_p3-1.png" width="672" />
+
+    hls_carrier_scatter_p4
+
+<img src="README_files/figure-markdown_strict/hls_carrier_scatter_p4-1.png" width="672" />

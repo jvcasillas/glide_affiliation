@@ -48,3 +48,8 @@ hls_carrier_f1_p2
 ```{r, 'hls_carrier_int_p3', fig.retina=2}
 hls_carrier_int_p3
 ```
+
+```{r, 'hls_carrier_scatter_p4', fig.retina=2}
+hls_carrier_scatter_p4
+```
+
