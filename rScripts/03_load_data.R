@@ -1,14 +1,16 @@
 source(here::here("./rScripts/00_helpers.R"))
 
-# Load raw csv file
-car_df <- read_csv(here("data", "dataframes", "raw", "./carrier_raw.csv"))
+# Load carrier data ------------------------------------------------------------
+carrier_dur <- read_csv(here("data", "dataframes", "tidy", "./carrier_duration_tidy.csv"))
+carrier_tc  <- read_csv(here("data", "dataframes", "tidy", "./carrier_duration_tidy.csv"))
 
 # Check it
-head(car_df)
+glimpse(carrier_dur)
+glimpse(carrier_tc)
 
 
-# Load new file
-syl_df <- read_csv(here("data", "dataframes", "raw", "./syllable_raw.csv"))
+# Load syllabification data ----------------------------------------------------
+syllabified_trip <- read_csv(here("data", "dataframes", "tidy", "./syllabified_tripthong_tidy.csv"))
 
 # Check it
-head(syl_df)
+glimpse(syllabified_trip)

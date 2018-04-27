@@ -1,9 +1,6 @@
+source(here::here("./rScripts/03_load_data.R"))
 
-syl_df <- read_csv(here("data", "tidy", "./syllable_clean.csv"))
+xtabs(~ item + response, data = syllabified_trip)
 
-glimpse(syl_df)
-
-syl_df %>%
-  ggplot(., aes(x = syll1Dur, y = syll2Dur, label = item, color = participant)) + 
-    geom_text() + 
-    geom_smooth(method = 'lm')
+ggplot(syllabified_trip, aes(x = item, y = response)) + 
+  geom_jitter()

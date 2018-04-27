@@ -1,30 +1,61 @@
 source(here::here("./rScripts/00_helpers.R"))
 
 
-# Load new file
-syl_df <- read_csv(here("data", "dataframes", "raw", "./syllable_raw.csv")) %>% 
-  separate(., col = prefix, 
-              into = c('participant', 'exp', 'x', 'item', 'status')) %>% 
-  select(-x)
+# Load syllabification data ----------------------------------------------------
+syl_df <- read_csv(here("data", "dataframes", "raw", "./syllable_raw.csv"))
 
-# Check it
-head(syl_df)
 
-# Get vector of unique words
-unique(syl_df$item)
+# Tidy data --------------------------------------------------------------------
+#
+# labID coding: 
+#  - extra = hiato
+#  - error = simplification or wrong vowel
+#  - NA = tripthong
+
 
 # Get critical items
 critical_items <- c(
-  "costonhialo", "lakabiaisto", "lakabuaisto", 
-  "lakadiaisto", "lakaduaisto", "lakafiaisto", 
-  "lakafuaisto", "lakagiaisto", "lakaguaisto", 
-  "lakakiaisto", "lakakuaisto", "lakapiaisto", 
-  "lakapuaisto", "lakatiaisto", "lakatuaisto"
+  "lakabiaisto", "lakabuaisto", 
+  "lakadiaisto", "lakaduaisto", 
+  "lakafiaisto", "lakafuaisto", 
+  "lakagiaisto", "lakaguaisto", 
+  "lakakiaisto", "lakakuaisto", 
+  "lakapiaisto", "lakapuaisto", 
+  "lakatiaisto", "lakatuaisto"
 )
 
-# extra = hiato
-# error = simplification
-# NA = glide
+critical_syllables <- c(
+  "biais", "buais", 
+  "diais", "duais", 
+  "fiais", "fuais", 
+  "giais", "guais", 
+  "kiais", "kuais", 
+  "piais", "puais", 
+  "tiais", "tuais"
+)
 
-syl_df %>% 
-  filter(., item %in% critical_items) %>% View
+# Create appropriate columns from file names
+# Remove extraneous columns
+# Filter to keep critical items
+# Create 'response' column with three possible responses: 
+#  - hiato
+#  - tripthong
+#  - simplification
+# if_else series to fill 'response' column
+syl_tidy <- syl_df %>% 
+  separate(., col = prefix, 
+              into = c('participant', 'exp', 'task', 'item', 'status')) %>% 
+  select(., -ends_with('Dur'), -critOnsetLab) %>% 
+  filter( item %in% critical_items) %>% 
+  mutate(., response = if_else(syll3Lab %in% critical_syllables, 'tripthong', 
+                               if_else(!(syll3Lab %in% critical_syllables) & 
+                                         labID == 'extra', 'hiato', 'simplification')), 
+            response = if_else(is.na(response), 'simplification', response), 
+            item = as.factor(item), 
+            response = as.factor(response)) %>% 
+  write_csv(., path = here("data", "dataframes", "tidy", "syllabified_tripthong_tidy.csv"))
+
+
+
+
+
