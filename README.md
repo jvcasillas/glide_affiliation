@@ -16,58 +16,6 @@ Analyses
 
     source("./rScripts/04_exploratory_plots.R")
 
-    ## ── Attaching packages ────────────────────────── tidyverse 1.2.1 ──
-
-    ## ✔ ggplot2 2.2.1.9000     ✔ purrr   0.2.4     
-    ## ✔ tibble  1.4.2          ✔ dplyr   0.7.4     
-    ## ✔ tidyr   0.8.0          ✔ stringr 1.3.0     
-    ## ✔ readr   1.1.1          ✔ forcats 0.3.0
-
-    ## ── Conflicts ───────────────────────────── tidyverse_conflicts() ──
-    ## ✖ dplyr::filter() masks stats::filter()
-    ## ✖ dplyr::lag()    masks stats::lag()
-
-    ## here() starts at /Users/casillas/Desktop/glide_affiliation
-
-    ## Loading required package: Matrix
-
-    ## 
-    ## Attaching package: 'Matrix'
-
-    ## The following object is masked from 'package:tidyr':
-    ## 
-    ##     expand
-
-    ## Parsed with column specification:
-    ## cols(
-    ##   participant = col_character(),
-    ##   exp = col_character(),
-    ##   task = col_integer(),
-    ##   item = col_character(),
-    ##   status = col_character(),
-    ##   TextGridLabel = col_character(),
-    ##   duration = col_double(),
-    ##   sex = col_character()
-    ## )
-
-    ## Parsed with column specification:
-    ## cols(
-    ##   participant = col_character(),
-    ##   exp = col_character(),
-    ##   task = col_integer(),
-    ##   item = col_character(),
-    ##   status = col_character(),
-    ##   TextGridLabel = col_character(),
-    ##   duration = col_double(),
-    ##   time_course_segment = col_integer(),
-    ##   sex = col_character(),
-    ##   f0 = col_double(),
-    ##   f1 = col_double(),
-    ##   f2 = col_double(),
-    ##   f3 = col_double(),
-    ##   `in` = col_double()
-    ## )
-
     ## Observations: 1,247
     ## Variables: 8
     ## $ participant   <chr> "p03", "p03", "p03", "p03", "p03", "p03", "p03",...
@@ -94,23 +42,6 @@ Analyses
     ## $ f2                  <dbl> 2192.50, 1896.37, 1740.53, 1663.15, 1600.7...
     ## $ f3                  <dbl> 2804.07, 2823.23, 2784.17, 2763.05, 2701.6...
     ## $ `in`                <dbl> 80.46, 81.81, 82.42, 82.46, 82.08, 81.78, ...
-
-    ## Parsed with column specification:
-    ## cols(
-    ##   participant = col_character(),
-    ##   exp = col_character(),
-    ##   task = col_integer(),
-    ##   item = col_character(),
-    ##   status = col_character(),
-    ##   syll1Lab = col_character(),
-    ##   syll2Lab = col_character(),
-    ##   syll3Lab = col_character(),
-    ##   syll4Lab = col_character(),
-    ##   syll5Lab = col_character(),
-    ##   labID = col_character(),
-    ##   response = col_character()
-    ## )
-
     ## Observations: 84
     ## Variables: 12
     ## $ participant <chr> "p03", "p03", "p03", "p03", "p03", "p03", "p03", "...
@@ -131,4 +62,4 @@ Syllabification task
 
     hls_syllabification_p1
 
-![](README_files/figure-markdown_strict/unnamed-chunk-1-1.png)
+<img src="README_files/figure-markdown_strict/hls_syllabification_p1-1.png" width="672" />

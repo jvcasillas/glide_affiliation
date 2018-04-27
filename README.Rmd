@@ -21,12 +21,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Analyses
 
-```{r, 'source_scripts'}
+```{r, 'source_scripts', message=FALSE, warning=FALSE}
 source("./rScripts/04_exploratory_plots.R")
 ```
 
 ## Syllabification task
 
-```{r}
+```{r, 'hls_syllabification_p1', fig.retina=2}
 hls_syllabification_p1
 ```
