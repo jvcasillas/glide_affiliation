@@ -90,8 +90,16 @@ hls_carrier_dur_p1 <- carrier_tc %>%
   filter(., item %in% c(critical_items_palatals, 
                         comparison_items_nonpalatals)) %>% 
   mutate(., is_palatal = if_else(item %in% critical_items_palatals, 'palatal', 'other')) %>% 
-  ggplot(., aes(x = is_palatal, y = duration, color = is_palatal)) + 
-    stat_summary(fun.data = mean_se, geom = 'pointrange') 
+  ggplot(., aes(x = is_palatal, y = duration, fill = is_palatal)) + 
+    stat_summary(fun.data = mean_cl_boot, geom = 'pointrange', 
+                 pch = 21, color = 'black', size = 1.25, show.legend = F) + 
+    coord_cartesian(ylim = c(100, 130)) + 
+    labs(y = "Duration (ms)", x = "Preceeding consonant", 
+         caption = "Mean +/- 95% CI") + 
+    scale_fill_brewer(palette = "Set1") + 
+    scale_x_discrete(labels = c('Other', 'Palatal')) + 
+    theme_test(base_size = 16, base_family = 'Times') 
+
 
 hls_carrier_f1_p2 <- carrier_tc %>% 
   filter(., item %in% c(critical_items_palatals, 
@@ -102,10 +110,19 @@ hls_carrier_f1_p2 <- carrier_tc %>%
   mutate(., f1norm = (f1 - mean(f1)) / sd(f1), 
             f2norm = (f2 - mean(f2)) / sd(f2)) %>% 
   ungroup(.) %>% 
-  ggplot(., aes(x = time_course_segment, y = f1norm, color = is_palatal)) + 
-    stat_summary(fun.data = mean_se, geom = 'pointrange') + 
-    stat_summary(fun.y = mean, geom = 'line') + 
-    scale_y_reverse()
+  ggplot(., aes(x = time_course_segment, y = f1norm, fill = is_palatal)) + 
+    stat_summary(aes(color = is_palatal), fun.y = mean, geom = 'line') + 
+    stat_summary(fun.data = mean_se, geom = 'pointrange', 
+                 pch = 21, color = 'grey20', size = 1) + 
+    scale_y_reverse() + 
+    scale_fill_brewer(name = "Preceeding\nconsonant", palette = 'Set1', 
+                      labels = c("Other", "Palatal")) + 
+    scale_color_brewer(palette = "Set1", guide = F) + 
+    labs(y = "Normalized F1", x = "% Time course of [j]", 
+         caption = "Mean +/- SE") + 
+    theme_test(base_size = 16, base_family = 'Times') + 
+    theme(legend.position = c(0.9, 0.8))
+
 
 hls_carrier_int_p3 <- carrier_tc %>% 
   filter(., item %in% c(critical_items_palatals, 
