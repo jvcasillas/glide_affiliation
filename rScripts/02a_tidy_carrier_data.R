@@ -1,26 +1,34 @@
 source(here::here("./rScripts/00_helpers.R"))
 
-# Load raw csv file
+# Load raw csv file ------------------------------------------------------------
 car_df <- read_csv(here("data", "dataframes", "raw", "./carrier_raw.csv")) 
 
 head(car_df)
 glimpse(car_df)
 
+
+
+
 # Tidy time course data --------------------------------------------------------
+#
+# Create columns for 'participant', 'exp', 'task', 'item' and 'status' from 
+# file name. 
+# Fileter out misses and errors. 
+# Gather -> separate -> spread to create time course. 
+# Make duration more interpretable, round all continuous variables to two 
+# decimal places, and save as tidy .csv file
 car_timecourse <- car_df %>%
   separate(., col = Filename, 
-              into = c('participant', 'exp', 'x', 'item', 'status')) %>% 
-  select(-x) %>% 
-  filter(., status == 'hit') %>% 
+              into = c('participant', 'exp', 'task', 'item', 'status')) %>% 
+  filter(., status == 'hit', TextGridLabel != "error") %>% 
   gather(., metric, value, 
-           -c(participant, exp, item, status, TextGridLabel, duration)) %>% 
-  separate(., metric, into = c('metric', 'time_course'), sep = "_") %>% 
-  mutate(., time_course = as.numeric(time_course), 
-            TextGridLabel = as.factor(TextGridLabel)) %>% 
-  group_by(., participant, item, TextGridLabel, metric) %>% 
-  mutate(., identifier = seq_along(item)) %>% 
-  ungroup(.) %>% 
-  spread(., metric, value)
+         -c(participant, exp, task, item, status, TextGridLabel, duration)) %>% 
+  separate(., metric, into = c('metric', 'time_course_segment'), sep = "_") %>% 
+  mutate(., time_course_segment = as.numeric(time_course_segment), 
+            duration = (duration * 1000) %>% round(., 2), 
+            value = round(value, 2)) %>% 
+  spread(., metric, value) %>% 
+  write_csv(., path = here("data", "dataframes", "tidy", "carrier_timecourse_tidy.csv"))
 
 
 
@@ -31,11 +39,19 @@ car_timecourse <- car_df %>%
 
 
 # tidy duration data -----------------------------------------------------------
+#
+# Create columns for 'participant', 'exp', 'task', 'item' and 'status' from 
+# file name. 
+# Remove unnecessary columns. 
+# Filter out misses and errors. 
+# Make duration more interpretable, round to two digits, and save as tidy .csv
 car_duration <- car_df %>%
   separate(., col = Filename, 
-              into = c('participant', 'exp', 'x', 'item', 'status')) %>% 
-  select(participant:duration, -x) %>% 
-  filter(., status == 'hit')
+              into = c('participant', 'exp', 'task', 'item', 'status')) %>% 
+  select(participant:duration) %>% 
+  filter(., status == 'hit', TextGridLabel != "error") %>% 
+  mutate(., duration = (duration * 1000) %>% round(., 2)) %>% 
+  write_csv(., path = here("data", "dataframes", "tidy", "carrier_duration_tidy.csv"))
 
 
 
@@ -44,6 +60,3 @@ car_duration <- car_df %>%
 
 
 
-car_duration %>% 
-  group_by(., TextGridLabel) %>% 
-  summarize(., mean_dur = mean(duration), sd_dur = sd(duration))
