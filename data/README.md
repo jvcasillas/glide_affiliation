@@ -22,24 +22,42 @@ Total missing: 594
 - p01 and p02 did a different version of the experiment
 	- no carrier sentences
 	- less items
-- p03:p08 completed an updated version of the experiment administered with 'stim2.pptx'
+- p03:p08 completed an updated version of the experiment administered with 
+'stim2.pptx'
 	- includes carrier sentences
 	- includes real and nonce words
 	- includes syllabification task
 
-## Coding
+## Coding and segmentation
+
+### Carrier sentence task
+
+- Target syllables are analyzed by segments
+- The onset of prevocalic glides was determined by locating the intensity valley 
+after the syllable onset. 
+- The beginning of the syllable nucleus was defined as the point in which 
+formant trajectories became steady, before peak intensity was reached. 
+- The beginning of the offglide was defined as the point in which formant 
+trajectories began changing once again, usually accompanied by a decrease in 
+intensity. 
+- Misread target words are labelled as 'error'
+- For all segments the following metrics are calculated: 
+  - F0, F1, F2, and F3 values over the time course of the segment in 10% 
+  increments
+  - Total segment duration
 
 ### Syllabification task
 
-- each syllable is segmented and the duration is calculated
-- if a hiatus is pronounced in critical syllables then the final column
-is coded as 'extra' (extra syllable)
+- Target words are segmented by syllables and the duration is calculated
+- If a hiatus is pronounced in critical syllables then the final column
+is coded as 'extra' (extra syllable) in the textgrid
 - if the syllable is altered in a way that reduces the phonotactic 
-structure (to avoid illegal phonotactics) the final column is coded 
-as 'error'
+structure (to avoid illegal phonotactics?) the final column is coded 
+as 'error' in the textgrid
 - if the participant produced something that has nothing to do with the 
 item then the final column is coded as 'wayoff'
-- otherwise the final column in coded as NA
+- otherwise the final tier of the textfrid is coded as NA, which indicates a 
+tripthong
 
 ## Descriptives
 
