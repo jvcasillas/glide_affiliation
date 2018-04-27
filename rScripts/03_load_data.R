@@ -2,7 +2,7 @@ source(here::here("./rScripts/00_helpers.R"))
 
 # Load carrier data ------------------------------------------------------------
 carrier_dur <- read_csv(here("data", "dataframes", "tidy", "./carrier_duration_tidy.csv"))
-carrier_tc  <- read_csv(here("data", "dataframes", "tidy", "./carrier_duration_tidy.csv"))
+carrier_tc  <- read_csv(here("data", "dataframes", "tidy", "./carrier_timecourse_tidy.csv"))
 
 # Check it
 glimpse(carrier_dur)

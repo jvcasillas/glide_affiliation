@@ -19,13 +19,13 @@
 
 form Get pitch formants and duration from labeled segments in files
 	comment Directory of sound files. Be sure to include the final "/"
-	text sound_directory ../data/p04/wavs/carrier/
+	text sound_directory ../data/p03/wavs/carrier/
 	sentence Sound_file_extension .wav
 	comment Directory of TextGrid files. Be sure to include the final "/"
-	text textGrid_directory ../data/p04/wavs/carrier/
+	text textGrid_directory ../data/p03/wavs/carrier/
 	sentence TextGrid_file_extension .TextGrid
 	comment Full path of the resulting text file:
-	text resultsfile ../data/p04/data/carrier/p04_carrier.csv
+	text resultsfile ../data/p03/data/carrier/p03_carrier.csv
 	comment Which tier do you want to analyze?
 	integer Tier 1
 	comment Formant analysis parameters
@@ -52,7 +52,7 @@ endif
 
 # Create a header row for the result file: (remember to edit this if 
 # you add or change the analyses!)
-header$ = "Filename,TextGridLabel,duration,f0_00,f1_00,f2_00,f3_00,f0_10,f1_10,f2_10,f3_10,f0_20,f1_20,f2_20,f3_20,f0_30,f1_30,f2_30,f3_30,f0_40,f1_40,f2_40,f3_40,f0_50,f1_50,f2_50,f3_50,f0_60,f1_60,f2_60,f3_60,f0_70,f1_70,f2_70,f3_70,f0_80,f1_80,f2_80,f3_80,f0_90,f1_90,f2_90,f3_90,f0_100,f1_100,f2_100,f3_100'newline$'"
+header$ = "Filename,TextGridLabel,duration,in_00,f0_00,f1_00,f2_00,f3_00,in_10,f0_10,f1_10,f2_10,f3_10,in_20,f0_20,f1_20,f2_20,f3_20,in_30,f0_30,f1_30,f2_30,f3_30,in_40,f0_40,f1_40,f2_40,f3_40,in_50,f0_50,f1_50,f2_50,f3_50,in_60,f0_60,f1_60,f2_60,f3_60,in_70,f0_70,f1_70,f2_70,f3_70,in_80,f0_80,f1_80,f2_80,f3_80,in_90,f0_90,f1_90,f2_90,f3_90,in_100,f0_100,f1_100,f2_100,f3_100'newline$'"
 fileappend "'resultsfile$'" 'header$'
 
 # Open each sound file in the directory:
@@ -75,6 +75,9 @@ for ifile to numberOfFiles
 
 		select Sound 'soundname$'
 		To Pitch... pitch_time_step minimum_pitch maximum_pitch
+
+		select Sound 'soundname$'
+		To Intensity: 100, 0, "yes"
 
 		select TextGrid 'soundname$'
 		numberOfIntervals = Get number of intervals... tier
@@ -148,8 +151,22 @@ for ifile to numberOfFiles
 				f0_90 = Get value at time... perc_90 Hertz Linear
 				f0_100 = Get value at time... end Hertz Linear
 
+				# intensity:
+				select Intensity 'soundname$'
+				in_00 = Get value at time... start Cubic
+				in_10 = Get value at time... perc_10 Cubic
+				in_20 = Get value at time... perc_20 Cubic
+				in_30 = Get value at time... perc_30 Cubic
+				in_40 = Get value at time... perc_40 Cubic
+				in_50 = Get value at time... perc_50 Cubic
+				in_60 = Get value at time... perc_60 Cubic
+				in_70 = Get value at time... perc_70 Cubic
+				in_80 = Get value at time... perc_80 Cubic
+				in_90 = Get value at time... perc_90 Cubic
+				in_100 = Get value at time... end Cubic
+
 				# Save result to text file:
-				resultline$ = "'soundname$','label$','duration','f0_00','f1_00','f2_00','f3_00','f0_10','f1_10','f2_10','f3_10','f0_20','f1_20','f2_20','f3_20','f0_30','f1_30','f2_30','f3_30','f0_40','f1_40','f2_40','f3_40','f0_50','f1_50','f2_50','f3_50','f0_60','f1_60','f2_60','f3_60','f0_70','f1_70','f2_70','f3_70','f0_80','f1_80','f2_80','f3_80','f0_90','f1_90','f2_90','f3_90','f0_100','f1_100','f2_100','f3_100''newline$'"
+				resultline$ = "'soundname$','label$','duration','in_00','f0_00','f1_00','f2_00','f3_00','in_10','f0_10','f1_10','f2_10','f3_10','in_20','f0_20','f1_20','f2_20','f3_20','in_30','f0_30','f1_30','f2_30','f3_30','in_40','f0_40','f1_40','f2_40','f3_40','in_50','f0_50','f1_50','f2_50','f3_50','in_60','f0_60','f1_60','f2_60','f3_60','in_70','f0_70','f1_70','f2_70','f3_70','in_80','f0_80','f1_80','f2_80','f3_80','in_90','f0_90','f1_90','f2_90','f3_90','in_100','f0_100','f1_100','f2_100','f3_100''newline$'"
 				fileappend "'resultsfile$'" 'resultline$'
 
 				# select the TextGrid so we can iterate to the next interval:
@@ -161,6 +178,7 @@ for ifile to numberOfFiles
 		select TextGrid 'soundname$'
 		plus Formant 'soundname$'
 		plus Pitch 'soundname$'
+		plus Intensity 'soundname$'
 		Remove
 	endif
 

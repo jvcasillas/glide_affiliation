@@ -26,7 +26,8 @@ car_timecourse <- car_df %>%
   separate(., metric, into = c('metric', 'time_course_segment'), sep = "_") %>% 
   mutate(., time_course_segment = as.numeric(time_course_segment), 
             duration = (duration * 1000) %>% round(., 2), 
-            value = round(value, 2)) %>% 
+            value = round(value, 2), 
+            sex = if_else(participant %in% c('p03', 'p04', 'p07'), 'm', 'f')) %>% 
   spread(., metric, value) %>% 
   write_csv(., path = here("data", "dataframes", "tidy", "carrier_timecourse_tidy.csv"))
 
@@ -50,7 +51,8 @@ car_duration <- car_df %>%
               into = c('participant', 'exp', 'task', 'item', 'status')) %>% 
   select(participant:duration) %>% 
   filter(., status == 'hit', TextGridLabel != "error") %>% 
-  mutate(., duration = (duration * 1000) %>% round(., 2)) %>% 
+  mutate(., duration = (duration * 1000) %>% round(., 2), 
+            sex = if_else(participant %in% c('p03', 'p04', 'p07'), 'm', 'f')) %>% 
   write_csv(., path = here("data", "dataframes", "tidy", "carrier_duration_tidy.csv"))
 
 

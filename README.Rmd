@@ -16,3 +16,17 @@ knitr::opts_chunk$set(echo = TRUE)
 2. [praatScripts](./praatScripts/)
 3. [rScripts](./rScripts/)
 4. [sources](./sources/)
+
+----
+
+# Analyses
+
+```{r, 'source_scripts'}
+source("./rScripts/04_exploratory_plots.R")
+```
+
+## Syllabification task
+
+```{r}
+hls_syllabification_p1
+```
