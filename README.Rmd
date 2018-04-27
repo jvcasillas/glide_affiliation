@@ -1,5 +1,5 @@
 ---
-title: "Glide affiliation in chicano"
+title: "Syllabic affiliation of glides in chicano"
 date: "Last update: `r Sys.Date()`"
 output: md_document
 ---
@@ -7,6 +7,10 @@ output: md_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+# Syllabic affiliation of glides in chicano
+
+## Last update: `r Sys.Date()`
 
 1. [data](./data/)
 2. [praatScripts](./praatScripts/)
