@@ -18,3 +18,6 @@
 # RStudio files
 .Rproj.user/
 .Rproj.user
+
+# Ignore primary README.Rmd 
+README.Rmd

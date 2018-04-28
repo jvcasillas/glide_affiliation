@@ -27,6 +27,13 @@ source("./rScripts/04_exploratory_plots.R")
 
 ## Syllabification task
 
+The following plots show 4 syllable nonse words containing a CGVGC sequence as 
+the penultimate syllable. The plots show the overall distribution of the 
+responses, which were tripthong, vowel + dipthong (labelled as 'hiatus'), or 
+a simplification of some sort (typically the pre-vocalic glide was dropped, 
+creating a sequence like [pajs] instead of [pjajs])
+
+
 ```{r, 'hls_syllabification_p1', fig.retina=2}
 hls_syllabification_p1
 ```
