@@ -61,6 +61,8 @@ tripthong
 
 ## Descriptives
 
+### Participants
+
 |  id | age | gender |   born  | yrs_in_SW | grew_up_son | years_in_US | parents_son | eng_use |
 | :-- | :-- | :----- | :------ | :-------- | :---------- | :---------- | :---------- | :------ |
 | p01 | 28  | m      | nog_az  | 28        | n           | 28          | y           | 50      |
@@ -71,3 +73,37 @@ tripthong
 | p06 | 46  | f      | nog_son | 46        | y           | 30          | y           | 30      |
 | p07 | 27  | m      | nog_az  | 27        | n           | 27          | y           | 50      |
 | p08 | 25  | f      | nog_az  | 25        | n           | 25          | y           | 70      |
+
+### Palatal + glide
+
+|    [ji]   |    [je]   |   [ja]   |   [jo]   |    [ju]   |
+| :-------- | :-------- | :------- | :------- | :-------- |
+| bollito   | ayer      | baya     | bellota  | ayuda     |
+| bullicio  | ballena   | bella    | cabello  | patilludo |
+| caballito | belleza   | cebolla  | chillo   | velludo   |
+| gallina   | billete   | centella | cuchillo |           |
+| pollito   | caballero | cholla   | gallo    |           |
+| rollizo   | bulle     | costilla | grillo   |           |
+| sellito   | calle     | ella     | portillo |           |
+| tullito   | callejero | milla    | poyo     |           |
+| apellido  | leyenda   | montoya  | tuyo     |           |
+|           | oyendo    | olla     | vello    |           |
+|           | pille     | sella    |          |           |
+|           | rellena   | silla    |          |           |
+|           | sencillez | toalla   |          |           |
+|           | silleta   | tuya     |          |           |
+|           | toller    | baya     |          |           |
+|           | valle     |          |          |           |
+|           | ayer      |          |          |           |
+|           | ballena   |          |          |           |
+
+### Non-palatal + glide
+
+| Preceeding consonant |      'ia'     |
+| -------------------: | :------------ |
+|                  [f] | faluf**ia**lo |
+|                  [k] | faluk**ia**go |
+|                  [l] | l**ia**mo     |
+|                  [p] | p**ia**no     |
+
+
