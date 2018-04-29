@@ -82,6 +82,20 @@ pre-vocalic glides can be part of the onset in this variety of Spanish.
 Carrier sentence task
 ---------------------
 
+The following plots illustrate results from the carrier sentence task.
+These analyses test the hypothesis that pre-vocalic glides will be
+disallowed if preceeded by a palatal consonant. To test this, we measure
+duration, F1, and intensity of the pre-vocalic glide in two
+environments: after a palatal consonant and after any other consonant.
+If pre-vocalic glides are blocked after palatals, we expect to observe
+differences in overall duration. Moreover, the absense of the
+pre-vocalic glide should also affect intensity measurements.
+Specifically, a more 'consonant-like' production (i.e., not a glide)
+should show lower intensity, whereas a more 'vowel-like' production
+should show higher intensity. Furthermore, we analyze the time course of
+intensity, rather than a specific time point, in order to see how the
+two environments differ as they near the following \[a\].
+
 <img src="README_files/figure-markdown_strict/hls_carrier_dur_p1-1.png" width="672" />
 
 <img src="README_files/figure-markdown_strict/hls_carrier_f1_p2-1.png" width="672" />
