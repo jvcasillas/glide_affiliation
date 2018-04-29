@@ -4,8 +4,8 @@ date: "Last update: `r Sys.Date()`"
 output: md_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r 'setup', include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, fig.retina=2, fig.align='center')
 ```
 
 # Syllabic affiliation of glides in chicano
@@ -48,7 +48,7 @@ in approximately 45% of the targets. A production containing a hiatus made up
 roughly 30% of the data, followed by a simplification of some sort (~25% of the 
 time). 
 
-```{r, 'hls_syllabification_p1', fig.retina=2, fig.align='center', fig.cap='hi'}
+```{r, 'hls_syllabification_p1', fig.cap='Figure 1: Responses in syllabification task.'}
 hls_syllabification_p1
 ```
 

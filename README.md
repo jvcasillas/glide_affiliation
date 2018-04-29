@@ -14,8 +14,6 @@ Last update: 2018-04-28
 Analyses
 ========
 
-    source("./rScripts/04_exploratory_plots.R")
-
     ## Observations: 1,247
     ## Variables: 8
     ## $ participant   <chr> "p03", "p03", "p03", "p03", "p03", "p03", "p03",...
@@ -83,32 +81,20 @@ produced in approximately 45% of the targets. A production containing a
 hiatus made up roughly 30% of the data, followed by a simplification of
 some sort (~25% of the time).
 
-    hls_syllabification_p1
-
-<img src="README_files/figure-markdown_strict/hls_syllabification_p1-1.png" alt="hi" width="672" />
+<img src="README_files/figure-markdown_strict/hls_syllabification_p1-1.png" alt="Figure 1: Responses in syllabification task." width="672" />
 <p class="caption">
-hi
+Figure 1: Responses in syllabification task.
 </p>
-
-    hls_syllabification_p2
 
 <img src="README_files/figure-markdown_strict/hls_syllabification_p2-1.png" width="672" style="display: block; margin: auto;" />
 
 Carrier sentence task
 ---------------------
 
-    hls_carrier_dur_p1
-
 <img src="README_files/figure-markdown_strict/hls_carrier_dur_p1-1.png" width="672" style="display: block; margin: auto;" />
-
-    hls_carrier_f1_p2
 
 <img src="README_files/figure-markdown_strict/hls_carrier_f1_p2-1.png" width="672" style="display: block; margin: auto;" />
 
-    hls_carrier_int_p3
-
 <img src="README_files/figure-markdown_strict/hls_carrier_int_p3-1.png" width="672" style="display: block; margin: auto;" />
-
-    hls_carrier_scatter_p4
 
 <img src="README_files/figure-markdown_strict/hls_carrier_scatter_p4-1.png" width="672" style="display: block; margin: auto;" />
