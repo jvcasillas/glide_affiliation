@@ -1,7 +1,7 @@
 Syllabic affiliation of glides in chicano
 =========================================
 
-Last update: 2018-04-27
+Last update: 2018-04-28
 -----------------------
 
 1.  [data](./data/)
@@ -60,12 +60,24 @@ Analyses
 Syllabification task
 --------------------
 
-The following plots show 4 syllable nonse words containing a CGVGC
-sequence as the penultimate syllable. The plots show the overall
-distribution of the responses, which were tripthong, vowel + dipthong
-(labelled as 'hiatus'), or a simplification of some sort (typically the
-pre-vocalic glide was dropped, creating a sequence like \[pajs\] instead
-of \[pjajs\])
+The following plots show results from the syllabification task. Four
+syllable nonse words containing a CGVGC sequence in the penultimate
+syllable were presented on a screen. Participants read the words out
+loud, syllable by syllable. The plots show the overall distribution of
+the responses, which have been classified in the following manner:
+
+-   **tripthong**: the critical sequence was produced in a single
+    syllable
+-   **vowel + dipthong**: the critical sequence was produced as two
+    syllables: CV + VGC (labeled as 'hiatus'), e.g. "lakapiaisto"
+    \[la.ka.**pi**.'**ais**.to\]
+-   **simplification**: a segment was elided from the critical sequence,
+    simplifying the critical syllable. The most common strategy was to
+    drop the pre-vocalic glide, creating a sequence like
+    \[la.ka.pai̯s.to\] instead of \[la.ka.'pjai̯s.to\]), but the
+    post-vocalic glide was also dropped occasionally.
+
+<!-- -->
 
     hls_syllabification_p1
 
