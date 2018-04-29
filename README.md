@@ -74,7 +74,8 @@ pre-vocalic glides can be part of the onset in this variety of Spanish.
 -   Criterion: response (tripthong/hiatus/simplification)
 -   Predictors: glide (\[j\]/\[w\]), consonant (\[b, d, g, p, t, k, f\])
 -   Random effects:
-    `(1 + glide + consonant | participant) + (1 + glide + consonant | item)`
+    -   `(1 + glide + consonant | participant)`
+    -   `(1 + glide + consonant | item)`
 -   Another possibility is to combine hiatus/simplification and use
     standard logistic regression.
 

@@ -93,11 +93,11 @@ hls_carrier_dur_p1 <- carrier_tc %>%
   mutate(., is_palatal = if_else(item %in% critical_items_palatals, 
                                  'palatal', 'other')) %>% 
   ggplot(., aes(x = is_palatal, y = duration, fill = is_palatal)) + 
-    stat_summary(fun.data = mean_cl_boot, geom = 'pointrange', 
+    stat_summary(fun.data = mean_se, geom = 'pointrange', 
                  pch = 21, color = 'black', size = 1.25, show.legend = F) + 
     #coord_cartesian(ylim = c(100, 130)) + 
     labs(y = "Duration (ms)", x = "Preceeding consonant", 
-         caption = "Mean +/- 95% CI") + 
+         caption = "Mean +/- SE") + 
     scale_fill_brewer(palette = "Set1") + 
     scale_x_discrete(labels = c('Other', 'Palatal')) + 
     theme_test(base_size = 16, base_family = 'Times') 
