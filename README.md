@@ -48,10 +48,10 @@ Figure 1: Responses in syllabification task.
 If we combine `hiatus` and `simplification` (Figure 2), we see that they
 make up approximately 60% of the data.
 
-<img src="README_files/figure-markdown_strict/hls_syllabification_p2-1.png" alt="Figure 2: Responses in syllabification task combining 'hiatus/simplification'" width="672" />
+<img src="README_files/figure-markdown_strict/hls_syllabification_p2-1.png" alt="Figure 2: Responses in syllabification task combining 'hiatus/simplification'." width="672" />
 <p class="caption">
 Figure 2: Responses in syllabification task combining
-'hiatus/simplification'
+'hiatus/simplification'.
 </p>
 
 Overall, the task provides evidence supporting the hypothesis that
@@ -82,23 +82,46 @@ pre-vocalic glides can be part of the onset in this variety of Spanish.
 Carrier sentence task
 ---------------------
 
-The following plots illustrate results from the carrier sentence task.
-These analyses test the hypothesis that pre-vocalic glides will be
+The following plots illustrate the results from the carrier sentence
+task. These analyses test the hypothesis that pre-vocalic glides will be
 disallowed if preceeded by a palatal consonant. To test this, we measure
 duration, F1, and intensity of the pre-vocalic glide in two
 environments: after a palatal consonant and after any other consonant.
 If pre-vocalic glides are blocked after palatals, we expect to observe
-differences in overall duration. Moreover, the absense of the
-pre-vocalic glide should also affect intensity measurements.
-Specifically, a more 'consonant-like' production (i.e., not a glide)
-should show lower intensity, whereas a more 'vowel-like' production
-should show higher intensity. Furthermore, we analyze the time course of
-intensity, rather than a specific time point, in order to see how the
-two environments differ as they near the following \[a\].
+differences in overall duration. Figure 3 plots the duration data.
 
-<img src="README_files/figure-markdown_strict/hls_carrier_dur_p1-1.png" width="672" />
+<img src="README_files/figure-markdown_strict/hls_carrier_dur_p1-1.png" alt="Figure 3: Duration as a function of preceeding consonant." width="672" />
+<p class="caption">
+Figure 3: Duration as a function of preceeding consonant.
+</p>
+
+We see a longer duration for glide segments following a palatal
+consonant (contrary to the hypothesis). There are two possible
+explanations (that I can think of). 1) The participants are able to
+produce a glide in this context (at least in some cases) because the
+preceeding consonant is not palatal (i.e., 'ch' is surfacing as \[ʃ\] or
+the fact that it is alveo-palatal is different enough to allow a glide
+afterwards). 2) The participants are not producing a glide, but rather
+are lengthening the onset.
+
+We can examine the plausability of (1) by looking at the formant
+trajectory and intensity over the course of the segment. If the
+participants are able to produce a glide in some contexts but not others
+we should see differences in F1 as a function of the preceeding
+consonant.
 
 <img src="README_files/figure-markdown_strict/hls_carrier_f1_p2-1.png" width="672" />
+
+Again, the second possibility is that participants are lengthening the
+palatal consonant (not producing a glide) because of the fact that they
+cannot produce both. In other words, they might be trying to produce
+something, but because the target is illicit, they resort to lengthening
+the onset. If this is indeed what is happening, then we would expect the
+intensity of the lengthened segment to be lower from that of a glide.
+Why? Because more consonant-like productions have lower intensity than
+more vowel-like productions. Thus we analyze the time course of
+intensity in order to see how the two environments differ as they near
+the following \[a\].
 
 <img src="README_files/figure-markdown_strict/hls_carrier_int_p3-1.png" width="672" />
 
