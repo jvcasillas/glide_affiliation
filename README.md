@@ -81,10 +81,10 @@ pre-vocalic glides can be part of the onset in this variety of Spanish.
 Carrier sentence task
 ---------------------
 
-<img src="README_files/figure-markdown_strict/hls_carrier_dur_p1-1.png" width="672" style="display: block; margin: auto;" />
+<img src="README_files/figure-markdown_strict/hls_carrier_dur_p1-1.png" width="672" />
 
-<img src="README_files/figure-markdown_strict/hls_carrier_f1_p2-1.png" width="672" style="display: block; margin: auto;" />
+<img src="README_files/figure-markdown_strict/hls_carrier_f1_p2-1.png" width="672" />
 
-<img src="README_files/figure-markdown_strict/hls_carrier_int_p3-1.png" width="672" style="display: block; margin: auto;" />
+<img src="README_files/figure-markdown_strict/hls_carrier_int_p3-1.png" width="672" />
 
-<img src="README_files/figure-markdown_strict/hls_carrier_scatter_p4-1.png" width="672" style="display: block; margin: auto;" />
+<img src="README_files/figure-markdown_strict/hls_carrier_scatter_p4-1.png" width="672" />
