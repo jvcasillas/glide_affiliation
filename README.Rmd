@@ -62,7 +62,7 @@ hls_syllabification_p2
 Overall, the task provides evidence supporting the hypothesis that pre-vocalic 
 glides can be part of the onset in this variety of Spanish. 
 
-To consider: 
+**To consider**: 
 
 - What factors can explain the variation in response types?
 - Possibilities: 
@@ -70,22 +70,31 @@ To consider:
     - Preceeding consonant. The pre-vocalic glides in this task are preceeded 
     by a stop (voiced and voiceless) or [f]
 
+**Statistical analysis**: 
+
+- Multinomial mixed effects regression 
+- Criterion: response (tripthong/hiatus/simplification)
+- Predictors: glide ([j]/[w]), consonant ([b, d, g, p, t, k, f])
+- Random effects: 
+(1 + glide + consonant | participant) + (1 + glide + consonant | item)
+- Another possibility is to combine hiatus and simplification and use standard 
+logistic regression. 
 
 ## Carrier sentence task
 
-```{r, 'hls_carrier_dur_p1', fig.retina=2, fig.align='center'}
+```{r, 'hls_carrier_dur_p1'}
 hls_carrier_dur_p1
 ```
 
-```{r, 'hls_carrier_f1_p2', fig.retina=2, fig.align='center'}
+```{r, 'hls_carrier_f1_p2'}
 hls_carrier_f1_p2
 ```
 
-```{r, 'hls_carrier_int_p3', fig.retina=2, fig.align='center'}
+```{r, 'hls_carrier_int_p3'}
 hls_carrier_int_p3
 ```
 
-```{r, 'hls_carrier_scatter_p4', fig.retina=2, fig.align='center'}
+```{r, 'hls_carrier_scatter_p4'}
 hls_carrier_scatter_p4
 ```
 

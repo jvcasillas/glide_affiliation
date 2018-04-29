@@ -57,7 +57,7 @@ Figure 2: Responses in syllabification task combining
 Overall, the task provides evidence supporting the hypothesis that
 pre-vocalic glides can be part of the onset in this variety of Spanish.
 
-To consider:
+**To consider**:
 
 -   What factors can explain the variation in response types?
 -   Possibilities:
@@ -65,6 +65,16 @@ To consider:
         \[w\]?
     -   Preceeding consonant. The pre-vocalic glides in this task are
         preceeded by a stop (voiced and voiceless) or \[f\]
+
+**Statistical analysis**:
+
+-   Multinomial mixed effects regression
+-   Criterion: response (tripthong/hiatus/simplification)
+-   Predictors: glide (\[j\]/\[w\]), consonant (\[b, d, g, p, t, k, f\])
+-   Random effects: (1 + glide + consonant | participant) + (1 + glide +
+    consonant | item)
+-   Another possibility is to combine hiatus and simplification and use
+    standard logistic regression.
 
 Carrier sentence task
 ---------------------
