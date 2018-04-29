@@ -70,11 +70,11 @@ the responses, which have been classified in the following manner:
     syllable
 -   **vowel + dipthong**: the critical sequence was produced as two
     syllables: CV + VGC (labeled as 'hiatus'), e.g. "lakapiaisto"
-    \[la.ka.**pi**.'**ais**.to\]
+    \[la.ka.**pi**.'**ai̯s**.to\]
 -   **simplification**: a segment was elided from the critical sequence,
     simplifying the critical syllable. The most common strategy was to
     drop the pre-vocalic glide, creating a sequence like
-    \[la.ka.pai̯s.to\] instead of \[la.ka.'pjai̯s.to\]), but the
+    \[la.ka.**pai̯s**.to\] instead of \[la.ka.'**pjai̯s**.to\]), but the
     post-vocalic glide was also dropped occasionally.
 
 <!-- -->
