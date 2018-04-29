@@ -86,7 +86,14 @@ some sort (~25% of the time).
 Figure 1: Responses in syllabification task.
 </p>
 
-<img src="README_files/figure-markdown_strict/hls_syllabification_p2-1.png" width="672" style="display: block; margin: auto;" />
+If we combine `hiatus` and `simplification` (Figure 2), we see that they
+make up approximately 60% of the data.
+
+<img src="README_files/figure-markdown_strict/hls_syllabification_p2-1.png" alt="Figure 2: Response in syllabification task combining 'hiatus/simplification'" width="672" />
+<p class="caption">
+Figure 2: Response in syllabification task combining
+'hiatus/simplification'
+</p>
 
 Carrier sentence task
 ---------------------

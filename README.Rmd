@@ -52,7 +52,10 @@ time).
 hls_syllabification_p1
 ```
 
-```{r, 'hls_syllabification_p2', fig.retina=2, fig.align='center'}
+If we combine `hiatus` and `simplification` (Figure 2), we see that they make 
+up approximately 60% of the data. 
+
+```{r, 'hls_syllabification_p2', fig.cap="Figure 2: Response in syllabification task combining 'hiatus/simplification'"}
 hls_syllabification_p2
 ```
 
