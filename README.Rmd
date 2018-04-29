@@ -35,7 +35,7 @@ have been classified in the following manner:
 
 - **tripthong**: the critical sequence was produced in a single syllable 
 - **vowel + dipthong**: the critical sequence was produced as two syllables: 
-CV + VGC (labeled as 'hiatus'), e.g. "lakapiaisto" [la.ka.**pi**.'**ais**.to]
+CV + VGC (labeled as 'hiatus'), e.g. "lakapiaisto" [la.ka.**pi**.'**ai̯s**.to]
 - **simplification**: a segment was elided from the critical sequence, 
 simplifying the critical syllable. The most common strategy was to drop the 
 pre-vocalic glide, creating a sequence like [la.ka.pai̯s.to] instead of 
