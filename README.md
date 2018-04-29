@@ -1,7 +1,7 @@
 Syllabic affiliation of glides in chicano
 =========================================
 
-Last update: 2018-04-28
+Last update: 2018-04-29
 -----------------------
 
 1.  [data](./data/)
@@ -64,7 +64,9 @@ pre-vocalic glides can be part of the onset in this variety of Spanish.
     -   Frontness of glide. Is there a difference between \[j\] and
         \[w\]?
     -   Preceeding consonant. The pre-vocalic glides in this task are
-        preceeded by a stop (voiced and voiceless) or \[f\]
+        preceeded by a stop (voiced and voiceless) or \[f\]. Is there is
+        a difference in response strategies as a function of preceeding
+        consonant?
 
 **Statistical analysis**:
 
@@ -73,7 +75,7 @@ pre-vocalic glides can be part of the onset in this variety of Spanish.
 -   Predictors: glide (\[j\]/\[w\]), consonant (\[b, d, g, p, t, k, f\])
 -   Random effects: (1 + glide + consonant | participant) + (1 + glide +
     consonant | item)
--   Another possibility is to combine hiatus and simplification and use
+-   Another possibility is to combine hiatus/simplification and use
     standard logistic regression.
 
 Carrier sentence task
