@@ -66,9 +66,9 @@ To consider:
 
 - What factors can explain the variation in response types?
 - Possibilities: 
-  - Frontness of glide. Is there a difference between [j] and [w]?
-  - Preceeding consonant. The pre-vocalic glides in this task are preceeded by 
-  a stop (voiced and voiceless) or [f]
+    - Frontness of glide. Is there a difference between [j] and [w]?
+    - Preceeding consonant. The pre-vocalic glides in this task are preceeded 
+    by a stop (voiced and voiceless) or [f]
 
 
 ## Carrier sentence task
