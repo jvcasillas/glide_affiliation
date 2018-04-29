@@ -105,12 +105,13 @@ afterwards). 2) The participants are not producing a glide, but rather
 are lengthening the onset.
 
 We can examine the plausability of (1) by looking at the formant
-trajectory and intensity over the course of the segment. If the
-participants are able to produce a glide in some contexts but not others
-we should see differences in F1 as a function of the preceeding
-consonant.
+trajectory over the course of the segment. If the participants are able
+to produce a glide in some contexts but not others we should see
+differences in F1 as a function of the preceeding consonant.
 
 <img src="README_files/figure-markdown_strict/hls_carrier_f1_p2-1.png" width="672" />
+
+<img src="README_files/figure-markdown_strict/hls_carrier_f1_p3-1.png" width="672" />
 
 Again, the second possibility is that participants are lengthening the
 palatal consonant (not producing a glide) because of the fact that they
@@ -123,6 +124,8 @@ more vowel-like productions. Thus we analyze the time course of
 intensity in order to see how the two environments differ as they near
 the following \[a\].
 
-<img src="README_files/figure-markdown_strict/hls_carrier_int_p3-1.png" width="672" />
+<img src="README_files/figure-markdown_strict/hls_carrier_int_p4-1.png" width="672" />
 
-<img src="README_files/figure-markdown_strict/hls_carrier_scatter_p4-1.png" width="672" />
+<img src="README_files/figure-markdown_strict/hls_carrier_int_p5-1.png" width="672" />
+
+<img src="README_files/figure-markdown_strict/hls_carrier_scatter_p6-1.png" width="672" />

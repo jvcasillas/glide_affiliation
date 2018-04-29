@@ -106,13 +106,17 @@ is surfacing as [ʃ] or the fact that it is alveo-palatal is different enough to
 allow a glide afterwards). 2) The participants are not producing a glide, but 
 rather are lengthening the onset. 
 
-We can examine the plausability of (1) by looking at the formant trajectory and 
-intensity over the course of the segment. If the participants are able to 
-produce a glide in some contexts but not others we should see differences in F1 
-as a function of the preceeding consonant. 
+We can examine the plausability of (1) by looking at the formant trajectory over 
+the course of the segment. If the participants are able to produce a glide in 
+some contexts but not others we should see differences in F1 as a function of 
+the preceeding consonant. 
 
 ```{r, 'hls_carrier_f1_p2'}
 hls_carrier_f1_p2
+```
+
+```{r, 'hls_carrier_f1_p3'}
+hls_carrier_f1_p3
 ```
 
 Again, the second possibility is that participants are lengthening the palatal consonant (not producing a glide) because of the fact that they cannot produce both. In other words, they might be trying to produce something, but because the target is illicit, they resort to lengthening the onset. If this is indeed what is happening, then we would expect the intensity of the lengthened segment to 
@@ -120,11 +124,16 @@ be lower from that of a glide. Why? Because more consonant-like productions
 have lower intensity than more vowel-like productions. Thus we analyze the time course of intensity in order to see how the two environments differ as they 
 near the following [a].
 
-```{r, 'hls_carrier_int_p3'}
-hls_carrier_int_p3
+```{r, 'hls_carrier_int_p4'}
+hls_carrier_int_p4
 ```
 
-```{r, 'hls_carrier_scatter_p4'}
-hls_carrier_scatter_p4
+```{r, 'hls_carrier_int_p5'}
+hls_carrier_int_p5
+```
+
+
+```{r, 'hls_carrier_scatter_p6'}
+hls_carrier_scatter_p6
 ```
 

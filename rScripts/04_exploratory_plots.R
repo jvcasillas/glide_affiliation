@@ -85,17 +85,26 @@ comparison_items_nonpalatals <- c(
  'piano'      # [p]
 )
 
-
-hls_carrier_dur_p1 <- carrier_tc %>% 
+carrier_tc_final <- carrier_tc %>% 
   filter(., item %in% c(critical_items_palatals, 
                         comparison_items_nonpalatals), 
             TextGridLabel == 'i') %>% 
   mutate(., is_palatal = if_else(item %in% critical_items_palatals, 
-                                 'palatal', 'other')) %>% 
+                                 'palatal', 'other'), 
+            pre_c = if_else(item %in% comparison_items_nonpalatals, 'other', 
+                            if_else(item %in% c('chiaba', 'mebochiana', 'pachialo'), 'ch', 
+                                    if_else(item == 'lliape', 'j', 'nh')))) %>% 
+  group_by(., participant, TextGridLabel) %>% 
+  mutate(., f1norm = (f1 - mean(f1)) / sd(f1), 
+            f2norm = (f2 - mean(f2)) / sd(f2)) %>% 
+  ungroup(.)
+
+hls_carrier_dur_p1 <- carrier_tc_final %>% 
+  filter(., duration <= 375) %>% 
   ggplot(., aes(x = is_palatal, y = duration, fill = is_palatal)) + 
     stat_summary(fun.data = mean_se, geom = 'pointrange', 
                  pch = 21, color = 'black', size = 1.25, show.legend = F) + 
-    #coord_cartesian(ylim = c(100, 130)) + 
+    coord_cartesian(ylim = c(78, 112)) + 
     labs(y = "Duration (ms)", x = "Preceeding consonant", 
          caption = "Mean +/- SE") + 
     scale_fill_brewer(palette = "Set1") + 
@@ -103,16 +112,8 @@ hls_carrier_dur_p1 <- carrier_tc %>%
     theme_test(base_size = 16, base_family = 'Times') 
 
 
-hls_carrier_f1_p2 <- carrier_tc %>% 
-  filter(., item %in% c(critical_items_palatals, 
-                        comparison_items_nonpalatals), 
-            TextGridLabel == 'i', time_course_segment != 0) %>% 
-  mutate(., is_palatal = if_else(item %in% critical_items_palatals, 
-                                 'palatal', 'other')) %>% 
-  group_by(., participant, TextGridLabel) %>% 
-  mutate(., f1norm = (f1 - mean(f1)) / sd(f1), 
-            f2norm = (f2 - mean(f2)) / sd(f2)) %>% 
-  ungroup(.) %>% 
+hls_carrier_f1_p2 <- carrier_tc_final %>% 
+  filter(., time_course_segment != 0) %>% 
   ggplot(., aes(x = time_course_segment, y = f1norm, fill = is_palatal)) + 
     stat_summary(aes(color = is_palatal), fun.y = mean, geom = 'line') + 
     stat_summary(fun.data = mean_se, geom = 'pointrange', 
@@ -126,13 +127,25 @@ hls_carrier_f1_p2 <- carrier_tc %>%
     theme_test(base_size = 16, base_family = 'Times') + 
     theme(legend.position = c(0.9, 0.8))
 
+hls_carrier_f1_p3 <- carrier_tc_final %>% 
+  filter(., time_course_segment != 0) %>% 
+  ggplot(., aes(x = time_course_segment, y = f1norm, fill = pre_c)) + 
+    stat_summary(aes(color = pre_c), fun.y = mean, geom = 'line') + 
+    stat_summary(fun.data = mean_se, geom = 'pointrange', 
+                 pch = 21, color = 'grey20', size = 1) + 
+    scale_y_reverse() + 
+    scale_fill_brewer(name = "Preceeding\nconsonant", palette = 'Set1', 
+                      labels = c("ch", "j", "nh", "other")) + 
+    scale_color_brewer(palette = "Set1", guide = F) + 
+    labs(y = "Normalized F1", x = "% Time course of [j]", 
+         caption = "Mean +/- SE") + 
+    theme_test(base_size = 16, base_family = 'Times') + 
+    theme(legend.position = c(0.9, 0.8))
 
-hls_carrier_int_p3 <- carrier_tc %>% 
-  filter(., item %in% c(critical_items_palatals, 
-                        comparison_items_nonpalatals), 
-            TextGridLabel == 'i') %>% 
-  mutate(., is_palatal = if_else(item %in% critical_items_palatals, 
-                                 'palatal', 'other')) %>% 
+
+
+
+hls_carrier_int_p4 <- carrier_tc_final %>% 
   ggplot(., aes(x = time_course_segment, y = `in`, fill = is_palatal)) + 
     stat_summary(aes(color = is_palatal), fun.y = mean, geom = 'line') + 
     stat_summary(fun.data = mean_se, geom = 'pointrange', 
@@ -145,24 +158,31 @@ hls_carrier_int_p3 <- carrier_tc %>%
     theme_test(base_size = 16, base_family = 'Times') + 
     theme(legend.position = c(0.9, 0.15))
 
+hls_carrier_int_p5 <- carrier_tc_final %>% 
+  ggplot(., aes(x = time_course_segment, y = `in`, fill = pre_c)) + 
+    stat_summary(aes(color = pre_c), fun.y = mean, geom = 'line') + 
+    stat_summary(fun.data = mean_se, geom = 'pointrange', 
+                 pch = 21, size = 1, color = 'grey20') + 
+    scale_fill_brewer(name = "Preceeding\nconsonant", palette = 'Set1', 
+                      labels = c("ch", "j", "nh", "other")) + 
+    scale_color_brewer(palette = "Set1", guide = F) + 
+    labs(y = "Intensity (dB)", x = "% Time course of [j]", 
+         caption = "Mean +/- SE") + 
+    theme_test(base_size = 16, base_family = 'Times') 
 
 
-int_dur <- carrier_tc %>% 
-  filter(., item %in% c(critical_items_palatals, 
-                        comparison_items_nonpalatals), 
-            TextGridLabel == 'i', 
-            time_course_segment %in% c(0, 100)) %>% 
-  mutate(., is_palatal = if_else(item %in% critical_items_palatals, 
-                                 'palatal', 'other')) %>% 
+int_dur <- carrier_tc_final %>% 
+  filter(., time_course_segment %in% c(0, 100), 
+            duration <= 375) %>% 
   select(., participant:sex, int = `in`, is_palatal) %>% 
   spread(., time_course_segment, int) %>% 
-  mutate(., int_diff = `100` - `0`) 
+  mutate(., int_diff = `100` - `0`)
 
 int_dur_means <- int_dur %>% 
   group_by(is_palatal) %>% 
   summarise(., int_mean = mean(int_diff), dur_mean = mean(duration))
 
-hls_carrier_scatter_p4 <- int_dur %>% 
+hls_carrier_scatter_p6 <- int_dur %>% 
   ggplot(., aes(x = duration, y = int_diff, color = is_palatal)) + 
     geom_point(size = 4, alpha = 0.9, pch = 21, fill = 'grey90', stroke = 1) + 
     geom_point(data = int_dur_means, aes(x = dur_mean, y = int_mean), 
