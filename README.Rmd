@@ -55,9 +55,21 @@ hls_syllabification_p1
 If we combine `hiatus` and `simplification` (Figure 2), we see that they make 
 up approximately 60% of the data. 
 
-```{r, 'hls_syllabification_p2', fig.cap="Figure 2: Response in syllabification task combining 'hiatus/simplification'"}
+```{r, 'hls_syllabification_p2', fig.cap="Figure 2: Responses in syllabification task combining 'hiatus/simplification'"}
 hls_syllabification_p2
 ```
+
+Overall, the task provides evidence supporting the hypothesis that pre-vocalic 
+glides can be part of the onset in this variety of Spanish. 
+
+To consider: 
+
+- What factors can explain the variation in response types?
+- Possibilities: 
+  - Frontness of glide. Is there a difference between [j] and [w]?
+  - Preceeding consonant. The pre-vocalic glides in this task are preceeded by 
+  a stop (voiced and voiceless) or [f]
+
 
 ## Carrier sentence task
 
