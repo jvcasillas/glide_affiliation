@@ -42,32 +42,35 @@ pre-vocalic glide, creating a sequence like [la.ka.**pai̯s**.to] instead of
 [la.ka.'**pjai̯s**.to]), but the post-vocalic glide was also dropped
 occasionally. 
 
+Figure 1 plots the proportion of responses accross all data (collapsing across 
+the pre-vocalic glide and onset). We observe that tripthongs were produced 
+in approximately 45% of the targets. A production containing a hiatus made up 
+roughly 30% of the data, followed by a simplification of some sort (~25% of the 
+time). 
 
-
-
-```{r, 'hls_syllabification_p1', fig.retina=2}
+```{r, 'hls_syllabification_p1', fig.retina=2, fig.align='center', fig.cap='hi'}
 hls_syllabification_p1
 ```
 
-```{r, 'hls_syllabification_p2', fig.retina=2}
+```{r, 'hls_syllabification_p2', fig.retina=2, fig.align='center'}
 hls_syllabification_p2
 ```
 
 ## Carrier sentence task
 
-```{r, 'hls_carrier_dur_p1', fig.retina=2}
+```{r, 'hls_carrier_dur_p1', fig.retina=2, fig.align='center'}
 hls_carrier_dur_p1
 ```
 
-```{r, 'hls_carrier_f1_p2', fig.retina=2}
+```{r, 'hls_carrier_f1_p2', fig.retina=2, fig.align='center'}
 hls_carrier_f1_p2
 ```
 
-```{r, 'hls_carrier_int_p3', fig.retina=2}
+```{r, 'hls_carrier_int_p3', fig.retina=2, fig.align='center'}
 hls_carrier_int_p3
 ```
 
-```{r, 'hls_carrier_scatter_p4', fig.retina=2}
+```{r, 'hls_carrier_scatter_p4', fig.retina=2, fig.align='center'}
 hls_carrier_scatter_p4
 ```
 

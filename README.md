@@ -77,31 +77,38 @@ the responses, which have been classified in the following manner:
     \[la.ka.**pai̯s**.to\] instead of \[la.ka.'**pjai̯s**.to\]), but the
     post-vocalic glide was also dropped occasionally.
 
-<!-- -->
+Figure 1 plots the proportion of responses accross all data (collapsing
+across the pre-vocalic glide and onset). We observe that tripthongs were
+produced in approximately 45% of the targets. A production containing a
+hiatus made up roughly 30% of the data, followed by a simplification of
+some sort (~25% of the time).
 
     hls_syllabification_p1
 
-<img src="README_files/figure-markdown_strict/hls_syllabification_p1-1.png" width="672" />
+<img src="README_files/figure-markdown_strict/hls_syllabification_p1-1.png" alt="hi" width="672" />
+<p class="caption">
+hi
+</p>
 
     hls_syllabification_p2
 
-<img src="README_files/figure-markdown_strict/hls_syllabification_p2-1.png" width="672" />
+<img src="README_files/figure-markdown_strict/hls_syllabification_p2-1.png" width="672" style="display: block; margin: auto;" />
 
 Carrier sentence task
 ---------------------
 
     hls_carrier_dur_p1
 
-<img src="README_files/figure-markdown_strict/hls_carrier_dur_p1-1.png" width="672" />
+<img src="README_files/figure-markdown_strict/hls_carrier_dur_p1-1.png" width="672" style="display: block; margin: auto;" />
 
     hls_carrier_f1_p2
 
-<img src="README_files/figure-markdown_strict/hls_carrier_f1_p2-1.png" width="672" />
+<img src="README_files/figure-markdown_strict/hls_carrier_f1_p2-1.png" width="672" style="display: block; margin: auto;" />
 
     hls_carrier_int_p3
 
-<img src="README_files/figure-markdown_strict/hls_carrier_int_p3-1.png" width="672" />
+<img src="README_files/figure-markdown_strict/hls_carrier_int_p3-1.png" width="672" style="display: block; margin: auto;" />
 
     hls_carrier_scatter_p4
 
-<img src="README_files/figure-markdown_strict/hls_carrier_scatter_p4-1.png" width="672" />
+<img src="README_files/figure-markdown_strict/hls_carrier_scatter_p4-1.png" width="672" style="display: block; margin: auto;" />
