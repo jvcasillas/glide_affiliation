@@ -3,8 +3,39 @@ source(here::here("./rScripts/00_helpers.R"))
 # Load raw csv file ------------------------------------------------------------
 car_df <- read_csv(here("data", "dataframes", "raw", "./carrier_raw.csv")) 
 
-head(car_df)
-glimpse(car_df)
+
+
+# Setup ------------------------------------------------------------------------
+
+# Get critical items for subsetting and creating new variables
+critical_items_tripthongs <- c(
+#      [j]            [w]
+  "lakabiaisto", "lakabuaisto", # [b]
+  "lakadiaisto", "lakaduaisto", # [d]
+  "lakafiaisto", "lakafuaisto", # [f]
+  "lakagiaisto", "lakaguaisto", # [g]
+  "lakakiaisto", "lakakuaisto", # [k]
+  "lakapiaisto", "lakapuaisto", # [p]
+  "lakatiaisto", "lakatuaisto"  # [t]
+)
+
+# Target words in part two of carrier task
+critical_items_palatals <- c(
+#    [tʃ]          [j]        [ɲ]                     
+  "chiaba",     "lliape",  "manhiala",    # ia
+  "mebochiana",            "costonhialo", # ia, minus "ruyiola"
+  "pachialo",              "nhiape"       # ia, minus "payielo",
+)
+
+# Words to compare with critical items
+comparison_items_nonpalatals <- c(
+#     [ia]
+ 'falufialo', # [f]
+ 'falukiago', # [k]
+ 'liamo',     # [l]
+ 'piano'      # [p]
+)
+
 
 
 
@@ -29,6 +60,12 @@ car_timecourse <- car_df %>%
             value = round(value, 2), 
             sex = if_else(participant %in% c('p03', 'p04', 'p07'), 'm', 'f')) %>% 
   spread(., metric, value) %>% 
+  mutate(., is_palatal = if_else(item %in% critical_items_palatals, 
+                                 'palatal', 'other')) %>% 
+  group_by(., participant, TextGridLabel) %>% 
+  mutate(., f1norm = (f1 - mean(f1)) / sd(f1), 
+            f2norm = (f2 - mean(f2)) / sd(f2)) %>% 
+  ungroup(.) %>% 
   write_csv(., path = here("data", "dataframes", "tidy", "carrier_timecourse_tidy.csv"))
 
 

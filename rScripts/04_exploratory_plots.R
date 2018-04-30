@@ -1,14 +1,28 @@
 source(here::here("./rScripts/03_load_data.R"))
 
 
-# Syllabification task ---------------------------------------------------------
-syllabified_props <- xtabs(~ participant + response, data = syllabified_trip) %>% 
+# Syllabification task subsets -------------------------------------------------
+#
+# Props as a function of 3 response types for each participant
+syllabified_props <- syllabified_trip %>% 
+  xtabs(~ participant + response, data = .) %>% 
   as.tibble(.) %>% 
   arrange(., participant) %>% 
   mutate(., prop = n / 14, 
             response_simp = if_else(response == 'Tripthong', 
                                     'Tripthong', 'Hiatus/\nSimplification')) 
 
+# Props as a function of 2 response types for each participant
+simp_props <- syllabified_props %>% 
+  group_by(., participant, response_simp) %>% 
+  summarize(., count = sum(n)) %>% 
+  mutate(., prop = count / sum(count)) %>% 
+  ungroup(.) 
+
+
+# Syllabification task plots ---------------------------------------------------
+#
+# Response proportion as a function of response type
 hls_syllabification_p1 <- syllabified_props %>% 
   group_by(., response) %>% 
   summarize(., count = sum(n)) %>% 
@@ -24,14 +38,7 @@ hls_syllabification_p1 <- syllabified_props %>%
     labs(y = 'Proportion', x = 'Response', caption = 'Mean +/- SE') +
     theme_test(base_size = 16, base_family = 'Times') 
 
-
-
-simp_props <- syllabified_props %>% 
-  group_by(., participant, response_simp) %>% 
-  summarize(., count = sum(n)) %>% 
-  mutate(., prop = count / sum(count)) %>% 
-  ungroup(.) 
-
+# Response proportion as a function of response type simplified
 hls_syllabification_p2 <- simp_props %>% 
   group_by(., response_simp) %>% 
   summarize(., count = sum(count)) %>% 
@@ -46,6 +53,10 @@ hls_syllabification_p2 <- simp_props %>%
                  pch = 21, size = 1.25, fill = 'white', color = 'grey30') + 
     labs(y = 'Proportion', x = 'Response', caption = 'Mean +/- SE') +
     theme_test(base_size = 16, base_family = 'Times')
+
+
+
+
 
 
 
@@ -89,15 +100,9 @@ carrier_tc_final <- carrier_tc %>%
   filter(., item %in% c(critical_items_palatals, 
                         comparison_items_nonpalatals), 
             TextGridLabel == 'i') %>% 
-  mutate(., is_palatal = if_else(item %in% critical_items_palatals, 
-                                 'palatal', 'other'), 
-            pre_c = if_else(item %in% comparison_items_nonpalatals, 'other', 
+  mutate(., pre_c = if_else(item %in% comparison_items_nonpalatals, 'other', 
                             if_else(item %in% c('chiaba', 'mebochiana', 'pachialo'), 'ch', 
-                                    if_else(item == 'lliape', 'j', 'nh')))) %>% 
-  group_by(., participant, TextGridLabel) %>% 
-  mutate(., f1norm = (f1 - mean(f1)) / sd(f1), 
-            f2norm = (f2 - mean(f2)) / sd(f2)) %>% 
-  ungroup(.)
+                                    if_else(item == 'lliape', 'j', 'nh')))) 
 
 hls_carrier_dur_p1 <- carrier_tc_final %>% 
   filter(., duration <= 375) %>% 
