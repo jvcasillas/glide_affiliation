@@ -64,7 +64,7 @@ hls_syllabification_all_p3 <- syllabified_trip %>%
     scale_x_discrete(name = 'Glide', labels = c('[j]', '[w]')) + 
     scale_color_brewer(name = 'Voicing', labels = c('Voiced', 'Voiceless'), 
                        palette = 'Set1') + 
-    scale_shape_discrete(name = 'Preceeding\nconsonant\nPOA', 
+    scale_shape_discrete(name = 'Preceding\nconsonant\nPOA', 
                          labels = c('Bilabial', 'Dental', 'Labiodental', 'Velar')) + 
     theme_grey(base_size = 16, base_family = 'Times')
 
@@ -125,7 +125,7 @@ hls_carrier_dur_p1 <- carrier_tc_final %>%
     stat_summary(fun.data = mean_se, geom = 'pointrange', 
                  pch = 21, color = 'black', size = 1.25, show.legend = F) + 
     coord_cartesian(ylim = c(78, 112)) + 
-    labs(y = "Duration (ms)", x = "Preceeding consonant", 
+    labs(y = "Duration (ms)", x = "Preceding consonant", 
          caption = "Mean +/- SE") + 
     scale_fill_brewer(palette = "Set1") + 
     scale_x_discrete(labels = c('Other', 'Palatal')) + 
@@ -139,7 +139,7 @@ hls_carrier_f1_p2 <- carrier_tc_final %>%
     stat_summary(fun.data = mean_se, geom = 'pointrange', 
                  pch = 21, color = 'grey20', size = 1) + 
     scale_y_reverse() + 
-    scale_fill_brewer(name = "Preceeding\nconsonant", palette = 'Set1', 
+    scale_fill_brewer(name = "Preceding\nconsonant", palette = 'Set1', 
                       labels = c("Other", "Palatal")) + 
     scale_color_brewer(palette = "Set1", guide = F) + 
     labs(y = "Normalized F1", x = "% Time course of [j]", 
@@ -154,7 +154,7 @@ hls_carrier_f1_p3 <- carrier_tc_final %>%
     stat_summary(fun.data = mean_se, geom = 'pointrange', 
                  pch = 21, color = 'grey20', size = 1) + 
     scale_y_reverse() + 
-    scale_fill_brewer(name = "Preceeding\nconsonant", palette = 'Set1', 
+    scale_fill_brewer(name = "Preceding\nconsonant", palette = 'Set1', 
                       labels = c("ch", "j", "nh", "other")) + 
     scale_color_brewer(palette = "Set1", guide = F) + 
     labs(y = "Normalized F1", x = "% Time course of [j]", 
@@ -170,7 +170,7 @@ hls_carrier_int_p4 <- carrier_tc_final %>%
     stat_summary(aes(color = is_palatal), fun.y = mean, geom = 'line') + 
     stat_summary(fun.data = mean_se, geom = 'pointrange', 
                  pch = 21, size = 1, color = 'grey20') + 
-    scale_fill_brewer(name = "Preceeding\nconsonant", palette = 'Set1', 
+    scale_fill_brewer(name = "Preceding\nconsonant", palette = 'Set1', 
                       labels = c("Other", "Palatal")) + 
     scale_color_brewer(palette = "Set1", guide = F) + 
     labs(y = "Intensity (dB)", x = "% Time course of [j]", 
@@ -183,7 +183,7 @@ hls_carrier_int_p5 <- carrier_tc_final %>%
     stat_summary(aes(color = pre_c), fun.y = mean, geom = 'line') + 
     stat_summary(fun.data = mean_se, geom = 'pointrange', 
                  pch = 21, size = 1, color = 'grey20') + 
-    scale_fill_brewer(name = "Preceeding\nconsonant", palette = 'Set1', 
+    scale_fill_brewer(name = "Preceding\nconsonant", palette = 'Set1', 
                       labels = c("ch", "j", "nh", "other")) + 
     scale_color_brewer(palette = "Set1", guide = F) + 
     labs(y = "Intensity (dB)", x = "% Time course of [j]", 
@@ -207,7 +207,7 @@ hls_carrier_scatter_p6 <- int_dur %>%
     geom_point(size = 4, alpha = 0.9, pch = 21, fill = 'grey90', stroke = 1) + 
     geom_point(data = int_dur_means, aes(x = dur_mean, y = int_mean), 
                size = 8, pch = 21, stroke = 2, show.legend = F) + 
-    scale_color_brewer(name = "Preceeding\nconsonant", palette = 'Set1', 
+    scale_color_brewer(name = "Preceding\nconsonant", palette = 'Set1', 
                       labels = c("Other", "Palatal")) + 
     labs(y = "Intensity difference (dB)", x = "Duration of [j] (ms)") + 
     theme_test(base_size = 16, base_family = 'Times') + 
