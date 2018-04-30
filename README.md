@@ -87,6 +87,8 @@ preceeding consonant, and voicing.
 -   Another possibility is to combine hiatus/simplification and use
     standard logistic regression.
 
+</br></br></br>
+
 Carrier sentence task
 ---------------------
 
