@@ -1,7 +1,7 @@
 Syllabic affiliation of glides in chicano
 =========================================
 
-Last update: 2018-04-29
+Last update: 2018-04-30
 -----------------------
 
 1.  [data](./data/)
@@ -34,7 +34,7 @@ the responses, which have been classified in the following manner:
     \[la.ka.**pai̯s**.to\] instead of \[la.ka.'**pjai̯s**.to\]), but the
     post-vocalic glide was also dropped occasionally.
 
-Figure 1 plots the proportion of responses accross all data (collapsing
+Figure 1 plots the proportion of responses across all data (collapsing
 across the pre-vocalic glide and onset). We observe that tripthongs were
 produced in approximately 45% of the targets. A production containing a
 hiatus made up roughly 30% of the data, followed by a simplification of
@@ -63,17 +63,17 @@ pre-vocalic glides can be part of the onset in this variety of Spanish.
 -   Possibilities:
     -   Frontness of glide. Is there a difference between \[j\] and
         \[w\]?
-    -   Preceeding consonant. The pre-vocalic glides in this task are
-        preceeded by a stop (voiced and voiceless) or \[f\]. Is there is
-        a difference in response strategies as a function of preceeding
+    -   Preceding consonant. The pre-vocalic glides in this task are
+        preceded by a stop (voiced and voiceless) or \[f\]. Is there is
+        a difference in response strategies as a function of preceding
         consonant?
--   Figure 3 suggests that frontness and preceeding consonant are not
+-   Figure 3 suggests that frontness and preceding consonant are not
     critical in determining response type.
 
-<img src="README_files/figure-markdown_strict/hls_syllabification_all_p3-1.png" alt="Figure 3: Responses in syllabification task as a function of glide, preceeding consonant, and voicing." width="672" />
+<img src="README_files/figure-markdown_strict/hls_syllabification_all_p3-1.png" alt="Figure 3: Responses in syllabification task as a function of glide, preceding consonant, and voicing." width="672" />
 <p class="caption">
 Figure 3: Responses in syllabification task as a function of glide,
-preceeding consonant, and voicing.
+preceding consonant, and voicing.
 </p>
 
 **Statistical analysis**:
@@ -94,30 +94,30 @@ Carrier sentence task
 
 The following plots illustrate the results from the carrier sentence
 task. These analyses test the hypothesis that pre-vocalic glides will be
-disallowed if preceeded by a palatal consonant. To test this, we measure
+disallowed if preceded by a palatal consonant. To test this, we measure
 duration, F1, and intensity of the pre-vocalic glide in two
 environments: after a palatal consonant and after any other consonant.
 If pre-vocalic glides are blocked after palatals, we expect to observe
 differences in overall duration. Figure 3 plots the duration data.
 
-<img src="README_files/figure-markdown_strict/hls_carrier_dur_p1-1.png" alt="Figure 3: Duration as a function of preceeding consonant." width="672" />
+<img src="README_files/figure-markdown_strict/hls_carrier_dur_p1-1.png" alt="Figure 3: Duration as a function of preceding consonant." width="672" />
 <p class="caption">
-Figure 3: Duration as a function of preceeding consonant.
+Figure 3: Duration as a function of preceding consonant.
 </p>
 
 We see a longer duration for glide segments following a palatal
 consonant (contrary to the hypothesis). There are two possible
 explanations (that I can think of). 1) The participants are able to
 produce a glide in this context (at least in some cases) because the
-preceeding consonant is not palatal (i.e., 'ch' is surfacing as \[ʃ\] or
+preceding consonant is not palatal (i.e., 'ch' is surfacing as \[ʃ\] or
 the fact that it is alveo-palatal is different enough to allow a glide
 afterwards). 2) The participants are not producing a glide, but rather
 are lengthening the onset.
 
-We can examine the plausability of (1) by looking at the formant
+We can examine the plausibility of (1) by looking at the formant
 trajectory over the course of the segment. If the participants are able
 to produce a glide in some contexts but not others we should see
-differences in F1 as a function of the preceeding consonant.
+differences in F1 as a function of the preceding consonant.
 
 <img src="README_files/figure-markdown_strict/hls_carrier_f1_p2-1.png" width="672" />
 
