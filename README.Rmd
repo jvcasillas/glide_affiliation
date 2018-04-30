@@ -70,6 +70,12 @@ glides can be part of the onset in this variety of Spanish.
     - Preceeding consonant. The pre-vocalic glides in this task are preceeded 
     by a stop (voiced and voiceless) or [f]. Is there is a difference in 
     response strategies as a function of preceeding consonant?
+- Figure 3 suggests that frontness and preceeding consonant are not critical in 
+determining response type. 
+
+```{r, 'hls_syllabification_all_p3', fig.cap="Figure 3: Responses in syllabification task as a function of glide, preceeding consonant, and voicing."}
+hls_syllabification_all_p3
+```
 
 **Statistical analysis**: 
 

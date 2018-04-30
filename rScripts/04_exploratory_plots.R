@@ -55,6 +55,21 @@ hls_syllabification_p2 <- simp_props %>%
     theme_test(base_size = 16, base_family = 'Times')
 
 
+hls_syllabification_all_p3 <- syllabified_trip %>% 
+  ggplot(., aes(x = glide, y = as.numeric(as.factor(response)) - 1, 
+                color = pre_c_voicing, shape = pre_c_poa)) + 
+    geom_jitter(width = 0.2, height = 0.2, size = 2) + 
+    scale_y_continuous(breaks = 0:2, name = 'Response', 
+                       labels = c('Hiatus', 'Simplification', 'Tripthong')) + 
+    scale_x_discrete(name = 'Glide', labels = c('[j]', '[w]')) + 
+    scale_color_brewer(name = 'Voicing', labels = c('Voiced', 'Voiceless'), 
+                       palette = 'Set1') + 
+    scale_shape_discrete(name = 'Preceeding\nconsonant\nPOA', 
+                         labels = c('Bilabial', 'Dental', 'Labiodental', 'Velar')) + 
+    theme_grey(base_size = 16, base_family = 'Times')
+
+
+
 
 
 
