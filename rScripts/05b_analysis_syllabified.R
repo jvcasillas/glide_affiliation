@@ -1,4 +1,5 @@
+# What are my questions?
+# How can I answer them?
 
 
-xtabs(~ item + response, data = syl_tidy)
 
