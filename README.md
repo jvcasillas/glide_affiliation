@@ -1,7 +1,7 @@
 Syllabic affiliation of glides in chicano
 =========================================
 
-Last update: 2018-04-30
+Last update: 2018-10-13
 -----------------------
 
 1.  [data](./data/)
@@ -26,12 +26,12 @@ the responses, which have been classified in the following manner:
 -   **tripthong**: the critical sequence was produced in a single
     syllable
 -   **vowel + dipthong**: the critical sequence was produced as two
-    syllables: CV + VGC (labeled as 'hiatus'), e.g. "lakapiaisto"
-    \[la.ka.**pi**.'**ai̯s**.to\]
+    syllables: CV + VGC (labeled as ‘hiatus’), e.g. “lakapiaisto”
+    \[la.ka.**pi**.’**ai̯s**.to\]
 -   **simplification**: a segment was elided from the critical sequence,
     simplifying the critical syllable. The most common strategy was to
     drop the pre-vocalic glide, creating a sequence like
-    \[la.ka.**pai̯s**.to\] instead of \[la.ka.'**pjai̯s**.to\]), but the
+    \[la.ka.**pai̯s**.to\] instead of \[la.ka.’**pjai̯s**.to\]), but the
     post-vocalic glide was also dropped occasionally.
 
 Figure 1 plots the proportion of responses across all data (collapsing
@@ -51,7 +51,7 @@ make up approximately 60% of the data.
 <img src="README_files/figure-markdown_strict/hls_syllabification_p2-1.png" alt="Figure 2: Responses in syllabification task combining 'hiatus/simplification'." width="672" />
 <p class="caption">
 Figure 2: Responses in syllabification task combining
-'hiatus/simplification'.
+‘hiatus/simplification’.
 </p>
 
 Overall, the task provides evidence supporting the hypothesis that
@@ -109,7 +109,7 @@ We see a longer duration for glide segments following a palatal
 consonant (contrary to the hypothesis). There are two possible
 explanations (that I can think of). 1) The participants are able to
 produce a glide in this context (at least in some cases) because the
-preceding consonant is not palatal (i.e., 'ch' is surfacing as \[ʃ\] or
+preceding consonant is not palatal (i.e., ‘ch’ is surfacing as \[ʃ\] or
 the fact that it is alveo-palatal is different enough to allow a glide
 afterwards). 2) The participants are not producing a glide, but rather
 are lengthening the onset.
