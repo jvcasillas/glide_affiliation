@@ -31,12 +31,15 @@ hls_syllabification_p1 <- syllabified_props %>%
   ggplot(., aes(x = response, y = prop, fill = response)) + 
     geom_bar(stat = 'identity', width = 0.3, show.legend = F, color = 'grey20') + 
     ylim(0, 1) + 
-    scale_fill_grey(start = 0.45, end = 0.75) + 
+    scale_fill_brewer(palette = "Set1") + 
     stat_summary(data = syllabified_props, aes(x = response, y = prop),
                  fun.data = mean_se, geom = 'pointrange', 
                  pch = 21, size = 1.25, fill = 'white', color = 'grey30') + 
-    labs(y = 'Proportion', x = 'Response', caption = 'Mean +/- SE') +
-    theme_test(base_size = 16, base_family = 'Times') 
+    labs(y = 'Proportion  ', x = '', caption = 'Mean +/- SE', 
+         title = "Syllabification task", 
+         subtitle = "Proportion of responses across all data") +
+    my_theme() +
+    my_save("figs/plot_syllabification_all.png")
 
 # Response proportion as a function of response type simplified
 hls_syllabification_p2 <- simp_props %>% 
@@ -47,12 +50,16 @@ hls_syllabification_p2 <- simp_props %>%
   ggplot(., aes(x = response_simp, y = prop, fill = response_simp)) + 
     geom_bar(stat = 'identity', width = 0.3, show.legend = F, color = 'grey20') + 
     ylim(0, 1) + 
-    scale_fill_grey(start = 0.45, end = 0.75) + 
+    scale_fill_brewer(palette = "Set1") + 
     stat_summary(data = simp_props, aes(x = response_simp, y = prop),
                  fun.data = mean_se, geom = 'pointrange', 
                  pch = 21, size = 1.25, fill = 'white', color = 'grey30') + 
-    labs(y = 'Proportion', x = 'Response', caption = 'Mean +/- SE') +
-    theme_test(base_size = 16, base_family = 'Times')
+    labs(y = 'Proportion', x = '', caption = 'Mean +/- SE', 
+         title = "Syllabification task", 
+         subtitle = "Proportion of responses across all data") +
+    my_theme() + 
+    my_save("figs/plot_syllabification_combined.png")
+
 
 
 hls_syllabification_all_p3 <- syllabified_trip %>% 
@@ -60,13 +67,14 @@ hls_syllabification_all_p3 <- syllabified_trip %>%
                 color = pre_c_voicing, shape = pre_c_poa)) + 
     geom_jitter(width = 0.2, height = 0.2, size = 2) + 
     scale_y_continuous(breaks = 0:2, name = 'Response', 
-                       labels = c('Hiatus', 'Simplification', 'Tripthong')) + 
+                       labels = c('Hiatus', 'Simplification', 'Triphthong')) + 
     scale_x_discrete(name = 'Glide', labels = c('[j]', '[w]')) + 
     scale_color_brewer(name = 'Voicing', labels = c('Voiced', 'Voiceless'), 
                        palette = 'Set1') + 
     scale_shape_discrete(name = 'Preceding\nconsonant\nPOA', 
                          labels = c('Bilabial', 'Dental', 'Labiodental', 'Velar')) + 
-    theme_grey(base_size = 16, base_family = 'Times')
+    theme_grey(base_size = 16, base_family = 'Times') + 
+    my_save("figs/plot_syllabification_by_glide_cons_voicing.png")
 
 
 
@@ -121,15 +129,19 @@ carrier_tc_final <- carrier_tc %>%
 
 hls_carrier_dur_p1 <- carrier_tc_final %>% 
   filter(., duration <= 375) %>% 
-  ggplot(., aes(x = is_palatal, y = duration, fill = is_palatal)) + 
-    stat_summary(fun.data = mean_se, geom = 'pointrange', 
+  group_by(., participant, item, is_palatal) %>% 
+  summarize(., dur = mean(duration)) %>% 
+  ungroup(.) %>% 
+  ggplot(., aes(x = is_palatal, y = dur, fill = is_palatal)) + 
+    stat_summary(fun.data = mean_cl_boot, geom = 'pointrange', 
                  pch = 21, color = 'black', size = 1.25, show.legend = F) + 
-    coord_cartesian(ylim = c(78, 112)) + 
-    labs(y = "Duration (ms)", x = "Preceding consonant", 
-         caption = "Mean +/- SE") + 
+    labs(y = "Duration (ms)", x = "", 
+         caption = "Mean +/- 95% CI", title = "Phrase reading", 
+         subtitle = "Duration of pre-vocalic glide after palatal and non-palatal onset") + 
     scale_fill_brewer(palette = "Set1") + 
     scale_x_discrete(labels = c('Other', 'Palatal')) + 
-    theme_test(base_size = 16, base_family = 'Times') 
+    my_theme() + 
+    my_save("figs/plot_phrase_duration.png")
 
 
 hls_carrier_f1_p2 <- carrier_tc_final %>% 
