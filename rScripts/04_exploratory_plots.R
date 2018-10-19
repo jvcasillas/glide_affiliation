@@ -10,7 +10,8 @@ syllabified_props <- syllabified_trip %>%
   arrange(., participant) %>% 
   mutate(., prop = n / 14, 
             response_simp = if_else(response == 'Tripthong', 
-                                    'Tripthong', 'Hiatus/\nSimplification')) 
+                                    'Triphthong', 'Hiatus/\nSimplification'), 
+            response = fct_recode(response, "Triphthong" = "Tripthong")) 
 
 # Props as a function of 2 response types for each participant
 simp_props <- syllabified_props %>% 
@@ -92,7 +93,7 @@ hls_syllabification_all_p3 <- syllabified_trip %>%
 # Carrier task -----------------------------------------------------------------
 
 # Get critical items
-critical_items_tripthongs <- c(
+critical_items_triphthongs <- c(
 #      [j]            [w]
   "lakabiaisto", "lakabuaisto", # [b]
   "lakadiaisto", "lakaduaisto", # [d]

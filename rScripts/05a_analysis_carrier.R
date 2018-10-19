@@ -9,7 +9,7 @@
 # Duration analysis -----------------------------------------------------------
 
 # Get critical items
-critical_items_tripthongs <- c(
+critical_items_triphthongs <- c(
 #      [j]            [w]
   "lakabiaisto", "lakabuaisto", # [b]
   "lakadiaisto", "lakaduaisto", # [d]
