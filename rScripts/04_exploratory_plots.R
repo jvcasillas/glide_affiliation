@@ -4,11 +4,16 @@ source(here::here("./rScripts/03_load_data.R"))
 # Syllabification task subsets -------------------------------------------------
 #
 # Props as a function of 3 response types for each participant
+
+# remove labials delante de [w]
+labial_remove <- c("lakabuaisto", "lakafuaisto", "lakapuaisto")
+
 syllabified_props <- syllabified_trip %>% 
+  filter(., !(item %in% labial_remove)) %>% 
   xtabs(~ participant + response, data = .) %>% 
   as.tibble(.) %>% 
   arrange(., participant) %>% 
-  mutate(., prop = n / 14, 
+  mutate(., prop = n / 11, 
             response_simp = if_else(response == 'Tripthong', 
                                     'Triphthong', 'Hiatus/\nSimplification'), 
             response = fct_recode(response, "Triphthong" = "Tripthong")) 
@@ -74,7 +79,7 @@ hls_syllabification_all_p3 <- syllabified_trip %>%
                        palette = 'Set1') + 
     scale_shape_discrete(name = 'Preceding\nconsonant\nPOA', 
                          labels = c('Bilabial', 'Dental', 'Labiodental', 'Velar')) + 
-    theme_grey(base_size = 16, base_family = 'Times') + 
+    my_theme() + 
     my_save("figs/plot_syllabification_by_glide_cons_voicing.png")
 
 

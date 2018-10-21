@@ -3,12 +3,14 @@
 # How does this vary as a function of glide type and preceding consonant?
 # How can I answer them?
 # Plots, frequencies, multinomial regression
+labial_remove <- c("lakabuaisto", "lakafuaisto", "lakapuaisto")
 
 test_mod <- brm(response ~ glide + 
                (glide + pre_c | participant) + 
                (glide + pre_c | item), 
                 control = list(adapt_delta = 0.99), 
-                data = syllabified_trip, family = categorical())
+                data = filter(syllabified_trip, !(item %in% labial_remove)), 
+                family = categorical())
 
 syllabified_trip %>% 
   data_grid(glide, pre_c, item, participant) %>% 
