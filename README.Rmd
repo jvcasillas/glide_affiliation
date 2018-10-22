@@ -118,7 +118,7 @@ the course of the segment. If the participants are able to produce a glide in
 some contexts but not others we should see differences in F1 as a function of 
 the preceding consonant. 
 
-![gam-f1]("figs/plot_phrase_tc_f1.pdf")
+![gam-f1](./figs/plot_phrase_tc_f1.png)
 
 Again, the second possibility is that participants are lengthening the palatal 
 consonant (not producing a glide) because of the fact that they cannot produce 
@@ -130,6 +130,6 @@ have lower intensity than more vowel-like productions. Thus we analyze the time
 course of intensity in order to see how the two environments differ as they 
 near the following [a].
 
-![gam-int](figs/plot_phrase_tc_int.pdf)
+![gam-int](./figs/plot_phrase_tc_int.png)
 
-![gam-int-dif](figs/plot_phrase_tc_diff_int.pdf)
+![gam-int-dif](./figs/plot_phrase_tc_dff_int.png)
