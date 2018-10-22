@@ -1,7 +1,7 @@
 Syllabic affiliation of glides in chicano
 =========================================
 
-Last update: 2018-10-13
+Last update: 2018-10-22
 -----------------------
 
 1.  [data](./data/)
@@ -119,9 +119,7 @@ trajectory over the course of the segment. If the participants are able
 to produce a glide in some contexts but not others we should see
 differences in F1 as a function of the preceding consonant.
 
-<img src="README_files/figure-markdown_strict/hls_carrier_f1_p2-1.png" width="672" />
-
-<img src="README_files/figure-markdown_strict/hls_carrier_f1_p3-1.png" width="672" />
+![gam-f1](%22figs/plot_phrase_tc_f1.pdf%22)
 
 Again, the second possibility is that participants are lengthening the
 palatal consonant (not producing a glide) because of the fact that they
@@ -134,8 +132,6 @@ more vowel-like productions. Thus we analyze the time course of
 intensity in order to see how the two environments differ as they near
 the following \[a\].
 
-<img src="README_files/figure-markdown_strict/hls_carrier_int_p4-1.png" width="672" />
+![gam-int](figs/plot_phrase_tc_int.pdf)
 
-<img src="README_files/figure-markdown_strict/hls_carrier_int_p5-1.png" width="672" />
-
-<img src="README_files/figure-markdown_strict/hls_carrier_scatter_p6-1.png" width="672" />
+![gam-int-dif](figs/plot_phrase_tc_diff_int.pdf)
