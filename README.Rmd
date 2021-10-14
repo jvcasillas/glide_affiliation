@@ -13,9 +13,8 @@ knitr::opts_chunk$set(echo=FALSE, fig.retina=2)
 ## Last update: `r Sys.Date()`
 
 1. [data](./data/)
-2. [praatScripts](./praatScripts/)
-3. [rScripts](./rScripts/)
-4. [sources](./sources/)
+2. [scripts](./scripts/)
+3. [sources](./sources/)
 
 ----
 

@@ -1,11 +1,10 @@
 # Syllabic affiliation of glides in chicano
 
-## Last update: 2021-05-20
+## Last update: 2021-10-13
 
 1.  [data](./data/)
-2.  [praatScripts](./praatScripts/)
-3.  [rScripts](./rScripts/)
-4.  [sources](./sources/)
+2.  [scripts](./scripts/)
+3.  [sources](./sources/)
 
 ------------------------------------------------------------------------
 
