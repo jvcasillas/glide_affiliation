@@ -1,11 +1,10 @@
-# History files
+.Rproj.user
 .Rhistory
-.Rapp.history
-
-# Session Data files
 .RData
+.Ruserdata
 
-# Ignore long wav files
+*.DS_Store
+
 /data/p01/p01_list.wav
 /data/p02/p02_list.wav
 /data/p03/p03_stim2.wav
@@ -14,10 +13,3 @@
 /data/p06/p06_stim2.wav
 /data/p07/p07_stim2.wav
 /data/p08/p08_stim2.wav
-
-# RStudio files
-.Rproj.user/
-.Rproj.user
-
-# Ignore primary README.Rmd 
-README.Rmd
