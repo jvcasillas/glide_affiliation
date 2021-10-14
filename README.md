@@ -1,8 +1,6 @@
-Syllabic affiliation of glides in chicano
-=========================================
+# Syllabic affiliation of glides in chicano
 
-Last update: 2018-10-22
------------------------
+## Last update: 2021-05-20
 
 1.  [data](./data/)
 2.  [praatScripts](./praatScripts/)
@@ -11,11 +9,9 @@ Last update: 2018-10-22
 
 ------------------------------------------------------------------------
 
-Analyses
-========
+# Analyses
 
-Syllabification task
---------------------
+## Syllabification task
 
 The following plots show results from the syllabification task. Four
 syllable nonse words containing a CGVGC sequence in the penultimate
@@ -26,7 +22,7 @@ the responses, which have been classified in the following manner:
 -   **tripthong**: the critical sequence was produced in a single
     syllable
 -   **vowel + dipthong**: the critical sequence was produced as two
-    syllables: CV + VGC (labeled as ‘hiatus’), e.g. “lakapiaisto”
+    syllables: CV + VGC (labeled as ‘hiatus’), e.g. “lakapiaisto”
     \[la.ka.**pi**.’**ai̯s**.to\]
 -   **simplification**: a segment was elided from the critical sequence,
     simplifying the critical syllable. The most common strategy was to
@@ -89,8 +85,7 @@ preceding consonant, and voicing.
 
 </br></br></br>
 
-Carrier sentence task
----------------------
+## Carrier sentence task
 
 The following plots illustrate the results from the carrier sentence
 task. These analyses test the hypothesis that pre-vocalic glides will be

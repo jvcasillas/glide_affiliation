@@ -22,7 +22,7 @@ knitr::opts_chunk$set(echo=FALSE, fig.retina=2)
 # Analyses
 
 ```{r, 'source_scripts', message=FALSE, warning=FALSE}
-source("./rScripts/04_exploratory_plots.R")
+source("./scripts/r/04_exploratory_plots.R")
 ```
 
 ## Syllabification task
