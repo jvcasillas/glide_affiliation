@@ -15,7 +15,7 @@ carrier_tc  <- read_csv(here("data", "dataframes", "tidy", "./carrier_timecourse
 
 
 # Load syllabification data ----------------------------------------------------
-syllabified_trip <- read_csv(here("data", "dataframes", "tidy", "./syllabified_tripthong_tidy.csv"))
+syllabified_trip <- read_csv(here("data", "dataframes", "tidy", "./syllabified_triphthong_tidy.csv"))
 
 # Check it
 #glimpse(syllabified_trip)

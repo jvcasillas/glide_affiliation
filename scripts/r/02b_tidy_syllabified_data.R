@@ -10,11 +10,11 @@ syl_df <- read_csv(here("data", "dataframes", "raw", "./syllable_raw.csv"))
 # labID coding: 
 #  - extra = hiato
 #  - error = simplification or wrong vowel
-#  - NA = tripthong
+#  - NA = triphthong
 
 
 # Get critical items
-critical_items_tripthongs <- c(
+critical_items_triphthongs <- c(
 #      [j]            [w]
   "lakabiaisto", "lakabuaisto", # [b]
   "lakadiaisto", "lakaduaisto", # [d]
@@ -41,16 +41,16 @@ critical_syllables <- c(
 # Filter to keep critical items
 # Create 'response' column with three possible responses: 
 #  - hiato
-#  - tripthong
+#  - triphthong
 #  - simplification
 # if_else series to fill 'response' column
 syl_tidy <- syl_df %>% 
   separate(., col = prefix, 
               into = c('participant', 'exp', 'task', 'item', 'status')) %>% 
   select(., -ends_with('Dur'), -critOnsetLab) %>% 
-  filter(., item %in% critical_items_tripthongs) %>% 
+  filter(., item %in% critical_items_triphthongs) %>% 
   mutate(., itemRepeat = item, 
-            response = if_else(syll3Lab %in% critical_syllables, 'Tripthong', 
+            response = if_else(syll3Lab %in% critical_syllables, 'Triphthong', 
                                if_else(!(syll3Lab %in% critical_syllables) & 
                                          labID == 'extra', 'Hiatus', 'Simplification')), 
             response = if_else(is.na(response), 'Simplification', response), 
@@ -71,4 +71,4 @@ syl_tidy <- syl_df %>%
             pre_c_poa, 
             glide, 
             response) %>% 
-  write_csv(., path = here("data", "dataframes", "tidy", "syllabified_tripthong_tidy.csv"))
+  write_csv(., file = here("data", "dataframes", "tidy", "syllabified_triphthong_tidy.csv"))

@@ -9,11 +9,11 @@ source(here::here("./scripts/r/03_load_data.R"))
 labial_remove <- c("lakabuaisto", "lakafuaisto", "lakapuaisto")
 
 syllabified_props <- syllabified_trip %>% 
-  #filter(., !(item %in% labial_remove)) %>% 
+  filter(., !(item %in% labial_remove)) %>% 
   xtabs(~ participant + response, data = .) %>% 
   as_tibble(.) %>% 
   arrange(., participant) %>% 
-  mutate(., prop = n / 14, # switch to 11 if you use 'labial_remove'
+  mutate(., prop = n / 11, # switch to 11 if you use 'labial_remove'
             response_simp = if_else(response == 'Tripthong', 
                                     'Triphthong', 'Hiatus/\nSimplification'), 
             response = fct_recode(response, "Triphthong" = "Tripthong")) 
@@ -22,6 +22,7 @@ syllabified_props <- syllabified_trip %>%
 simp_props <- syllabified_props %>% 
   group_by(., participant, response_simp) %>% 
   summarize(., count = sum(n), .groups = "drop") %>% 
+  group_by(participant) %>% 
   mutate(., prop = count / sum(count)) %>% 
   ungroup(.) 
 
