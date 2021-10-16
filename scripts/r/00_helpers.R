@@ -3,23 +3,12 @@
 library("tidyverse")
 library("here")
 library("broom")
-library("lme4")
-library("lmerTest")
 library("knitr")
 library("kableExtra")
 library("patchwork")
 library("brms")
 library("tidybayes")
-#library("mgcv")
-#library("itsadug")
-#library("voxel")
-
 library("modelr")
-library("ggstance")
-library("ggridges")
-library("cowplot")
-library("rstan")
-library("ggrepel")
 
 # -----------------------------------------------------------------------------
 
@@ -28,7 +17,7 @@ library("ggrepel")
 
 # Plotting functions ----------------------------------------------------------
 
-## create style theme
+# create style theme
 my_theme <- function() {
   theme_minimal() + 
     theme(
@@ -41,10 +30,19 @@ my_theme <- function() {
     )
 }
 
+# Quick save function
 my_save <- function(file) {
   ggsave(file, width = 7, height = 4.5, units = "in")
 }
 
-my_colors <- 
-  c("#f98e09", "#bc3754", "#57106e")
+# Viridis colors (colorblindness friendly)
+my_colors <- c("#f98e09", "#bc3754", "#57106e")
+
+# -----------------------------------------------------------------------------
+
+
+# Other helpers ---------------------------------------------------------------
+
+specify_decimal <- function(x, k) trimws(format(round(x, k), nsmall=k))
+
 # -----------------------------------------------------------------------------

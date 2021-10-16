@@ -91,26 +91,32 @@ b_multi_1b_post <- as_draws_df(b_multi_1b) %>%
 
 
 # Probability table with CrI's
-b_multi_0_post %>% 
+glide_cri <- b_multi_0_post %>% 
   group_by(realization) %>% 
   mean_qi(phi) %>% 
-  mutate_if(is.double, round, digits = 2) %>% 
-  mutate(`95% CrI` = glue::glue("[{.lower}, {.upper}]")) %>% 
-  select(Realization = realization, Probability = phi, `95% CrI`)  
+  mutate_if(is.double, specify_decimal, k = 2) %>% 
+  mutate(
+    realization = glue::glue("{realization}: "), 
+    cri =  glue::glue("{phi} [{.lower}, {.upper}]")) %>%
+  select(realization, cri)  
 
-b_multi_1a_post %>% 
+glide_i_cri <- b_multi_1a_post %>% 
   group_by(realization) %>% 
   mean_qi(phi) %>% 
-  mutate_if(is.double, round, digits = 2) %>% 
-  mutate(`95% CrI` = glue::glue("[{.lower}, {.upper}]")) %>% 
-  select(Realization = realization, Probability = phi, `95% CrI`)  
+  mutate_if(is.double, specify_decimal, k = 2) %>% 
+  mutate(
+    realization = glue::glue("{realization}: "), 
+    cri =  glue::glue("{phi} [{.lower}, {.upper}]")) %>%
+  select(realization, cri)  
 
-b_multi_1b_post %>% 
+glide_u_cri <- b_multi_1b_post %>% 
   group_by(realization) %>% 
   mean_qi(phi) %>% 
-  mutate_if(is.double, round, digits = 2) %>% 
-  mutate(`95% CrI` = glue::glue("[{.lower}, {.upper}]")) %>% 
-  select(Realization = realization, Probability = phi, `95% CrI`)  
+  mutate_if(is.double, specify_decimal, k = 2) %>% 
+  mutate(
+    realization = glue::glue("{realization}: "), 
+    cri =  glue::glue("{phi} [{.lower}, {.upper}]")) %>%
+  select(realization, cri)  
 
 
 
@@ -119,18 +125,26 @@ b_multi_1b_post %>%
 p_multi_0 <- b_multi_0_post %>% 
   ggplot(., aes(x = phi, color = realization, fill = realization)) + 
     stat_slab(alpha = 0.7, color = "white") +
-    stat_pointinterval(pch = 21, point_fill = "white", point_size = 4, 
-      position = position_dodge(width = .4, preserve = "single"), 
-      show.legend = F) +
-    scale_fill_manual(name = NULL, values = my_colors) + 
-    scale_color_manual(name = NULL, values = my_colors) + 
-    coord_cartesian(ylim = c(-0.15, NA)) + 
+    stat_pointinterval(aes(y = -0.025), pch = 21, point_fill = "white", 
+      point_size = 4, show.legend = F, 
+      position = position_dodge(width = .4, preserve = "single")) +
+    scale_fill_manual(name = NULL, values = my_colors, labels = NULL) + 
+    scale_color_manual(name = NULL, values = my_colors, labels = NULL) + 
+    coord_cartesian(ylim = c(-0.2, NA)) + 
     scale_x_continuous(labels = scales::percent, 
       expand = expansion(mult = c(0, 0)), limits = c(-0.0225, 1.02)) + 
-    labs(y = NULL, x = "P(realization)") + 
-    annotate(geom = "text", label = "(A)", x = 0, y = 0.95, color = "grey30") +
+    labs(y = NULL, x = NULL) + 
+    annotate("text", label = "(A)", x = 0, y = 0.95, color = "grey30") + 
+    annotate("text", label = "P(response)", x = 0.67, y = 0.9, size = 3.25) +
+    annotate("text", x = c(0.65, 0.95), y = 0.65, hjust = c(0, 1), size = 3.25,
+      family = "Times", label = glue::glue("
+        {glide_cri[1, ]}
+        {glide_cri[2, ]}
+        {glide_cri[3, ]}")) +
     ds4ling::ds4ling_bw_theme(base_size = 13, base_family = "Times") + 
-    theme(legend.position = c(0.8, 0.75), 
+    theme(legend.position = c(0.63, 0.6875), 
+      legend.spacing.y = unit(0, 'cm'), 
+      legend.key.height = unit(0.5, "cm"),
       legend.background = element_blank(), 
       legend.key = element_rect(fill = NA), 
       strip.background = element_rect(fill = NA), 
@@ -139,32 +153,65 @@ p_multi_0 <- b_multi_0_post %>%
 
 p_multi_i <- b_multi_1a_post %>% 
   ggplot(., aes(x = phi, color = realization, fill = realization)) + 
-    stat_slab(alpha = 0.7, color = "white", show.legend = F) +
-    stat_pointinterval(pch = 21, point_fill = "white", point_size = 4, 
-      position = position_dodge(width = .4, preserve = "single"), 
+    stat_slab(alpha = 0.7, color = "white") +
+    stat_pointinterval(aes(y = -0.025), pch = 21, point_fill = "white", 
+      point_size = 4, position = position_dodge(width = .4, preserve = "single"),
       show.legend = F) +
-    scale_fill_manual(name = NULL, values = my_colors) + 
-    scale_color_manual(name = NULL, values = my_colors) + 
-    coord_cartesian(ylim = c(-0.15, NA)) + 
+    scale_fill_manual(name = NULL, values = my_colors, labels = NULL) + 
+    scale_color_manual(name = NULL, values = my_colors, labels = NULL) + 
+    coord_cartesian(ylim = c(-0.2, NA)) + 
     scale_x_continuous(labels = scales::percent, limits = c(0, 1)) + 
-    labs(y = NULL, x = "P(realization | /i/)") + 
-    annotate(geom = "text", label = "(B)", x = 0, y = 0.95, color = "grey30") +
+    labs(y = NULL, x = NULL) + 
+    annotate("text", label = "(B)", x = 0, y = 0.95, color = "grey30") + 
+    annotate("text", label = "P(response | /i/)", x = 0.78, y = 0.9, size = 3.25) + 
+    annotate("text", x = 1, y = 0.665, hjust = 1, size = 3.25, family = "Times", 
+      label = glue::glue("
+        {glide_i_cri[1, 2]}
+        {glide_i_cri[2, 2]}
+        {glide_i_cri[3, 2]}")) +
     ds4ling::ds4ling_bw_theme(base_size = 13, base_family = "Times") + 
-    theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+    theme(legend.position = c(0.65, 0.7), 
+      legend.spacing.y = unit(0, 'cm'), 
+      legend.key.height = unit(0.5, "cm"),
+      legend.background = element_blank(), 
+      legend.key = element_rect(fill = NA), 
+      strip.background = element_rect(fill = NA), 
+      axis.text.y = element_blank(),
+      axis.ticks.y = element_blank())
 
 p_multi_u <- b_multi_1b_post %>% 
   ggplot(., aes(x = phi, color = realization, fill = realization)) + 
-    stat_slab(alpha = 0.7, color = "white", show.legend = F) +
-    stat_pointinterval(pch = 21, point_fill = "white", point_size = 4, 
-      position = position_dodge(width = .4, preserve = "single"), 
+    stat_slab(alpha = 0.7, color = "white") +
+    stat_pointinterval(aes(y = -0.025), pch = 21, point_fill = "white", 
+      point_size = 4, position = position_dodge(width = .4, preserve = "single"),
       show.legend = F) +
-    scale_fill_manual(name = NULL, values = my_colors) + 
-    scale_color_manual(name = NULL, values = my_colors) + 
-    coord_cartesian(ylim = c(-0.15, NA)) + 
+    scale_fill_manual(name = NULL, values = my_colors, labels = NULL) + 
+    scale_color_manual(name = NULL, values = my_colors, labels = NULL) + 
+    coord_cartesian(ylim = c(-0.2, NA)) + 
     scale_x_continuous(labels = scales::percent, limits = c(0, 1)) + 
-    labs(y = NULL, x = "P(realization | /u/)") + 
-    annotate(geom = "text", label = "(C)", x = 0, y = 0.95, color = "grey30") +
+    labs(y = NULL, x = NULL) +
+    annotate("text", label = "(C)", x = 0, y = 0.95, color = "grey30") + 
+    annotate("text", label = "P(response | /u/)", x = 0.78, y = 0.9, size = 3.25) + 
+    annotate("text", x = 1, y = 0.665, hjust = 1, size = 3.25, family = "Times",
+      label = glue::glue("
+        {glide_u_cri[1, 2]}
+        {glide_u_cri[2, 2]}
+        {glide_u_cri[3, 2]}")) +
     ds4ling::ds4ling_bw_theme(base_size = 13, base_family = "Times") + 
-    theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+    theme(legend.position = c(0.65, 0.7), 
+      legend.spacing.y = unit(0, 'cm'), 
+      legend.key.height = unit(0.5, "cm"),
+      legend.background = element_blank(), 
+      legend.key = element_rect(fill = NA), 
+      strip.background = element_rect(fill = NA), 
+      axis.text.y = element_blank(),
+      axis.ticks.y = element_blank())
 
-p_multi_0 / (p_multi_i + p_multi_u)
+syllabification_all <- p_multi_0 / (p_multi_i + p_multi_u)
+
+ggsave(
+  filename = "syllabification_all.png", 
+  plot = syllabification_all, 
+  path = here("figs", "manuscript"), width = 7, height = 5.75, dpi = 600
+  )
+
