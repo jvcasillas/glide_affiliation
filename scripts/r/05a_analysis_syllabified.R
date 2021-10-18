@@ -11,8 +11,21 @@
 
 
 
+
+# Set up ----------------------------------------------------------------------
+
+# Source helpers and load data
+source(here::here("scripts", "r", "03_load_data.R"))
+
 # Create vector of items to remove (cant remember why)
 labial_remove <- c("lakabuaisto", "lakafuaisto", "lakapuaisto")
+
+# -----------------------------------------------------------------------------
+
+
+
+
+# Fit models ------------------------------------------------------------------
 
 # Fit intercept-only multinomial model to get CrI around response rates
 b_multi_0 <- brm(
@@ -52,11 +65,12 @@ b_multi_1b <- brm(
   family = categorical(link = "logit"), 
   file = here("models", "b_multi_1b"))
 
+# -----------------------------------------------------------------------------
 
 
 
 
-# Get posterior samples for each model and calculate phi
+# Get posterior samples for each model and calculate phi ----------------------
 b_multi_0_post <- as_draws_df(b_multi_0) %>% 
   transmute(iter           = 1:n(),
             Hiatus         = 0,  # recall this is the default
@@ -86,11 +100,13 @@ b_multi_1b_post <- as_draws_df(b_multi_1b) %>%
   group_by(iter) %>% 
   mutate(phi = exp(estimate) / sum(exp(estimate)))
 
+# -----------------------------------------------------------------------------
 
 
 
 
-# Probability table with CrI's
+# Probability tables with CrI's -----------------------------------------------
+
 glide_cri <- b_multi_0_post %>% 
   group_by(realization) %>% 
   mean_qi(phi) %>% 
@@ -118,10 +134,13 @@ glide_u_cri <- b_multi_1b_post %>%
     cri =  glue::glue("{phi} [{.lower}, {.upper}]")) %>%
   select(realization, cri)  
 
+# -----------------------------------------------------------------------------
 
 
 
-# Plot posteriors
+
+# Plots -----------------------------------------------------------------------
+
 p_multi_0 <- b_multi_0_post %>% 
   ggplot(., aes(x = phi, color = realization, fill = realization)) + 
     stat_slab(alpha = 0.7, color = "white") +
@@ -134,7 +153,7 @@ p_multi_0 <- b_multi_0_post %>%
     scale_x_continuous(labels = scales::percent, 
       expand = expansion(mult = c(0, 0)), limits = c(-0.0225, 1.02)) + 
     labs(y = NULL, x = NULL) + 
-    annotate("text", label = "(A)", x = 0, y = 0.95, color = "grey30") + 
+    annotate("text", label = "(A)", x = 0, y = 0.95, family = "Times") + 
     annotate("text", label = "P(response)", x = 0.67, y = 0.9, size = 3.25) +
     annotate("text", x = c(0.65, 0.95), y = 0.65, hjust = c(0, 1), size = 3.25,
       family = "Times", label = glue::glue("
@@ -162,7 +181,7 @@ p_multi_i <- b_multi_1a_post %>%
     coord_cartesian(ylim = c(-0.2, NA)) + 
     scale_x_continuous(labels = scales::percent, limits = c(0, 1)) + 
     labs(y = NULL, x = NULL) + 
-    annotate("text", label = "(B)", x = 0, y = 0.95, color = "grey30") + 
+    annotate("text", label = "(B)", x = 0, y = 0.95, family = "Times") + 
     annotate("text", label = "P(response | /i/)", x = 0.78, y = 0.9, size = 3.25) + 
     annotate("text", x = 1, y = 0.665, hjust = 1, size = 3.25, family = "Times", 
       label = glue::glue("
@@ -190,7 +209,7 @@ p_multi_u <- b_multi_1b_post %>%
     coord_cartesian(ylim = c(-0.2, NA)) + 
     scale_x_continuous(labels = scales::percent, limits = c(0, 1)) + 
     labs(y = NULL, x = NULL) +
-    annotate("text", label = "(C)", x = 0, y = 0.95, color = "grey30") + 
+    annotate("text", label = "(C)", x = 0, y = 0.95, family = "Times") + 
     annotate("text", label = "P(response | /u/)", x = 0.78, y = 0.9, size = 3.25) + 
     annotate("text", x = 1, y = 0.665, hjust = 1, size = 3.25, family = "Times",
       label = glue::glue("
@@ -215,3 +234,15 @@ ggsave(
   path = here("figs", "manuscript"), width = 7, height = 5.75, dpi = 600
   )
 
+# -----------------------------------------------------------------------------
+
+
+
+
+# Tables ----------------------------------------------------------------------
+
+bayestestR::describe_posterior(b_multi_0)
+bayestestR::describe_posterior(b_multi_1a)
+bayestestR::describe_posterior(b_multi_1b)
+
+# -----------------------------------------------------------------------------

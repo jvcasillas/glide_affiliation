@@ -18,16 +18,30 @@ library("modelr")
 # Plotting functions ----------------------------------------------------------
 
 # create style theme
-my_theme <- function() {
-  theme_minimal() + 
+my_theme <- function(...) {
+  list(
+    theme_minimal(...), 
     theme(
       plot.title = element_text(size = rel(1.5), face = "bold"), 
       plot.subtitle = element_text(size = rel(1.1)),
       plot.caption = element_text(color = "#777777", vjust = 0),
-      axis.title = element_text(size = rel(.9), hjust = 0.95, face = "italic"), 
-      panel.grid.major = element_line(size = rel(.1), color = "#000000"), 
-      panel.grid.minor = element_line(size = rel(.05), color = "#000000")
-    )
+      axis.title = element_text(size = rel(.9), hjust = 0.95), 
+      panel.grid.major = element_line(size = 0.15, color = "grey90"), 
+      panel.grid.minor = element_line(size = 0.15, color = "grey90"))
+  )
+}
+
+my_empty <- function(...) {
+  list(
+    theme_minimal(...), 
+    theme(
+      plot.title = element_text(size = rel(1.5), face = "bold"), 
+      plot.subtitle = element_text(size = rel(1.1)),
+      plot.caption = element_text(color = "#777777", vjust = 0),
+      axis.title = element_text(size = rel(.9), hjust = 0.95), 
+      panel.grid.major = element_line(size = 0, color = "grey90"), 
+      panel.grid.minor = element_line(size = 0, color = "grey90"))
+  )
 }
 
 # Quick save function

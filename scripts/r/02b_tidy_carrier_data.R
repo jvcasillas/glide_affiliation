@@ -71,6 +71,24 @@ car_timecourse <- car_df %>%
 
 
 
+carrier_tc_final <- car_timecourse %>% 
+  filter(., item %in% c(critical_items_palatals, 
+                        comparison_items_nonpalatals), 
+            TextGridLabel == 'i') %>% 
+  mutate(., pre_c = if_else(item %in% comparison_items_nonpalatals, 'other', 
+                            if_else(item %in% c('chiaba', 'mebochiana', 'pachialo'), 'ch', 
+                                    if_else(item == 'lliape', 'j', 'nh')))) %>% 
+  write_csv(., "./data/dataframes/tidy/carrier_timecourse_subset_tidy.csv")
+
+carrier_dur_final <- carrier_tc_final %>% 
+  group_by(., participant, item, is_palatal) %>% 
+  summarize(., dur = mean(duration), .groups = "drop") %>% 
+  ungroup(.) %>% 
+  mutate(dur_std = (dur - mean(dur)) / sd(dur), 
+         palatal_sum = if_else(is_palatal == "palatal", 1, -1)) %>% 
+  write_csv(., "./data/dataframes/tidy/carrier_duration_subset_tidy.csv")
+
+
 
 
 

@@ -67,6 +67,8 @@ We used `r cite_r("r-references.bib")` for all our analyses.
 
 # Results
 
+## Syllabification task 
+
 Figure \@ref(fig:plot-syllabification-task) shows stuff. 
 
 (ref:plot-syllabification-task) This is a figure caption.
@@ -74,6 +76,39 @@ Figure \@ref(fig:plot-syllabification-task) shows stuff.
 ```{r, 'plot-syllabification-task', out.width="100%", fig.cap="(ref:plot-syllabification-task)"}
 knitr::include_graphics(here("figs", "manuscript", "syllabification_all.png"))
 ```
+
+## Carrier task
+
+Table \@ref(fig:tab-carrier-task-duration) shows a picture table. 
+
+(ref:tab-carrier-task-duration) This is a table caption.
+
+```{r, 'tab-carrier-task-duration', out.width="100%", fig.cap="(ref:tab-carrier-task-duration)"}
+knitr::include_graphics(here("figs/manuscript/duration_forest.png"))
+```
+
+
+
+Figure \@ref(fig:plot-carrier-task-duration) shows stuff. 
+
+(ref:plot-carrier-task-duration) This is a figure caption.
+
+```{r, 'plot-carrier-task-duration', out.width="100%", fig.cap="(ref:plot-carrier-task-duration)"}
+knitr::include_graphics(here("figs", "manuscript", "duration_all.png"))
+```
+
+
+
+Figure \@ref(fig:plot-carrier-task-f1) shows the F1 GAM stuff. 
+
+(ref:plot-carrier-task-f1) This is a figure caption for the F1 GAM.
+
+```{r, 'plot-carrier-task-f1', out.width="100%", fig.cap="(ref:plot-carrier-task-f1)"}
+knitr::include_graphics(here("figs", "manuscript", "carrier_gam_f1.png"))
+```
+
+
+
 
 \newpage
 
