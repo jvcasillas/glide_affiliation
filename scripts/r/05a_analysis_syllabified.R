@@ -17,7 +17,8 @@
 # Source helpers and load data
 source(here::here("scripts", "r", "03_load_data.R"))
 
-# Create vector of items to remove (cant remember why)
+# Create vector of items to remove 
+# (Hypothesis is that palatal C + palatal glide should ilicit)
 labial_remove <- c("lakabuaisto", "lakafuaisto", "lakapuaisto")
 
 # -----------------------------------------------------------------------------

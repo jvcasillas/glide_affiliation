@@ -96,52 +96,58 @@ ggsave(
   path = here("figs", "manuscript"), width = 7, height = 3.5, dpi = 600
   )
 
+#
 # Duration mod table
+#
+
+# Get posterior and cleanup colnames and term names
 dur_tab_dat <- as_draws_df(b_dur_mod) %>% 
   select(starts_with(c("b_", "sd_", "cor_p", "sigma"))) %>% 
   pivot_longer(cols = everything()) %>% 
   mutate(type = case_when(
     startsWith(name, "b_") ~ "Population", 
-    TRUE ~ "Grouping"), 
-    type = fct_relevel(type, "Population")) %>% 
+    startsWith(name, "sd_") ~ "Grouping", 
+    TRUE ~ "Family"), 
+    type = fct_relevel(type, "Population", "Grouping")) %>% 
   mutate(
     name = str_remove_all(name, "b_"), 
     name = str_replace_all(name, "sd_", "σ "), 
     name = str_replace(name, "sigma", "Residual σ"), 
-    name = str_replace(name, "cor_participant__Intercept__", 
-      "Cor. Participant:\nInt., "), 
+    name = str_replace(name, "cor_participant__Intercept__", "r: Int., "), 
     name = str_replace_all(name, "__", ":\n"), 
     name = str_replace_all(name, "palatal_sum", "Palatal"), 
     name = str_replace_all(name, "participant", "Participant"), 
     name = str_replace(name, "item", "Item"), 
   ) %>% 
   mutate(name = fct_relevel(name, "σ Participant:\nIntercept", 
-    "σ Participant:\nPalatal", "Cor. Participant:\nInt., Palatal", 
-    "σ Item:\nIntercept"))
+    "σ Participant:\nPalatal", "r: Int., Palatal", "σ Item:\nIntercept"))
 
+# Summarize posterior for printing estimates in plot
 dur_data_summary <- group_by(dur_tab_dat, name, type) %>% 
   mean_qi(value, .width = 0.95) %>% 
   mutate_if(is.numeric, specify_decimal, k = 2)
 
+# Forest plot
 dur_forest <- dur_tab_dat %>% 
+  filter(name != "r: Int., Palatal") %>% 
   ggplot(., aes(x = value, y = name)) + 
-    facet_grid(type ~ ., scales = "free", space = "free", switch = "y") + 
+    facet_grid(type ~ ., scales = "free", space = "free") + 
     geom_vline(xintercept = 0, lty = 3) + 
     stat_halfeye(aes(fill = type), slab_type = "histogram", breaks = 30, 
       outline_bars = T, slab_color = "white", slab_size = 0.3, 
       point_fill = "white", pch = 21, show.legend = F) +
-    scale_fill_manual(values = alpha(my_colors[c(1, 3)], 0.8)) + 
-    geom_text(data = dur_data_summary, hjust = "inward", family = "Times", 
-      aes(group = type, label = glue::glue("{value} [{.lower}, {.upper}]   "), 
-        x = Inf), size = 3.25) +
-    coord_cartesian(xlim = c(-0.75, 1.8)) + 
+    scale_fill_manual(values = alpha(my_colors[1:3], 0.8)) + 
+    geom_text(data = filter(dur_data_summary, name != "r: Int., Palatal"), 
+      hjust = 1, family = "Times", size = 3.25, 
+      aes(group = type, label = glue::glue("{value} [{.lower}, {.upper}]"),
+        x = -0.7)) +
+    coord_cartesian(xlim = c(-1.15, 1.35)) + 
     scale_x_continuous(breaks = c(-0.5, 0, 0.5, 1)) + 
-    scale_y_discrete(limits = rev, position = "right") + 
+    scale_y_discrete(limits = rev, position = "left") + 
     labs(y = NULL, x = "Estimate") + 
-    my_theme(base_family = "Times", base_size = 13) + 
-    theme(strip.placement = "outside", strip.text.y = element_text(hjust = 1), 
-      axis.text.y = element_text(hjust = 0), axis.ticks.y = element_blank(),
-      plot.background = element_rect(colour = "black", size = 0.5))
+    ds4ling::ds4ling_bw_theme(base_family = "Times", base_size = 13) + 
+    theme(strip.placement = "outside", strip.background = element_blank(), 
+      axis.text.y = element_text(hjust = 1), axis.ticks.y = element_blank())
 
 ggsave(
   filename = "duration_forest.png", 
@@ -172,19 +178,16 @@ carrier_tc_final_gamm <- carrier_tc_final %>%
 # dummy code is_palatal_ord
 contrasts(carrier_tc_final_gamm$is_palatal_ord) <- "contr.treatment" 
 
-#
-# F1
-#
-
+# F1 GAM
 b_gam_f1 <- brm(
   formula = f1norm ~ is_palatal + 
-    s(time_course_segment, bs = "cr", k = 3) +                  # reference smooth
-    s(time_course_segment, by = is_palatal, bs = "cr", k = 3) + # difference smooth
+    s(time_course_segment, bs = "cr", k = 3) +                    # reference smooth
+    s(time_course_segment, by = is_palatal, bs = "cr", k = 3) +   # difference smooth
     s(time_course_segment, participant, bs = "fs", m = 1, k = 3), # random 
   family = gaussian(), 
   prior = c(
-    prior(normal(0, 5), class = Intercept), 
-    prior(normal(0, 5), class = b), 
+    prior(normal(0, 1), class = Intercept), 
+    prior(normal(0, 2), class = b), 
     prior(student_t(3, 0, 2.5), class = sds), 
     prior(cauchy(0, 2), class = sigma)
   ), 
@@ -194,19 +197,16 @@ b_gam_f1 <- brm(
   file = here("models", "b_gam_f1")
   ) 
 
-#
-# Intensity
-#
-
+# Intensity GAM
 b_gam_int <- brm(
   formula = int_norm ~ is_palatal + 
-    s(time_course_segment, bs = "cr", k = 3) +                  # reference smooth
-    s(time_course_segment, by = is_palatal, bs = "cr", k = 3) + # difference smooth
-    s(time_course_segment, participant, bs = "fs", m = 1, k = 3), # random 
+    s(time_course_segment, bs = "cr", k = 3) +                    # reference s
+    s(time_course_segment, by = is_palatal, bs = "cr", k = 3) +   # diff s
+    s(time_course_segment, participant, bs = "fs", m = 1, k = 3), # random s
   family = gaussian(), 
   prior = c(
-    prior(normal(0, 5), class = Intercept), 
-    prior(normal(0, 5), class = b), 
+    prior(normal(0, 1), class = Intercept), 
+    prior(normal(0, 1), class = b), 
     prior(student_t(3, 0, 2.5), class = sds), 
     prior(cauchy(0, 2), class = sigma)
   ), 
@@ -216,11 +216,10 @@ b_gam_int <- brm(
   file = here("models", "b_gam_int")
   ) 
 
-
-
-
+# Create grid for posterior samples and plotting
 grid <- carrier_tc_final_gamm %>%
-  data_grid(is_palatal, time_course_segment = seq(1, 100, length.out = 20), participant)
+  data_grid(is_palatal, time_course_segment = seq(1, 100, length.out = 20), 
+    participant)
 
 p_f1_tc <- grid %>% 
   add_epred_draws(b_gam_f1, ndraws = 200, re_formula = NULL) %>% 
@@ -230,9 +229,8 @@ p_f1_tc <- grid %>%
       fun = mean, geom = "line", size = 0.5, alpha = 0.1) + 
     geom_hline(yintercept = 0, lty = 3) + 
     stat_summary(aes(group = is_palatal), fun = mean, geom = "line", 
-      size = 3, color = "white") + 
-    stat_summary(aes(color = is_palatal), fun = mean, geom = "line", 
-      size = 1, alpha = 0.7) + 
+      size = 2.5, color = "white") + 
+    stat_summary(aes(color = is_palatal), fun = mean, geom = "line", size = 1) +
     scale_color_manual(name = NULL, values = my_colors[c(1, 3)]) + 
     scale_x_continuous(labels = scales::percent, 
       expand = expansion(mult = c(0, 0)), limits = c(-0.02, 1.02)) + 
@@ -240,10 +238,8 @@ p_f1_tc <- grid %>%
     labs(y = "Normalized F1", x = "") + 
     annotate("text", label = "(A)", x = 0.05, y = 0.95, family = "Times") + 
     ds4ling::ds4ling_bw_theme(base_family = "Times", base_size = 13) + 
-    theme(legend.position = c(0.15, 0.1), 
-      legend.background = element_blank(), 
-      legend.key = element_rect(fill = NA), 
-      strip.background = element_rect(fill = NA))
+    theme(legend.position = c(0.15, 0.1), legend.background = element_blank(),
+      legend.key = element_rect(fill = NA))
 
 p_f1_tc_diff <- grid %>%
   add_epred_draws(b_gam_f1, re_formula = NA, ndraws = 200) %>% 
@@ -260,9 +256,8 @@ p_f1_tc_diff <- grid %>%
   ggplot(., aes(x = time_course_segment / 100, y = diff)) + 
     geom_line(aes(group = dist), color = alpha(my_colors[2], 0.01), size = 0.5) + 
     geom_hline(yintercept = 0, lty = 3) + 
-    stat_summary(fun = mean, geom = "line", size = 3, color = "white") + 
-    stat_summary(aes(color = get_color), fun = mean, geom = "line", size = 1, 
-      alpha = 0.7) + 
+    stat_summary(fun = mean, geom = "line", size = 2.5, color = "white") + 
+    stat_summary(aes(color = get_color), fun = mean, geom = "line", size = 1) + 
     scale_color_manual(name = NULL, values = my_colors[2]) + 
     scale_x_continuous(labels = scales::percent, 
       expand = expansion(mult = c(0, 0)), limits = c(-0.02, 1.02)) + 
@@ -271,11 +266,8 @@ p_f1_tc_diff <- grid %>%
     labs(y = NULL, x = "Time course") + 
     annotate("text", label = "(B)", x = 0.05, y = 0.95, family = "Times") + 
     ds4ling::ds4ling_bw_theme(base_family = "Times", base_size = 13) + 
-    theme(
-      legend.position = c(0.25, 0.1), 
-      legend.background = element_blank(), 
-      legend.key = element_rect(fill = NA), 
-      strip.background = element_rect(fill = NA))
+    theme(legend.position = c(0.25, 0.1), legend.background = element_blank(),
+      legend.key = element_rect(fill = NA))
 
 carrier_gam_f1 <- p_f1_tc + p_f1_tc_diff
 
@@ -285,28 +277,29 @@ ggsave(
   path = here("figs", "manuscript"), width = 7, height = 3.5, dpi = 600
   )
 
-
-
-
-
-
-
-
-
-
-
-
-p_int_tc <- plot(conditional_effects(b_gam_int, 
-  spaghetti = T, nsamples = 500), plot = F)[[3]] + 
-  scale_color_viridis_d(name = NULL, option = "B", end = 0.8, alpha = 0.1) + 
-  scale_x_continuous(labels = c("0%", "25%", "50%", "75%", "100%"), 
-    expand = expansion(mult = c(0, 0)), limits = c(-2, 102)) + 
-  labs(y = "Intensity (dB)", x = "") + 
-  ds4ling::ds4ling_bw_theme(base_family = "Times", base_size = 12) + 
-  theme(legend.position = c(0.1, 0.9))
+# Plot intensity model
+p_int_tc <- grid %>% 
+  add_epred_draws(b_gam_int, ndraws = 200, re_formula = NULL) %>% 
+  mutate(is_palatal = str_to_title(is_palatal)) %>% 
+  ggplot(., aes(x = time_course_segment / 100, y = .epred)) + 
+    stat_summary(aes(group = interaction(.draw, is_palatal), color = is_palatal), 
+      fun = mean, geom = "line", size = 0.5, alpha = 0.1) + 
+    geom_hline(yintercept = 0, lty = 3) + 
+    stat_summary(aes(group = is_palatal), fun = mean, geom = "line", 
+      size = 2.5, color = "white") + 
+    stat_summary(aes(color = is_palatal), fun = mean, geom = "line", size = 1) +
+    scale_color_manual(name = NULL, values = my_colors[c(1, 3)]) + 
+    scale_x_continuous(labels = scales::percent, 
+      expand = expansion(mult = c(0, 0)), limits = c(-0.02, 1.02)) + 
+    coord_cartesian(ylim = c(-1.5, 1.5)) + 
+    labs(y = "Normalized Intenisity", x = "") + 
+    annotate("text", label = "(A)", x = 0.05, y = 1.45, family = "Times") + 
+    ds4ling::ds4ling_bw_theme(base_family = "Times", base_size = 13) + 
+    theme(legend.position = c(0.15, 0.1), legend.background = element_blank(),
+      legend.key = element_rect(fill = NA))
 
 p_int_tc_diff <- grid %>%
-  add_epred_draws(b_gam_int, re_formula = NA, ndraws = 300) %>% 
+  add_epred_draws(b_gam_int, re_formula = NA, ndraws = 200) %>% 
   ungroup() %>% 
   select(participant, is_palatal, time_course_segment, .epred) %>% 
   group_by(participant, is_palatal) %>% 
@@ -315,15 +308,83 @@ p_int_tc_diff <- grid %>%
   mutate(diff =  palatal - other) %>% 
   group_by(time_course_segment) %>% 
   mutate(dist = seq_along(time_course_segment)) %>% 
+  ungroup() %>% 
+  mutate(get_color = "Intensity diff.\nPalatal − Other") %>% 
   ggplot(., aes(x = time_course_segment / 100, y = diff)) + 
+    geom_line(aes(group = dist), color = alpha(my_colors[2], 0.01), size = 0.5) + 
     geom_hline(yintercept = 0, lty = 3) + 
-    geom_line(aes(group = dist), color = "lightgrey", alpha = 0.1, size = 0.25) + 
-    stat_summary(fun = mean, geom = "line", size = 7, color = "white") + 
-    stat_summary(fun = mean, geom = "line", size = 2.5, color = "darkred") + 
-    stat_pointinterval(.width = c(.66, .95), pch = 21, point_fill = "white") + 
+    stat_summary(fun = mean, geom = "line", size = 2.5, color = "white") + 
+    stat_summary(aes(color = get_color), fun = mean, geom = "line", size = 1) + 
+    scale_color_manual(name = NULL, values = my_colors[2]) + 
     scale_x_continuous(labels = scales::percent, 
       expand = expansion(mult = c(0, 0)), limits = c(-0.02, 1.02)) + 
-    labs(y = "Intensity difference (dB)\nPalatal - Other", x = "Time course") + 
-    ds4ling::ds4ling_bw_theme(base_family = "Times", base_size = 12)
+    scale_y_continuous(position = "right") + 
+    coord_cartesian(ylim = c(-1.5, 1.5)) + 
+    labs(y = NULL, x = "Time course") + 
+    annotate("text", label = "(B)", x = 0.05, y = 1.45, family = "Times") + 
+    ds4ling::ds4ling_bw_theme(base_family = "Times", base_size = 13) + 
+    theme(legend.position = c(0.25, 0.1), legend.background = element_blank(),
+      legend.key = element_rect(fill = NA))
 
-p_int_tc + p_int_tc_diff
+carrier_gam_int <- p_int_tc + p_int_tc_diff
+
+ggsave(
+  filename = "carrier_gam_int.png", 
+  plot = carrier_gam_int, 
+  path = here("figs", "manuscript"), width = 7, height = 3.5, dpi = 600
+  )
+
+# Table plots
+gam_forest_data <- bind_rows(
+  as_draws_df(b_gam_f1) %>% 
+    select(starts_with(c("b_", "bs_", "sds_")), sigma) %>% 
+    pivot_longer(cols = everything()) %>% 
+    mutate(model = "F1"),
+  as_draws_df(b_gam_int) %>% 
+    select(starts_with(c("b_", "bs_", "sds_")), sigma) %>% 
+    pivot_longer(cols = everything()) %>% 
+    mutate(model = "Intensity")
+  ) %>% 
+  separate(col = name, into = c("term", "name"), sep = "_", 
+    extra = "merge", fill = "left") %>% 
+  mutate(
+    term = if_else(is.na(term), "residual", .$term), 
+    term = fct_relevel(term, "b", "bs", "sds"), 
+    name = str_replace_all(name, "time_course_segment", "TC"), 
+    name = str_remove_all(name, "is_palatal"), 
+    name = str_remove_all(name, "_1"), 
+    name = str_remove_all(name, "_2"), 
+    name = str_replace_all(name, "sT", "T"), 
+    name = str_replace(name, "sigma", "σ"))
+
+gam_data_summary <- gam_forest_data %>% 
+  group_by(model, term, name) %>% 
+  mean_qi(value, .width = 0.95) %>% 
+  mutate_if(is.numeric, specify_decimal, k = 2)
+
+carrier_gam_forest <- gam_forest_data %>% 
+  ggplot(., aes(x = value, y = name, fill = model, shape = model)) + 
+    facet_grid(term ~ ., scales = "free", space = "free") + 
+    geom_vline(xintercept = 0, lty = 3) + 
+    stat_pointinterval(position = position_dodge(0.75)) + 
+    scale_shape_manual(name = NULL, values = c(21, 23)) + 
+    scale_fill_manual(name = NULL, values = my_colors[1:2]) + 
+    geom_text(data = gam_data_summary, 
+      hjust = 1, family = "Times", size = 3, position = position_dodge(0.75), 
+      aes(group = interaction(term, model), label = glue::glue("{value} [{.lower}, {.upper}]"),
+        x = -2.1)) +
+    coord_cartesian(xlim = c(-3.15, NA)) + 
+    scale_x_continuous(breaks = c(-2, 0, 2)) + 
+    scale_y_discrete(limits = rev, position = "left") + 
+    labs(title = NULL, subtitle = NULL, y = NULL, x = "Estimate") + 
+    ds4ling::ds4ling_bw_theme(base_family = "Times", base_size = 13) + 
+    theme(legend.position = c(0.9, 0.9), legend.background = element_blank(),
+      legend.key = element_rect(fill = NA), strip.placement = "outside", 
+      strip.background = element_blank(), axis.ticks.y = element_blank(), 
+      axis.text.y = element_text(hjust = 1))
+
+ggsave(
+  filename = "carrier_gam_forest.png", 
+  plot = carrier_gam_forest, 
+  path = here("figs", "manuscript"), width = 8, height = 5, dpi = 600
+  )
