@@ -38,10 +38,10 @@ b_dur_mod <- brm(
   control = list(adapt_delta = 0.99), 
   backend = "cmdstanr", 
   prior = c(
-    prior(normal(0, 0.5), class = Intercept), 
-    prior(normal(0, 1), class = b), 
+    prior(normal(0, 0.2), class = Intercept), 
+    prior(normal(0, 0.5), class = b), 
     prior(cauchy(0, 1), class = sd), 
-    prior(lkj(2), class = cor)
+    prior(lkj(10), class = cor)
   ), 
   file = here("models", "b_dur_mod")
 )
@@ -107,20 +107,23 @@ dur_tab_dat <- as_draws_df(b_dur_mod) %>%
   mutate(type = case_when(
     startsWith(name, "b_") ~ "Population", 
     startsWith(name, "sd_") ~ "Grouping", 
+    startsWith(name, "cor") ~ "Grouping", 
     TRUE ~ "Family"), 
     type = fct_relevel(type, "Population", "Grouping")) %>% 
   mutate(
-    name = str_remove_all(name, "b_"), 
-    name = str_replace_all(name, "sd_", "σ "), 
-    name = str_replace(name, "sigma", "Residual σ"), 
-    name = str_replace(name, "cor_participant__Intercept__", "r: Int., "), 
-    name = str_replace_all(name, "__", ":\n"), 
-    name = str_replace_all(name, "palatal_sum", "Palatal"), 
-    name = str_replace_all(name, "participant", "Participant"), 
-    name = str_replace(name, "item", "Item"), 
+    name = case_when(
+      name == "b_Intercept" ~ "Intercept", 
+      name == "b_palatal_sum" ~ "Palatal", 
+      name == "sd_item__Intercept" ~ "σ Item:\nIntercept", 
+      name == "sd_participant__Intercept" ~ "σ Participant:\nIntercept", 
+      name == "sd_participant__palatal_sum" ~ "σ Participant:\nPalatal", 
+      name == "cor_participant__Intercept__palatal_sum" ~ "r Participant:\nInt., Palatal", 
+      name == "sigma" ~ "σ"
+    )
   ) %>% 
   mutate(name = fct_relevel(name, "σ Participant:\nIntercept", 
-    "σ Participant:\nPalatal", "r: Int., Palatal", "σ Item:\nIntercept"))
+    "σ Participant:\nPalatal", "r Participant:\nInt., Palatal", 
+    "σ Item:\nIntercept"))
 
 # Summarize posterior for printing estimates in plot
 dur_data_summary <- group_by(dur_tab_dat, name, type) %>% 
@@ -129,7 +132,7 @@ dur_data_summary <- group_by(dur_tab_dat, name, type) %>%
 
 # Forest plot
 dur_forest <- dur_tab_dat %>% 
-  filter(name != "r: Int., Palatal") %>% 
+  #filter(name != "r Participant:\nInt., Palatal") %>% 
   ggplot(., aes(x = value, y = name)) + 
     facet_grid(type ~ ., scales = "free", space = "free") + 
     geom_vline(xintercept = 0, lty = 3) + 
@@ -146,13 +149,14 @@ dur_forest <- dur_tab_dat %>%
     scale_y_discrete(limits = rev, position = "left") + 
     labs(y = NULL, x = "Estimate") + 
     ds4ling::ds4ling_bw_theme(base_family = "Times", base_size = 13) + 
-    theme(strip.placement = "outside", strip.background = element_blank(), 
+    theme(plot.margin = unit(x = c(0, 0, 0, 0), units = "mm"), 
+      strip.placement = "outside", strip.background = element_blank(), 
       axis.text.y = element_text(hjust = 1), axis.ticks.y = element_blank())
 
 ggsave(
   filename = "duration_forest.png", 
   plot = dur_forest, 
-  path = here("figs", "manuscript"), width = 6.5, height = 3.75, dpi = 600
+  path = here("figs", "manuscript"), width = 6.5, height = 5.5, dpi = 600
   )
 
 # -----------------------------------------------------------------------------
@@ -182,17 +186,17 @@ contrasts(carrier_tc_final_gamm$is_palatal_ord) <- "contr.treatment"
 b_gam_f1 <- brm(
   formula = f1norm ~ is_palatal + 
     s(time_course_segment, bs = "cr", k = 3) +                    # reference smooth
-    s(time_course_segment, by = is_palatal, bs = "cr", k = 3) +   # difference smooth
+    s(time_course_segment, by = is_palatal, bs = "cr", k = 4) +   # difference smooth
     s(time_course_segment, participant, bs = "fs", m = 1, k = 3), # random 
   family = gaussian(), 
   prior = c(
-    prior(normal(0, 1), class = Intercept), 
-    prior(normal(0, 2), class = b), 
-    prior(student_t(3, 0, 2.5), class = sds), 
+    prior(normal(0, 0.5), class = Intercept), 
+    prior(normal(0, 0.5), class = b), 
+    prior(student_t(3, 0, 1), class = sds), 
     prior(cauchy(0, 2), class = sigma)
   ), 
   backend = "cmdstanr", iter = 2000, warmup = 1000, cores = 4,
-  control = list(adapt_delta = 0.9999, max_treedepth = 20), 
+  control = list(adapt_delta = 0.999999, max_treedepth = 20), 
   data = carrier_tc_final_gamm, 
   file = here("models", "b_gam_f1")
   ) 
@@ -201,13 +205,13 @@ b_gam_f1 <- brm(
 b_gam_int <- brm(
   formula = int_norm ~ is_palatal + 
     s(time_course_segment, bs = "cr", k = 3) +                    # reference s
-    s(time_course_segment, by = is_palatal, bs = "cr", k = 3) +   # diff s
+    s(time_course_segment, by = is_palatal, bs = "cr", k = 4) +   # diff s
     s(time_course_segment, participant, bs = "fs", m = 1, k = 3), # random s
   family = gaussian(), 
   prior = c(
-    prior(normal(0, 1), class = Intercept), 
-    prior(normal(0, 1), class = b), 
-    prior(student_t(3, 0, 2.5), class = sds), 
+    prior(normal(0, 0.5), class = Intercept), 
+    prior(normal(0, 0.5), class = b), 
+    prior(student_t(3, 0, 1), class = sds), 
     prior(cauchy(0, 2), class = sigma)
   ), 
   backend = "cmdstanr", iter = 2000, warmup = 1000, cores = 4,
@@ -234,9 +238,10 @@ p_f1_tc <- grid %>%
     scale_color_manual(name = NULL, values = my_colors[c(1, 3)]) + 
     scale_x_continuous(labels = scales::percent, 
       expand = expansion(mult = c(0, 0)), limits = c(-0.02, 1.02)) + 
-    coord_cartesian(ylim = c(-1, 1)) + 
+    scale_y_reverse() + 
+    coord_cartesian(ylim = c(1, -1)) + 
     labs(y = "Normalized F1", x = "") + 
-    annotate("text", label = "(A)", x = 0.05, y = 0.95, family = "Times") + 
+    annotate("text", label = "(A)", x = 0.05, y = -0.95, family = "Times") + 
     ds4ling::ds4ling_bw_theme(base_family = "Times", base_size = 13) + 
     theme(legend.position = c(0.15, 0.1), legend.background = element_blank(),
       legend.key = element_rect(fill = NA))
@@ -261,10 +266,10 @@ p_f1_tc_diff <- grid %>%
     scale_color_manual(name = NULL, values = my_colors[2]) + 
     scale_x_continuous(labels = scales::percent, 
       expand = expansion(mult = c(0, 0)), limits = c(-0.02, 1.02)) + 
-    scale_y_continuous(position = "right") + 
-    coord_cartesian(ylim = c(-1, 1)) + 
+    scale_y_reverse(position = "right") + 
+    coord_cartesian(ylim = c(1, -1)) + 
     labs(y = NULL, x = "Time course") + 
-    annotate("text", label = "(B)", x = 0.05, y = 0.95, family = "Times") + 
+    annotate("text", label = "(B)", x = 0.05, y = -0.95, family = "Times") + 
     ds4ling::ds4ling_bw_theme(base_family = "Times", base_size = 13) + 
     theme(legend.position = c(0.25, 0.1), legend.background = element_blank(),
       legend.key = element_rect(fill = NA))
@@ -348,14 +353,26 @@ gam_forest_data <- bind_rows(
   separate(col = name, into = c("term", "name"), sep = "_", 
     extra = "merge", fill = "left") %>% 
   mutate(
-    term = if_else(is.na(term), "residual", .$term), 
-    term = fct_relevel(term, "b", "bs", "sds"), 
-    name = str_replace_all(name, "time_course_segment", "TC"), 
-    name = str_remove_all(name, "is_palatal"), 
-    name = str_remove_all(name, "_1"), 
-    name = str_remove_all(name, "_2"), 
-    name = str_replace_all(name, "sT", "T"), 
-    name = str_replace(name, "sigma", "σ"))
+    term = case_when(
+      term == "b" ~ "Parametric\npop. β", 
+      term == "bs"~ "Non-parametric\npop. β", 
+      term == "sds" ~ "Smooth term\nσ", 
+      is.na(term) ~ "Family"), 
+    term = fct_relevel(term, "Parametric\npop. β", "Non-parametric\npop. β", 
+      "Smooth term\nσ"), 
+    name = case_when(
+      name == "Intercept" ~ "Intercept", 
+      name == "is_palatalpalatal" ~ "Palatal", 
+      name == "stime_course_segment_1" ~ "TC", 
+      name == "stime_course_segment:is_palatalother_1" ~ "TC - Other", 
+      name == "stime_course_segment:is_palatalpalatal_1" ~ "TC - Palatal", 
+      name == "stime_course_segment_1" ~ "TC", 
+      name == "stime_course_segmentis_palatalother_1" ~ "TC - Other", 
+      name == "stime_course_segmentis_palatalpalatal_1" ~ "TC - Palatal", 
+      name == "stime_course_segmentparticipant_1" ~ "TC Part. - Other", 
+      name == "stime_course_segmentparticipant_2" ~ "TC Part. - Palatal", 
+      name == "sigma" ~ "σ"
+    ))
 
 gam_data_summary <- gam_forest_data %>% 
   group_by(model, term, name) %>% 
@@ -372,19 +389,23 @@ carrier_gam_forest <- gam_forest_data %>%
     geom_text(data = gam_data_summary, 
       hjust = 1, family = "Times", size = 3, position = position_dodge(0.75), 
       aes(group = interaction(term, model), label = glue::glue("{value} [{.lower}, {.upper}]"),
-        x = -2.1)) +
-    coord_cartesian(xlim = c(-3.15, NA)) + 
-    scale_x_continuous(breaks = c(-2, 0, 2)) + 
+        x = -0.65)) +
+    coord_cartesian(xlim = c(-1.2, NA)) + 
+    scale_x_continuous(breaks = c(-1, 0, 1)) + 
     scale_y_discrete(limits = rev, position = "left") + 
     labs(title = NULL, subtitle = NULL, y = NULL, x = "Estimate") + 
     ds4ling::ds4ling_bw_theme(base_family = "Times", base_size = 13) + 
-    theme(legend.position = c(0.9, 0.9), legend.background = element_blank(),
-      legend.key = element_rect(fill = NA), strip.placement = "outside", 
-      strip.background = element_blank(), axis.ticks.y = element_blank(), 
-      axis.text.y = element_text(hjust = 1))
+    theme(
+      plot.margin = unit(x = c(0, 0, 0, 0), units = "mm"), 
+      legend.margin = margin(t = -0.5, b = 0, unit='cm'), 
+      legend.position = "bottom", legend.direction = "horizontal", 
+      legend.background = element_blank(), legend.key = element_rect(fill = NA), 
+      strip.placement = "outside", strip.background = element_blank(), 
+      axis.ticks.y = element_blank(), axis.text.y = element_text(hjust = 1)) +
+    guides(fill = guide_legend(override.aes = list(size = 5)))
 
 ggsave(
   filename = "carrier_gam_forest.png", 
   plot = carrier_gam_forest, 
-  path = here("figs", "manuscript"), width = 8, height = 5, dpi = 600
+  path = here("figs", "manuscript"), width = 7.5, height = 5.5, dpi = 600
   )

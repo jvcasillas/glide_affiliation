@@ -118,6 +118,17 @@ knitr::include_graphics(here("figs", "manuscript", "carrier_gam_int.png"))
 
 
 
+Figure \@ref(fig:plot-carrier-task-forest) shows the GAM forest plot 
+
+(ref:plot-carrier-task-forest) This is a figure caption for the forest plot of the gams.
+
+```{r, 'plot-carrier-task-forest', out.width="100%", fig.cap="(ref:plot-carrier-task-forest)"}
+knitr::include_graphics(here("figs", "manuscript", "carrier_gam_forest.png"))
+```
+
+
+
+
 \newpage
 
 # References
