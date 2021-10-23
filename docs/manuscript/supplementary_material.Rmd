@@ -1,0 +1,61 @@
+
+## Syllabification task
+
+Table \@ref(tab:syllabification-all-models-table) below.
+
+```{r, syllabification-all-models-table}
+tab_multi_all %>% 
+  knitr::kable(
+    format = "pandoc", align = c("l", "l", "r", "r", "r", "r", "r"), 
+    caption = "Model summary for the syllabification task. The table reports 
+    posterior medians, 95\\% credible intervals, and probability of direction 
+    to assess estimates, along with Rhat and Effective sample size to assess 
+    model fit.",
+    label = "syllabification-all-models-table")
+
+```
+
+
+## Carrier task
+
+Table \@ref(tab:carrier-dur) below.
+
+```{r, carrier-dur}
+tab_dur %>% 
+  knitr::kable(
+    format = "pandoc", align = c("l", "r", "r", "r", "r", "r"), 
+    caption = "Model summary for the duration analysis. The table reports 
+    posterior medians, 95\\% credible intervals, and probability of direction 
+    to assess estimates, along with Rhat and Effective sample size to assess 
+    model fit.",
+    label = "carrier-dur")
+```
+
+Table \@ref(tab:carrier-f1-gam) below.
+
+```{r, carrier-f1-gam}
+tab_gam_f1 %>% 
+  knitr::kable(
+    format = "pandoc", align = c("l", "l", "r", "r", "r", "r", "r"), 
+    caption = "Model summary for the F1 GAMM. The table reports 
+    posterior medians, 95\\% credible intervals, and probability of direction 
+    to assess estimates, along with Rhat and Effective sample size to assess 
+    model fit.",
+    label = "carrier-f1-gam")
+```
+
+Table \@ref(tab:carrier-int-gam) below.
+
+```{r, carrier-int-gam}
+tab_gam_int %>% 
+  knitr::kable(
+    format = "pandoc", align = c("l", "l", "r", "r", "r", "r", "r"), 
+    caption = "Model summary for the F1 GAMM. The table reports 
+    posterior medians, 95\\% credible intervals, and probability of direction 
+    to assess estimates, along with Rhat and Effective sample size to assess 
+    model fit.",
+    label = "carrier-int-gam")
+```
+
+
+

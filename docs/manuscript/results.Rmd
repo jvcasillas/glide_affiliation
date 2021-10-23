@@ -25,11 +25,14 @@ affiliation:
 
 authornote: ""
 abstract: ""
-  
+
 keywords          : "keywords"
 wordcount         : "X"
 
-bibliography      : ["r-references.bib"]
+bibliography      : ["method_refs.bib"]
+
+appendix          : 
+  - "supplementary_material.Rmd"
 
 floatsintext      : no
 figurelist        : no
@@ -46,16 +49,26 @@ output            : papaja::apa6_word
 
 ```{r setup, include = FALSE}
 library("papaja")
-r_refs("r-references.bib")
 
-source(here::here("scripts", "r", "00_helpers.R"))
+# Load data
+source(here::here("scripts", "r", "03_load_data.R"))
+
+# Load models
+b_multi_1b <- readRDS(here("models", "b_multi_1b.rds"))
+b_multi_1a <- readRDS(here("models", "b_multi_1a.rds"))
+b_multi_0 <- readRDS(here("models", "b_multi_0.rds"))
+b_gam_int <- readRDS(here("models", "b_gam_int.rds"))
+b_gam_f1 <- readRDS(here("models", "b_gam_f1.rds"))
+b_dur_mod <- readRDS(here("models", "b_dur_mod.rds"))
+
+# Load tables
+tab_multi_all <- readRDS(here("tables", "tab_multi_all.rds"))
+tab_dur <- readRDS(here("tables", "tab_dur.rds"))
+tab_gam_f1 <- readRDS(here("tables", "tab_gam_f1.rds"))
+tab_gam_int <- readRDS(here("tables", "tab_gam_int.rds"))
+
 ```
 
-```{r analysis-preferences}
-# Seed for random number generation
-set.seed(42)
-knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
-```
 
 
 
@@ -63,7 +76,7 @@ knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 
 ## Statistical analyses
 
-We used `r cite_r("r-references.bib")` for all our analyses.
+regularizing, weakly informative priors [@Gelman_2017]
 
 # Results
 
@@ -76,6 +89,10 @@ Figure \@ref(fig:plot-syllabification-task) shows stuff.
 ```{r, 'plot-syllabification-task', out.width="100%", fig.cap="(ref:plot-syllabification-task)"}
 knitr::include_graphics(here("figs", "manuscript", "syllabification_all.png"))
 ```
+
+
+
+
 
 ## Carrier task
 
