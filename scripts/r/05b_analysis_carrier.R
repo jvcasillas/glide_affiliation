@@ -182,19 +182,24 @@ carrier_tc_final_gamm <- carrier_tc_final %>%
 # dummy code is_palatal_ord
 contrasts(carrier_tc_final_gamm$is_palatal_ord) <- "contr.treatment" 
 
-# F1 GAM
-b_gam_f1 <- brm(
-  formula = f1norm ~ is_palatal + 
-    s(time_course_segment, bs = "cr", k = 3) +                    # reference smooth
-    s(time_course_segment, by = is_palatal, bs = "cr", k = 4) +   # difference smooth
-    s(time_course_segment, participant, bs = "fs", m = 1, k = 3), # random 
-  family = gaussian(), 
-  prior = c(
+# Set priors
+priors <- c(
     prior(normal(0, 0.5), class = Intercept), 
     prior(normal(0, 0.5), class = b), 
-    prior(student_t(3, 0, 1), class = sds), 
+    prior(student_t(3, 0, 1), class = sds, coef = s(time_course_segment, bs = "cr", k = 3)), 
+    prior(student_t(3, 0, 2.5), class = sds, coef = s(time_course_segment, by = is_palatal_ord, bs = "cr", k = 4)), 
+    prior(student_t(3, 0, 2.5), class = sds, coef = s(time_course_segment, participant, bs = "fs", m = 1, k = 3)), 
     prior(cauchy(0, 2), class = sigma)
-  ), 
+  )
+
+# F1 GAM
+b_gam_f1 <- brm(
+  formula = f1norm ~ is_palatal_ord + 
+    s(time_course_segment, bs = "cr", k = 3) +                    # reference smooth
+    s(time_course_segment, by = is_palatal_ord, bs = "cr", k = 4) +   # difference smooth
+    s(time_course_segment, participant, bs = "fs", m = 1, k = 3), # random 
+  family = gaussian(), 
+  prior = priors, 
   backend = "cmdstanr", iter = 2000, warmup = 1000, cores = 4,
   control = list(adapt_delta = 0.999999, max_treedepth = 20), 
   data = carrier_tc_final_gamm, 
@@ -203,31 +208,26 @@ b_gam_f1 <- brm(
 
 # Intensity GAM
 b_gam_int <- brm(
-  formula = int_norm ~ is_palatal + 
+  formula = int_norm ~ is_palatal_ord + 
     s(time_course_segment, bs = "cr", k = 3) +                    # reference s
-    s(time_course_segment, by = is_palatal, bs = "cr", k = 4) +   # diff s
+    s(time_course_segment, by = is_palatal_ord, bs = "cr", k = 4) +   # diff s
     s(time_course_segment, participant, bs = "fs", m = 1, k = 3), # random s
   family = gaussian(), 
-  prior = c(
-    prior(normal(0, 0.5), class = Intercept), 
-    prior(normal(0, 0.5), class = b), 
-    prior(student_t(3, 0, 1), class = sds), 
-    prior(cauchy(0, 2), class = sigma)
-  ), 
+  prior = priors, 
   backend = "cmdstanr", iter = 2000, warmup = 1000, cores = 4,
-  control = list(adapt_delta = 0.9999, max_treedepth = 20), 
+  control = list(adapt_delta = 0.999999, max_treedepth = 20), 
   data = carrier_tc_final_gamm, 
   file = here("models", "b_gam_int")
   ) 
 
 # Create grid for posterior samples and plotting
 grid <- carrier_tc_final_gamm %>%
-  data_grid(is_palatal, time_course_segment = seq(1, 100, length.out = 20), 
+  data_grid(is_palatal_ord, time_course_segment = seq(1, 100, length.out = 20), 
     participant)
 
 p_f1_tc <- grid %>% 
   add_epred_draws(b_gam_f1, ndraws = 200, re_formula = NULL) %>% 
-  mutate(is_palatal = str_to_title(is_palatal)) %>% 
+  mutate(is_palatal = str_to_title(is_palatal_ord)) %>% 
   ggplot(., aes(x = time_course_segment / 100, y = .epred)) + 
     stat_summary(aes(group = interaction(.draw, is_palatal), color = is_palatal), 
       fun = mean, geom = "line", size = 0.5, alpha = 0.1) + 
@@ -249,7 +249,7 @@ p_f1_tc <- grid %>%
 p_f1_tc_diff <- grid %>%
   add_epred_draws(b_gam_f1, re_formula = NA, ndraws = 200) %>% 
   ungroup() %>% 
-  select(participant, is_palatal, time_course_segment, .epred) %>% 
+  select(participant, is_palatal = is_palatal_ord, time_course_segment, .epred) %>% 
   group_by(participant, is_palatal) %>% 
   mutate(row = row_number()) %>% 
   pivot_wider(names_from = "is_palatal", values_from = ".epred") %>% 
@@ -285,7 +285,7 @@ ggsave(
 # Plot intensity model
 p_int_tc <- grid %>% 
   add_epred_draws(b_gam_int, ndraws = 200, re_formula = NULL) %>% 
-  mutate(is_palatal = str_to_title(is_palatal)) %>% 
+  mutate(is_palatal = str_to_title(is_palatal_ord)) %>% 
   ggplot(., aes(x = time_course_segment / 100, y = .epred)) + 
     stat_summary(aes(group = interaction(.draw, is_palatal), color = is_palatal), 
       fun = mean, geom = "line", size = 0.5, alpha = 0.1) + 
@@ -306,7 +306,7 @@ p_int_tc <- grid %>%
 p_int_tc_diff <- grid %>%
   add_epred_draws(b_gam_int, re_formula = NA, ndraws = 200) %>% 
   ungroup() %>% 
-  select(participant, is_palatal, time_course_segment, .epred) %>% 
+  select(participant, is_palatal = is_palatal_ord, time_course_segment, .epred) %>% 
   group_by(participant, is_palatal) %>% 
   mutate(row = row_number()) %>% 
   pivot_wider(names_from = "is_palatal", values_from = ".epred") %>% 
@@ -362,14 +362,12 @@ gam_forest_data <- bind_rows(
       "Smooth term\nσ"), 
     name = case_when(
       name == "Intercept" ~ "Intercept", 
-      name == "is_palatalpalatal" ~ "Palatal", 
+      name == "is_palatal_ordother" ~ "Not palatal", 
       name == "stime_course_segment_1" ~ "TC", 
-      name == "stime_course_segment:is_palatalother_1" ~ "TC - Other", 
-      name == "stime_course_segment:is_palatalpalatal_1" ~ "TC - Palatal", 
+      name == "stime_course_segment:is_palatal_ordother_1" ~ "TC - Not palatal", 
       name == "stime_course_segment_1" ~ "TC", 
-      name == "stime_course_segmentis_palatalother_1" ~ "TC - Other", 
-      name == "stime_course_segmentis_palatalpalatal_1" ~ "TC - Palatal", 
-      name == "stime_course_segmentparticipant_1" ~ "TC Part. - Other", 
+      name == "stime_course_segmentis_palatal_ordother_1" ~ "TC - Not palatal", 
+      name == "stime_course_segmentparticipant_1" ~ "TC Part. - Not palatal", 
       name == "stime_course_segmentparticipant_2" ~ "TC Part. - Palatal", 
       name == "sigma" ~ "σ"
     ))
@@ -389,7 +387,7 @@ carrier_gam_forest <- gam_forest_data %>%
     geom_text(data = gam_data_summary, 
       hjust = 1, family = "Times", size = 3, position = position_dodge(0.75), 
       aes(group = interaction(term, model), label = glue::glue("{value} [{.lower}, {.upper}]"),
-        x = -0.65)) +
+        x = -0.6)) +
     coord_cartesian(xlim = c(-1.2, NA)) + 
     scale_x_continuous(breaks = c(-1, 0, 1)) + 
     scale_y_discrete(limits = rev, position = "left") + 
