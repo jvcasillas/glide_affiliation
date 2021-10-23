@@ -97,7 +97,7 @@ ggsave(
   )
 
 #
-# Duration mod table
+# Duration mod forest plot
 #
 
 # Get posterior and cleanup colnames and term names
@@ -158,6 +158,25 @@ ggsave(
   plot = dur_forest, 
   path = here("figs", "manuscript"), width = 6.5, height = 5.5, dpi = 600
   )
+
+#
+# Duration mod table
+#
+
+bayestestR::describe_posterior(
+  posteriors = b_dur_mod, 
+  test = "p_direction", 
+  effects = "fixed") %>%
+  as_tibble() %>% 
+  mutate_if(is.numeric, specify_decimal, k = 2) %>% 
+  mutate(
+    Parameter = str_remove_all(Parameter, "b_"), 
+    Parameter = str_replace_all(Parameter, "palatal_sum", "Palatal"), 
+    Estimate = glue("{Median} [{CI_low}, {CI_high}]"), 
+    Prior = if_else(Parameter == "Intercept", "Normal(0, 0.2)", "Normal(0, 0.5)")) %>% 
+  select(Parameter, Estimate, `P(direction)` = pd, Rhat, ESS, Prior) %>% 
+  saveRDS(., file = here("tables", "tab_dur.rds"))
+
 
 # -----------------------------------------------------------------------------
 
@@ -407,3 +426,59 @@ ggsave(
   plot = carrier_gam_forest, 
   path = here("figs", "manuscript"), width = 7.5, height = 5.5, dpi = 600
   )
+
+#
+# Tables
+#
+
+bayestestR::describe_posterior(
+  posteriors = b_gam_f1, 
+  test = "p_direction", 
+  effects = "fixed") %>%
+  as_tibble() %>% 
+  mutate_if(is.numeric, specify_decimal, k = 2) %>% 
+  mutate(
+    Parameter = case_when(
+      Parameter == "b_Intercept" ~ "Intercept", 
+      Parameter == "b_is_palatal_ordother" ~ "Not palatal", 
+      Parameter == "bs_stime_course_segment_1" ~ "Time course", 
+      Parameter == "bs_stime_course_segment:is_palatal_ordother_1" ~ "Time course: Not palatal"
+    ), 
+    Estimate = glue("{Median} [{CI_low}, {CI_high}]"), 
+    Prior = case_when(
+      Parameter == "Intercept" ~ "Normal(0, 0.5)", 
+      Parameter == "Not palatal" ~ "Normal(0, 0.5)", 
+      TRUE ~ "student_t(3, 0, 1)"), 
+    Function = if_else(Parameter %in% c("Intercept", "Not palatal"), " ", "Smooth")
+    ) %>% 
+  select(Parameter, Function, Estimate, `P(direction)` = pd, Rhat, ESS, Prior) %>% 
+  saveRDS(., file = here("tables", "tab_gam_f1.rds"))
+
+
+
+# Intensity model
+bayestestR::describe_posterior(
+  posteriors = b_gam_int, 
+  test = "p_direction", 
+  effects = "fixed") %>%
+  as_tibble() %>% 
+  mutate_if(is.numeric, specify_decimal, k = 2) %>% 
+  mutate(
+    Parameter = case_when(
+      Parameter == "b_Intercept" ~ "Intercept", 
+      Parameter == "b_is_palatal_ordother" ~ "Not palatal", 
+      Parameter == "bs_stime_course_segment_1" ~ "Time course", 
+      Parameter == "bs_stime_course_segment:is_palatal_ordother_1" ~ "Time course: Not palatal"
+    ), 
+    Estimate = glue("{Median} [{CI_low}, {CI_high}]"), 
+    Prior = case_when(
+      Parameter == "Intercept" ~ "Normal(0, 0.5)", 
+      Parameter == "Not palatal" ~ "Normal(0, 0.5)", 
+      TRUE ~ "student_t(3, 0, 1)"), 
+    Function = if_else(Parameter %in% c("Intercept", "Not palatal"), " ", "Smooth")
+    ) %>% 
+  select(Parameter, Function, Estimate, `P(direction)` = pd, Rhat, ESS, Prior) %>% 
+  saveRDS(., file = here("tables", "tab_gam_int.rds"))
+
+# -----------------------------------------------------------------------------
+

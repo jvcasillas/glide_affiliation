@@ -242,8 +242,28 @@ ggsave(
 
 # Tables ----------------------------------------------------------------------
 
-bayestestR::describe_posterior(b_multi_0)
-bayestestR::describe_posterior(b_multi_1a)
-bayestestR::describe_posterior(b_multi_1b)
+bind_rows(
+  bayestestR::describe_posterior(posteriors = b_multi_0, test = "p_direction", 
+    effects = "all", priors = T) %>%
+  as_tibble() %>% 
+  mutate(Model = "Main"), 
+  bayestestR::describe_posterior(posteriors = b_multi_1a, test = "p_direction", 
+    effects = "all", priors = T) %>%
+  as_tibble() %>% 
+  mutate(Model = "/i/"), 
+  bayestestR::describe_posterior(posteriors = b_multi_1b, test = "p_direction", 
+    effects = "all", priors = T) %>%
+  as_tibble() %>% 
+  mutate(Model = "/u/") 
+  ) %>% 
+  mutate_if(is.numeric, specify_decimal, k = 2) %>% 
+  mutate(
+    Parameter = str_replace_all(Parameter, "b_mu", "μ "), 
+    Parameter = str_replace_all(Parameter, "_", ": "), 
+    Prior = glue("{Prior_Distribution}(0, 20)"), 
+    Prior = str_to_title(Prior), 
+    Estimate = glue("{Median} [{CI_low}, {CI_high}]")) %>% 
+  select(Model, Parameter, Estimate, `P(direction)` = pd, Rhat, ESS, Prior) %>% 
+  saveRDS(., file = here("tables", "tab_multi_all.rds"))
 
 # -----------------------------------------------------------------------------
