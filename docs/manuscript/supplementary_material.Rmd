@@ -1,5 +1,12 @@
+## Bayesian Data Analysis
+
+In all cases we used Bayesian Data Analysis (BDA, CITE) for statistical inferences. 
+
 
 ## Syllabification task
+
+The first model analyzed the syllabification task data using multinomial logistic regression. 
+The participants responses (triphthong, hiatus, simplification) were modeled in a simple, intecept-only model, and as a function of the post-consonantal glide ([j], [w]). 
 
 Table \@ref(tab:syllabification-all-models-table) below.
 

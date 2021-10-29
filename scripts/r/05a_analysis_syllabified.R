@@ -183,7 +183,7 @@ p_multi_i <- b_multi_1a_post %>%
     scale_x_continuous(labels = scales::percent, limits = c(0, 1)) + 
     labs(y = NULL, x = NULL) + 
     annotate("text", label = "(B)", x = 0, y = 0.95, family = "Times") + 
-    annotate("text", label = "P(response | /i/)", x = 0.78, y = 0.9, size = 3.25) + 
+    annotate("text", label = "P(response | [j])", x = 0.78, y = 0.9, size = 3.25) + 
     annotate("text", x = 1, y = 0.665, hjust = 1, size = 3.25, family = "Times", 
       label = glue::glue("
         {glide_i_cri[1, 2]}
@@ -211,7 +211,7 @@ p_multi_u <- b_multi_1b_post %>%
     scale_x_continuous(labels = scales::percent, limits = c(0, 1)) + 
     labs(y = NULL, x = NULL) +
     annotate("text", label = "(C)", x = 0, y = 0.95, family = "Times") + 
-    annotate("text", label = "P(response | /u/)", x = 0.78, y = 0.9, size = 3.25) + 
+    annotate("text", label = "P(response | [w])", x = 0.78, y = 0.9, size = 3.25) + 
     annotate("text", x = 1, y = 0.665, hjust = 1, size = 3.25, family = "Times",
       label = glue::glue("
         {glide_u_cri[1, 2]}
@@ -250,11 +250,11 @@ bind_rows(
   bayestestR::describe_posterior(posteriors = b_multi_1a, test = "p_direction", 
     effects = "all", priors = T) %>%
   as_tibble() %>% 
-  mutate(Model = "/i/"), 
+  mutate(Model = "[j]"), 
   bayestestR::describe_posterior(posteriors = b_multi_1b, test = "p_direction", 
     effects = "all", priors = T) %>%
   as_tibble() %>% 
-  mutate(Model = "/u/") 
+  mutate(Model = "[w]") 
   ) %>% 
   mutate_if(is.numeric, specify_decimal, k = 2) %>% 
   mutate(

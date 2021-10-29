@@ -3,7 +3,7 @@
 library("tidyverse")
 library("here")
 library("glue")
-library("broom")
+library("broom.mixed")
 library("knitr")
 library("kableExtra")
 library("patchwork")
@@ -59,5 +59,26 @@ my_colors <- c("#f98e09", "#bc3754", "#57106e")
 # Other helpers ---------------------------------------------------------------
 
 specify_decimal <- function(x, k) trimws(format(round(x, k), nsmall=k))
+
+
+# Report posterior estimates and CIs
+report_posterior <- function(df, row = NULL, param) {
+
+  if (is.null(row)) {
+    # Extract wanted value from model output
+    est  <- df[df$Parameter == param, "Estimate"]
+    mpe  <- df[df$Parameter == param, "P(direction)"]
+  } else {
+    # Extract wanted value from model output
+    est  <- df[row, "Estimate"]
+    mpe  <- df[row, "P(direction)"]
+  }
+
+  capture.output(
+    paste0("(&beta; = ", est, "; MPE = ", mpe, ")", "\n") %>%
+      cat()) %>%
+    paste()
+
+}
 
 # -----------------------------------------------------------------------------
