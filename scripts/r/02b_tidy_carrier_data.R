@@ -36,8 +36,18 @@ comparison_items_nonpalatals <- c(
  'piano'      # [p]
 )
 
+critical_items_palatals_u <- c(
+  "ayuda", 
+  "patilludo", 
+  "velludo", 
+  "coyunda"
+)
 
-
+comparison_items_nonpalatals_u <- c(
+  "luna", 
+  "fruta", 
+  "fortuna"
+)
 
 
 # Tidy time course data --------------------------------------------------------
@@ -68,26 +78,24 @@ car_timecourse <- car_df %>%
   ungroup(.) %>% 
   write_csv(., path = here("data", "dataframes", "tidy", "carrier_timecourse_tidy.csv"))
 
-
-
-
 carrier_tc_final <- car_timecourse %>% 
   filter(., item %in% c(critical_items_palatals, 
                         comparison_items_nonpalatals), 
             TextGridLabel == 'i') %>% 
-  mutate(., pre_c = if_else(item %in% comparison_items_nonpalatals, 'other', 
-                            if_else(item %in% c('chiaba', 'mebochiana', 'pachialo'), 'ch', 
-                                    if_else(item == 'lliape', 'j', 'nh')))) %>% 
+  mutate(., pre_c = case_when(
+    item %in% comparison_items_nonpalatals ~ 'other', 
+    item %in% c('chiaba', 'mebochiana', 'pachialo') ~ 'ch', 
+    item == 'lliape' ~ 'j', 
+    TRUE ~ 'nh')) %>% 
   write_csv(., "./data/dataframes/tidy/carrier_timecourse_subset_tidy.csv")
 
-carrier_dur_final <- carrier_tc_final %>% 
-  group_by(., participant, item, is_palatal) %>% 
-  summarize(., dur = mean(duration), .groups = "drop") %>% 
-  ungroup(.) %>% 
-  mutate(dur_std = (dur - mean(dur)) / sd(dur), 
-         palatal_sum = if_else(is_palatal == "palatal", 1, -1)) %>% 
-  write_csv(., "./data/dataframes/tidy/carrier_duration_subset_tidy.csv")
-
+carrier_tc_iu <- 
+  car_timecourse %>% 
+    filter(TextGridLabel == 'u') %>% 
+    mutate(., is_palatal = if_else(item %in% critical_items_palatals_u, "palatal", "other")) %>% 
+    group_by(., participant, TextGridLabel) %>% 
+    mutate(int_norm = (`in` - mean(`in`)) / sd(`in`)) %>% 
+    write_csv(., "./data/dataframes/tidy/carrier_timecourse_subset_iu_tidy.csv")
 
 
 
@@ -110,10 +118,22 @@ car_duration <- car_df %>%
             sex = if_else(participant %in% c('p03', 'p04', 'p07'), 'm', 'f')) %>% 
   write_csv(., path = here("data", "dataframes", "tidy", "carrier_duration_tidy.csv"))
 
-
-
-
-
-
-
+carrier_dur_final <- 
+  bind_rows(
+    car_timecourse %>% 
+      filter(., item %in% c(critical_items_palatals, 
+                            comparison_items_nonpalatals), 
+                TextGridLabel == 'i') %>% 
+      mutate(is_palatal = if_else(item %in% critical_items_palatals, "palatal", "other")), 
+    car_timecourse %>% 
+      filter(., TextGridLabel == 'u') %>%
+      mutate(., is_palatal = if_else(item %in% critical_items_palatals_u, "palatal", "other"))
+    ) %>% 
+  rename(glide = TextGridLabel) %>% 
+  group_by(., participant, item, is_palatal, glide) %>% 
+  summarize(., dur = mean(duration), .groups = "drop") %>% 
+  mutate(dur_std = (dur - mean(dur)) / sd(dur), 
+         palatal_sum = if_else(is_palatal == "palatal", 1, -1), 
+         glide_sum = if_else(glide == "i", 1, -1)) %>% 
+  write_csv(., "./data/dataframes/tidy/carrier_duration_iu_tidy.csv")
 

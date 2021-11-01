@@ -135,6 +135,10 @@ glide_u_cri <- b_multi_1b_post %>%
     cri =  glue::glue("{phi} [{.lower}, {.upper}]")) %>%
   select(realization, cri)  
 
+saveRDS(glide_cri, here("tables", "tab_multi_cri.rds"))
+saveRDS(glide_i_cri, here("tables", "tab_multi_i_cri.rds"))
+saveRDS(glide_u_cri, here("tables", "tab_multi_u_cri.rds"))
+
 # -----------------------------------------------------------------------------
 
 

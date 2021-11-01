@@ -25,6 +25,14 @@ tab_multi_all %>%
 
 ## Carrier task
 
+### GAMMs
+
+GAMMs represent an extension to the linear model framework that allow non-linear functions called factor smooths to be applied to predictors. In this sense, the predictors can be classified into two types: parametric terms (equivalent to fixed effects in hierarchical model terminology) and smooth terms. 
+Random smooths are conceptually similar to random slopes and intercepts in the mixed-effects regression framework [@winter2016].
+Thus, they allow the by-subject trajectory shapes to vary as a function of a parametric effect and are essential in avoiding anti-conservative models.
+
+### F1
+
 Table \@ref(tab:carrier-dur) below.
 
 ```{r, carrier-dur}

@@ -26,11 +26,13 @@ source(here::here("scripts", "r", "03_load_data.R"))
 
 # Duration analysis -----------------------------------------------------------
 
+# model formula
 dur_mod_formula <- 
-  brmsformula(dur_std ~ palatal_sum + 
+  brmsformula(dur_std ~ palatal_sum +
        (1 + palatal_sum | participant) + 
        (1 | item))
 
+# Main duration mod (i)
 b_dur_mod <- brm(
   formula = dur_mod_formula, 
   chains = 4, iter = 2000, warmup = 1000, cores = 4, 
@@ -46,6 +48,31 @@ b_dur_mod <- brm(
   file = here("models", "b_dur_mod")
 )
 
+# Prep [u] data
+carrier_dur_u <- carrier_u %>% 
+  group_by(., participant, item, is_palatal) %>% 
+  summarize(., dur = mean(duration), .groups = "drop") %>% 
+  mutate(dur_std = (dur - mean(dur)) / sd(dur), 
+         palatal_sum = if_else(is_palatal == "palatal", 1, -1)) 
+
+# Fit [u] comparison model
+b_dur_u_mod <- brm(
+  formula = dur_mod_formula, 
+  chains = 4, iter = 2000, warmup = 1000, cores = 4, 
+  data = carrier_dur_u, 
+  control = list(adapt_delta = 0.99), 
+  backend = "cmdstanr", 
+  prior = c(
+    prior(normal(0, 0.2), class = Intercept), 
+    prior(normal(0, 0.5), class = b), 
+    prior(cauchy(0, 1), class = sd), 
+    prior(lkj(10), class = cor)
+  ), 
+  file = here("models", "b_dur_u_mod")
+)
+
+
+# Get posterior draws for main model
 post_dur <- as_draws_df(b_dur_mod) %>% 
   select(starts_with("b_")) %>% 
   transmute(
@@ -54,47 +81,104 @@ post_dur <- as_draws_df(b_dur_mod) %>%
     diff = palatal - other
   ) 
 
+# Get posterior draws for u comparison model
+post_dur_u <- as_draws_df(b_dur_u_mod) %>% 
+  select(starts_with("b_")) %>% 
+  transmute(
+    palatal = b_Intercept + b_palatal_sum, 
+    other = b_Intercept - b_palatal_sum, 
+    diff = palatal - other
+  ) 
+
+#
+# Plot and compare
+#
+
 p_dur_param <- post_dur %>% 
   select(-diff) %>% 
   pivot_longer(cols = everything(), names_to = "param", values_to = "estimate") %>% 
   mutate(param = str_to_title(param)) %>% 
   ggplot(., aes(x = estimate, fill = param, color = param)) + 
     stat_slab(alpha = 0.7, color = "white") +
-    stat_pointinterval(pch = 21, point_fill = "white", point_size = 4, 
+    stat_pointinterval(aes(y = 0), pch = 21, point_fill = "white", point_size = 3, 
       position = position_dodge(width = .3, preserve = "single"), 
       show.legend = F) +
-    scale_fill_manual(name = NULL, values = my_colors[c(1, 3)]) + 
-    scale_color_manual(name = NULL, values = my_colors[c(1, 3)]) + 
-    labs(y = NULL, x = "Duration (std.)") + 
+    scale_fill_manual(name = "[j]", values = my_colors[c(1, 3)]) + 
+    scale_color_manual(name = "[j]", values = my_colors[c(1, 3)]) + 
+    labs(y = NULL, x = NULL) + 
     annotate("text", label = "(A)", x = -2, y = 0.95, family = "Times") + 
     coord_cartesian(ylim = c(-0.1, NA), xlim = c(-2.2, 2.2)) + 
     ds4ling::ds4ling_bw_theme(base_size = 12, base_family = "Times") + 
-    theme(legend.position = c(0.15, 0.75), 
+    theme(legend.position = c(0.15, 0.55), 
+      legend.background = element_blank(), 
+      legend.key = element_rect(fill = NA), 
+      strip.background = element_rect(fill = NA), 
+      axis.text = element_blank(),
+      axis.ticks = element_blank())
+
+p_dur_diff <- post_dur %>% 
+  ggplot(., aes(x = diff)) + 
+    stat_slab(alpha = 0.7, color = "white", fill = my_colors[2]) +
+    stat_pointinterval(aes(y = 0), pch = 21, point_fill = "white", point_size = 3, 
+      position = position_dodge(width = .3, preserve = "single"), 
+      color = my_colors[2], show.legend = F) + 
+    geom_vline(xintercept = 0, lty = 3) + 
+    labs(y = NULL, x = NULL) + 
+    annotate("text", label = "(B)", x = -2, y = 0.95, family = "Times") + 
+    coord_cartesian(ylim = c(-0.1, NA), xlim = c(-2.2, 2.2)) + 
+    ds4ling::ds4ling_bw_theme(base_size = 12, base_family = "Times") + 
+    theme(axis.text = element_blank(), axis.ticks = element_blank())
+
+duration_i <- p_dur_param + p_dur_diff
+
+p_dur_u_param <- post_dur_u %>% 
+  select(-diff) %>% 
+  pivot_longer(cols = everything(), names_to = "param", values_to = "estimate") %>% 
+  mutate(param = str_to_title(param)) %>% 
+  ggplot(., aes(x = estimate, fill = param, color = param)) + 
+    stat_slab(alpha = 0.7, color = "white") +
+    stat_pointinterval(aes(y = 0), pch = 21, point_fill = "white", point_size = 3, 
+      position = position_dodge(width = .3, preserve = "single"), 
+      show.legend = F) +
+    scale_fill_manual(name = "[w]", values = my_colors[c(1, 3)]) + 
+    scale_color_manual(name = "[w]", values = my_colors[c(1, 3)]) + 
+    labs(y = NULL, x = "Duration (std.)") + 
+    annotate("text", label = "(C)", x = -2, y = 0.95, family = "Times") + 
+    coord_cartesian(ylim = c(-0.1, NA), xlim = c(-2.2, 2.2)) + 
+    ds4ling::ds4ling_bw_theme(base_size = 12, base_family = "Times") + 
+    theme(legend.position = c(0.15, 0.55), 
       legend.background = element_blank(), 
       legend.key = element_rect(fill = NA), 
       strip.background = element_rect(fill = NA), 
       axis.text.y = element_blank(),
       axis.ticks.y = element_blank())
 
-p_dur_diff <- post_dur %>% 
+p_dur_u_diff <- post_dur_u %>% 
   ggplot(., aes(x = diff)) + 
     stat_slab(alpha = 0.7, color = "white", fill = my_colors[2]) +
-    stat_pointinterval(pch = 21, point_fill = "white", point_size = 4, 
+    stat_pointinterval(aes(y = 0), pch = 21, point_fill = "white", point_size = 3, 
       position = position_dodge(width = .3, preserve = "single"), 
-      color = my_colors[2], show.legend = F) +
+      color = my_colors[2], show.legend = F) + 
+    geom_vline(xintercept = 0, lty = 3) + 
     labs(y = NULL, x = "Duration difference") + 
-    annotate("text", label = "(B)", x = -2, y = 0.95, family = "Times") + 
+    annotate("text", label = "(D)", x = -2, y = 0.95, family = "Times") + 
     coord_cartesian(ylim = c(-0.1, NA), xlim = c(-2.2, 2.2)) + 
     ds4ling::ds4ling_bw_theme(base_size = 12, base_family = "Times") + 
     theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
 
-duration_all <- p_dur_param + p_dur_diff
+duration_u <- p_dur_u_param + p_dur_u_diff
+
+duration_all <- duration_i / duration_u
 
 ggsave(
   filename = "duration_all.png", 
   plot = duration_all, 
-  path = here("figs", "manuscript"), width = 7, height = 3.5, dpi = 600
+  path = here("figs", "manuscript"), 
+  scale = 1, width = 7, height = 5.75, dpi = 600
   )
+
+
+
 
 #
 # Duration mod forest plot
@@ -177,8 +261,20 @@ bayestestR::describe_posterior(
   select(Parameter, Estimate, `P(direction)` = pd, Rhat, ESS, Prior) %>% 
   saveRDS(., file = here("tables", "tab_dur.rds"))
 
-
 # -----------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -189,7 +285,7 @@ bayestestR::describe_posterior(
 # GAMMs: Time course of [j]: --------------------------------------------------
 
 # set participant to factor
-# set modality to ordered variable and relevel so production is reference
+# set is_palatal to ordered variable and relevel so palatal is reference
 carrier_tc_final_gamm <- carrier_tc_final %>% 
   mutate(
     participant = as.factor(participant), 
@@ -262,8 +358,8 @@ p_f1_tc <- grid %>%
     labs(y = "Normalized F1", x = "") + 
     annotate("text", label = "(A)", x = 0.05, y = -0.95, family = "Times") + 
     ds4ling::ds4ling_bw_theme(base_family = "Times", base_size = 13) + 
-    theme(legend.position = c(0.15, 0.1), legend.background = element_blank(),
-      legend.key = element_rect(fill = NA))
+    theme(legend.position = c(0.15, 0.12), legend.background = element_blank(),
+      legend.key = element_rect(fill = NA), axis.text = element_text(size = 9.5))
 
 p_f1_tc_diff <- grid %>%
   add_epred_draws(b_gam_f1, re_formula = NA, ndraws = 200) %>% 
@@ -290,15 +386,15 @@ p_f1_tc_diff <- grid %>%
     labs(y = NULL, x = "Time course") + 
     annotate("text", label = "(B)", x = 0.05, y = -0.95, family = "Times") + 
     ds4ling::ds4ling_bw_theme(base_family = "Times", base_size = 13) + 
-    theme(legend.position = c(0.25, 0.1), legend.background = element_blank(),
-      legend.key = element_rect(fill = NA))
+    theme(legend.position = c(0.25, 0.12), legend.background = element_blank(),
+      legend.key = element_rect(fill = NA), axis.text = element_text(size = 9.5))
 
 carrier_gam_f1 <- p_f1_tc + p_f1_tc_diff
 
 ggsave(
   filename = "carrier_gam_f1.png", 
   plot = carrier_gam_f1, 
-  path = here("figs", "manuscript"), width = 7, height = 3.5, dpi = 600
+  path = here("figs", "manuscript"), width = 7, height = 3, dpi = 600
   )
 
 # Plot intensity model
@@ -319,8 +415,8 @@ p_int_tc <- grid %>%
     labs(y = "Normalized Intenisity", x = "") + 
     annotate("text", label = "(A)", x = 0.05, y = 1.45, family = "Times") + 
     ds4ling::ds4ling_bw_theme(base_family = "Times", base_size = 13) + 
-    theme(legend.position = c(0.15, 0.1), legend.background = element_blank(),
-      legend.key = element_rect(fill = NA))
+    theme(legend.position = c(0.15, 0.12), legend.background = element_blank(),
+      legend.key = element_rect(fill = NA), axis.text = element_text(size = 9.5))
 
 p_int_tc_diff <- grid %>%
   add_epred_draws(b_gam_int, re_formula = NA, ndraws = 200) %>% 
@@ -347,15 +443,15 @@ p_int_tc_diff <- grid %>%
     labs(y = NULL, x = "Time course") + 
     annotate("text", label = "(B)", x = 0.05, y = 1.45, family = "Times") + 
     ds4ling::ds4ling_bw_theme(base_family = "Times", base_size = 13) + 
-    theme(legend.position = c(0.25, 0.1), legend.background = element_blank(),
-      legend.key = element_rect(fill = NA))
+    theme(legend.position = c(0.25, 0.12), legend.background = element_blank(),
+      legend.key = element_rect(fill = NA), axis.text = element_text(size = 9.5))
 
 carrier_gam_int <- p_int_tc + p_int_tc_diff
 
 ggsave(
   filename = "carrier_gam_int.png", 
   plot = carrier_gam_int, 
-  path = here("figs", "manuscript"), width = 7, height = 3.5, dpi = 600
+  path = here("figs", "manuscript"), width = 7, height = 3, dpi = 600
   )
 
 # Table plots
@@ -427,6 +523,36 @@ ggsave(
   path = here("figs", "manuscript"), width = 7.5, height = 5.5, dpi = 600
   )
 
+# Just F1 forest
+carrier_gam_forest_f1 <- gam_forest_data %>% 
+  filter(model == "F1") %>% 
+  ggplot(., aes(x = value, y = name, fill = term)) + 
+    facet_grid(term ~ ., scales = "free", space = "free") + 
+    geom_vline(xintercept = 0, lty = 3) + 
+    stat_halfeye(fill = "darkgrey", slab_type = "histogram", breaks = 30, 
+      outline_bars = T, slab_color = "white", slab_size = 0.3, 
+      point_fill = "white", pch = 21, show.legend = F) +
+    geom_text(data = gam_data_summary %>% filter(model == "F1"), 
+      hjust = 1, family = "Times", size = 3, 
+      aes(group = interaction(term, model), label = glue::glue("{value} [{.lower}, {.upper}]"),
+        x = -0.6)) +
+    coord_cartesian(xlim = c(-1.25, 3)) + 
+    scale_y_discrete(limits = rev, position = "left") + 
+    labs(title = NULL, subtitle = NULL, y = NULL, x = "Estimate") + 
+    ds4ling::ds4ling_bw_theme(base_family = "Times", base_size = 13) + 
+    theme(
+      plot.margin = unit(x = c(0, 0, 0, 0), units = "mm"), 
+      strip.placement = "outside", strip.background = element_blank(), 
+      axis.ticks.y = element_blank(), axis.text.y = element_text(hjust = 1))
+
+ggsave(
+  filename = "carrier_gam_forest_f1.png", 
+  plot = carrier_gam_forest_f1, 
+  path = here("figs", "manuscript"), width = 7.5, height = 5.5, dpi = 600
+  )
+
+
+
 #
 # Tables
 #
@@ -481,4 +607,3 @@ bayestestR::describe_posterior(
   saveRDS(., file = here("tables", "tab_gam_int.rds"))
 
 # -----------------------------------------------------------------------------
-

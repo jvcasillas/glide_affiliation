@@ -30,17 +30,32 @@ b_gam_f1   <- readRDS(here("models", "b_gam_f1.rds"))
 b_dur_mod  <- readRDS(here("models", "b_dur_mod.rds"))
 
 # Load tables
-tab_multi_all <- readRDS(here("tables", "tab_multi_all.rds"))
-tab_dur       <- readRDS(here("tables", "tab_dur.rds"))
-tab_gam_f1    <- readRDS(here("tables", "tab_gam_f1.rds"))
-tab_gam_int   <- readRDS(here("tables", "tab_gam_int.rds"))
+tab_multi_all <- readRDS(here("tables", "tab_multi_all.rds")) %>% 
+  mutate(Estimate = str_replace_all(Estimate, "-", "&minus;"))
+tab_dur       <- readRDS(here("tables", "tab_dur.rds")) %>% 
+  mutate(Estimate = str_replace_all(Estimate, "-", "&minus;"))
+tab_gam_f1    <- readRDS(here("tables", "tab_gam_f1.rds")) %>% 
+  mutate(Estimate = str_replace_all(Estimate, "-", "&minus;"))
+tab_gam_int   <- readRDS(here("tables", "tab_gam_int.rds")) %>% 
+  mutate(Estimate = str_replace_all(Estimate, "-", "&minus;"))
+
+multi_cri     <- readRDS(here("tables", "tab_multi_cri.rds"))
+multi_i_cri   <- readRDS(here("tables", "tab_multi_i_cri.rds"))
+multi_u_cri   <- readRDS(here("tables", "tab_multi_u_cri.rds"))
 
 ```
 
 
 
+# Filler
+# Filler
+# Filler
 
-# Methods
+# Experiment
+
+## Filler
+
+## Filler
 
 ## Statistical analyses
 
@@ -48,59 +63,37 @@ We report four primary statistical analyses in order to address the aforemention
 To this end, we fit a series of Bayesian regression models, which are described in detail in the corresponding sections below and in the supplementary materials (LINK).
 All analyses were conducted in R [@R-base, `r sessionInfo()$R.version$version %>%  substr(., start = 3, stop = 15)`].
 The models were fit using `stan` [@stan] via the R package `brms`  [@R_brms_a].
-All models included a maximal grouping-effects structure (CITE), as well as regularizing, weakly informative priors [@Gelman_2017]. 
+All models included a maximal grouping-effects structure [@barr2013random], as well as regularizing, weakly informative priors [@Gelman_2017]. 
 Additionally, models were fit with 2000 iterations (1000 warm-up) and  Hamiltonian Monte-Carlo sampling was carried out with 4 chains distributed between 4 processing cores.
 We report point estimates (posterior medians) for each parameter of interest, along with the 95% highest density interval (HDI), and the maximum probability of effect (MPE).
 A complete description of the models and output summaries in table format are available in the supplementary materials (LINK). 
 
-# Results
+## Results
 
-## Syllable division task 
+### Syllable division task 
 
-The first model analyzed the Syllable division task data using hierarchical multinomial logistic regression. 
+The first model analyzed the syllable division task data using hierarchical multinomial logistic regression. 
 The participants responses to the critical CGVG sequences were classified as triphthong, hiatus, or simplification, i.e., [la.ka.ˈpi̯ai̯s.to], [la.ka.pi.ˈai̯s.to], or [la.ka.ˈpai̯s.to], respectively. 
+Given that there were three response categorizations, the model likelihood was categorical and used a logit linking function. 
+To simplify model interpretation, we report effects in the probability space.^[The complete model output in the original format is avaiable in the supplementary materials.]
 The responses were modeled in a simple, intecept-only model, and as a function of the post-consonantal glide ([j], [w]). 
+A "hiatus" response was set as the default and the model estimated intercepts for the the "simplification" and "triphthong" responses. 
+Figure \@ref(fig:plot-syllabification-task) illustrates the overall posterior probabilities of a given response (panel A), and as a function of the glide (panels B and C). 
 
-
-The intercept was something `r report_posterior(tab_multi_all, row = 1)`.
-
-
-Figure \@ref(fig:plot-syllabification-task) shows stuff. 
-
-
-
-- Questions: 
-  - How do participants respond? Is GVG possible?
-  - Does production depend on the glide type
-- Coding
-  - Triphthong: critical sequence produced in a single syllable
-    - i.e. “lakapiaisto” ⇾ [la.ka.ˈpi̯ai̯s.to]
-  - Hiatus: vowel + diphthong (CV + VGC), 
-    - i.e., “lakapiaisto” ⇾ [la.ka.pi.ˈai̯s.to]
-  - Simplification: a segment was elided (typically the pre-vocalic glide)
-    - i.e., “lakapiaisto” ⇾ [la.ka.ˈpai̯s.to]
-
-
-
-- Triphthongs were produced in approximately 45% of the targets. 
-- A production containing a hiatus made up roughly 30% of the data, followed by a simplification of some sort (~25% of the time)
-- Overall, the task provides evidence supporting the hypothesis that pre-vocalic glides can be part of the onset in this variety of Spanish.
-
-
-- Main finding: we have evidence supporting the hypothesis that pre-vocalic glides can be part of the onset
-- Why: because the participants produced triphthongs at least some of the time. 
-Responses were variable and we cannot account for this variability with glide type nor preceding consonant
-
-
-
-
-
-(ref:plot-syllabification-task) This is a figure caption.
+(ref:plot-syllabification-task) Posterior probabilities of responding "hiatus", "triphthong", or "simplification". Each panel plots the posterior medians &pm; 66% and 95% credible intervals. Panels A shows overall responses, and panels B and C show responses as a function of glide type.
 
 ```{r, 'plot-syllabification-task', out.width="100%", fig.cap="(ref:plot-syllabification-task)"}
 knitr::include_graphics(here("figs", "manuscript", "syllabification_all.png"))
 ```
 
+With this model we aimed to shed light on how participants responded. 
+Specifically, we were interested in knowing if GVG productions were possible and whether responses depended on the type of glide. 
+We show that GVG responses are indeed possible. 
+Triphthong realizations occurred approximately 39% of the time (`r pull(multi_cri[3, 2])`) in the dataset. 
+Aa production containing a hiatus made up roughly 35% (`r pull(multi_cri[1, 2])`) of the data, followed by a simplification of some sort (`r pull(multi_cri[2, 2])`).
+Notably, responses were variable and the model does account for all of this variability when including the glide type, .
+If we consider realizations as a function of glide type we see that triphthong realizations were possible in both environments, with more being produced with [w] (`r pull(multi_u_cri[3, 2])`) than with [j] (`r pull(multi_i_cri[3, 2])`). 
+Overall, the task provides evidence supporting the hypothesis that pre-vocalic glides can be part of the onset in this variety of Spanish because the participants produced triphthongs at least some of the time. 
 
 
 
@@ -111,71 +104,33 @@ knitr::include_graphics(here("figs", "manuscript", "syllabification_all.png"))
 
 
 
+### Phrase reading task
 
+For the phrase reading task data we fit models analyzing acoustic properties of the pre-vocalic glide [j]. 
+Importantly, we expect co-occurrence restrictions such that pre-vocalic [j] will be disallowed if preceded by a palatal consonant. 
+In the case that pre-vocalic [j] is indeed blocked after a palatal consonant (i.e., "lliape"), we may observe differences in overall duration of the segment, as well as formant trajectory differences related to height (F1) when compared with a pre-vocalic [j] that is not preceded by a palatal segment (i.e., "piano"). 
+The justification for analyzing duration is due to the prediction that co-occurrence restrictions should result in an elided segment. 
+Formant trajectory differences related to height (F1) are expected because in one case (i.e., "piano") a glide should be produced without restrictions and in the other case (i.e., "lliape") it should not. 
+That is, in the non-palatal pre-glide items we expect formant movement from the high vocoid [j] to the low vowel [a]. 
+If the pre-vocalic glide is blocked due to a palatal onset then we should not observe the same formant movement. 
 
+#### Duration
 
+The duration data were modeled using Bayesian hierarchical linear regression. 
+The model analyzed participant-normalized segment duration as a function of whether the onset included a palatal consonant or not---henceforth *palatal*---, which was sum-to-zero coded (1, &minus;1, labelled as "palatal", "other"). 
+The model included by-participant and by-item grouping variables, and the *palatal* predictor varied for participants. 
+The model estimates suggest that the presence of a palatal onset is associated with an increase in glide duration `r report_posterior(tab_dur, row = 2)`, though the effect is small and the credible intervals of the posterior distribution are rather wide. 
+Concretely, based on the model, the data, and our prior assumptions, we can conclude with 95% certainty that the effect falls somewhere between &minus;0.20 and 0.62, with an 86% chance that the effect is positive. 
+Figure \@ref(fig:carrier-task-duration-all) plots the posterior distributions of pre-vocalic glides following [j] (and [w] for comparison) and Figure \@ref(fig:tab-carrier-task-duration) provides a forest plot of the parameter estimates, including all grouping variables. 
+A traditional table summary of the model output is available in the supplementary materials (LINK). 
 
+(ref:carrier-task-duration-all) Posterior distributions of pre-vocalic glide duration (panels A and C) following palatal and non-palatal onsets, as well as duration difference plots (panels B and D). Points represent posterior medians &pm;66% and 95% credible intervals.
 
+```{r, 'carrier-task-duration-all', out.width="100%", fig.cap="(ref:carrier-task-duration-all)"}
+knitr::include_graphics(here("figs/manuscript/duration_all.png"))
+```
 
-
-
-
-
-
-## Phrase reading task
-
-For the carrier phrase production task data, we fit three models: (1) a multi-level linear regression analyzing segment duration as a function of whether the onset included a palatal consonant or not (sum coded as 1, -1), and two Generalized Additive Mixed Models (GAMMs) analyzing the time course of (2) F1 (Hz) as a function of palatal status, and (2) intensity (dB) as a function of palatal status. 
-In both cases, palatal status (palatal, other) was set as an ordinal factor and included a difference smooth term. 
-
-
-- Hypothesis: Pre-vocalic glides will be disallowed if preceded by a palatal consonant
-- Measure duration, F1, and intensity of the pre-vocalic glide in two environments: after a palatal consonant, after any other consonant
-
-- If pre-vocalic glides are blocked after palatals (i.e., “lliape”), when compared with pre-vocalic glides that are not preceded by a palatal segment (i.e., “piano”) we expect to observe…
-  - differences in overall duration
-  - formant trajectory differences related to height (F1)
-- Analysis 1 (duration)
-  - Linear mixed effects model
-  - Model: duration ~ environment
-  - Random effect: by-subject/by-item intercepts with random slopes for preceding consonant
-
-Differences in duration: Why? Because something is theoretically elided
-Differences in F1: Why? Because in one case (piano) a glide should be 
-produced without problems and in the other case (lliape) it shouldn’t 
-thus there should be differences in formant movement between the two conditions: 
-(F1 correlates with height)
-PIANO: formant movement the high vocoid [j] to the low vowel [a]
-LLIAPE: if pre-vocalic glide is blocked then we shouldn’t see the same formant movement
-
-- If the participants are able to produce a glide in some contexts (piano) but not others (lliape) we should also see differences in F1 as a function of the preceding consonant.
-- Analysis 2
-  - Generalized Additive Mixed Model
-  - Model: F1 ~ preceding_consonant + time
-  - Reference smooth for time, participant
-  - Difference smooth for preceding_consonant
-
-- Participants might be producing a longer segment in the palatal condition because of the fact that they cannot naturally produce both. 
-- In other words, they might be trying to produce something, but because the target is illicit, they resort to lengthening.
-- Prediction: intensity of the lengthened segment should be lower than that of a glide. 
-- Why? More consonant-like productions have lower intensity than more vowel-like productions.
-- Analysis 3
-  - Generalized Additive Mixed Model
-  - Model: Intensity ~ preceding_consonant + time
-
-
-Summary
-- Sonoran speakers used variable strategies when producing the CGVGC sequences
-  - Importantly, they produced the GVG sequence at least some of the time (thus it is possible)
-  - Acoustic analysis shows that pre-vocalic segments are longer after palatal consonants
-  - Not shorter (i.e., elided because they are blocked)
-  - Analysis of the time course suggests the duration increase could be due to lengthening of onset (Strategy to avoid illicit sequence)
-
-
-The intercept was something `r report_posterior(tab_dur, row = 1)`.
-
-Table \@ref(fig:tab-carrier-task-duration) shows a picture table. 
-
-(ref:tab-carrier-task-duration) This is a table caption.
+(ref:tab-carrier-task-duration) Forest plot of posterior distributions of duration model estimates. Points represent posterior medians &pm;66% and 95% credible intervals.
 
 ```{r, 'tab-carrier-task-duration', out.width="100%", fig.cap="(ref:tab-carrier-task-duration)"}
 knitr::include_graphics(here("figs/manuscript/duration_forest.png"))
@@ -186,30 +141,28 @@ knitr::include_graphics(here("figs/manuscript/duration_forest.png"))
 
 
 
+#### Time course analyses
 
-Figure \@ref(fig:plot-carrier-task-f1) shows the F1 GAM stuff. 
+The F1 trajectory data were analyzed using a Bayesian Generalized Additive Mixed Model [GAMM, @soskuthy2017generalised; @winter2016; @wood2006]. 
+We modeled the participant-normalized F1 values as a function of pre-glide onset, *preceding consonant* ("palatal", "other"), and a non-linear function of the formant trajectory for the [j] productions. 
+The *preceding consonant* parametric term was set as an ordered variable with *palatal* coded as 0. 
+Cubic regression splines with three basis knots were applied (a) as a reference smooth to the time course, (b) as a difference smooth to the time course conditioned on the preceding consonant, and (c) as a random smooth for each participant conditioned on the time course. 
+This specification uses the trajectory of the *palatal* condition as the baseline and compares it to the *other* trajectory. 
 
-(ref:plot-carrier-task-f1) This is a figure caption for the F1 GAM.
+(ref:plot-carrier-task-f1) Non-linear formant (F1) trajectories of [j] when preceded by *palatal* and *non-palatal* onsets (panel A), and estimated differences (palatal &minus; other) in standardized F1 over the time course (panel b). In both panels, the thin lines represent 300 draws of plausible lines from the posterior distribution. The thicker lines outlined in white represent the model average for the population estimate.
 
 ```{r, 'plot-carrier-task-f1', out.width="100%", fig.cap="(ref:plot-carrier-task-f1)"}
 knitr::include_graphics(here("figs", "manuscript", "carrier_gam_f1.png"))
 ```
 
-
-
-
-
-
-
-Figure \@ref(fig:plot-carrier-task-int) shows the Intensity GAM stuff. 
-
-(ref:plot-carrier-task-int) This is a figure caption for the intensity GAM.
-
-```{r, 'plot-carrier-task-int', out.width="100%", fig.cap="(ref:plot-carrier-task-int)"}
-knitr::include_graphics(here("figs", "manuscript", "carrier_gam_int.png"))
-```
-
-
+Panel A of Figure \@ref(fig:plot-carrier-task-f1) plots 300 posterior draws of plausible lines for the time course of the F1 trajectories in the palatal and other conditions. 
+The thicker lines outlined in white represents the most plausible trajectories based on the data, the model, and our prior assumptions. 
+One observes non-linear trajectories that are generally non-overlapping at the beginning of the time course and tend to converge on a single trajectory after approximately 50% of the time course. 
+The estimates for the difference smooth suggest a small, negative effect with a moderate amount of uncertainty around the estimate `r report_posterior(tab_gam_f1, 2)`. 
+There is approximately a .98 probability that the effect is negative. 
+The uncertainty around the estimate is manifested in panels A and B of Figure \@ref(fig:plot-carrier-task-f1) by the overlapping colored lines. 
+Panel B plots the estimated difference between the palatal and other conditions. 
+The figure corroborates the estimates from the GAMM, as there appears to be a non-zero difference between trajectories during the first half of the time course, though some plausible estimates indicate that the difference may also be zero. 
 
 
 Figure \@ref(fig:plot-carrier-task-forest) shows the GAM forest plot 
@@ -222,7 +175,51 @@ knitr::include_graphics(here("figs", "manuscript", "carrier_gam_forest.png"))
 
 
 
+Taken together, the duration and formant trajectory analyses suggest (1) that participants may be producing slightly *longer* pre-vocalic [j] when preceded by a &plus;palatal onset segment, and (2) that the starting point for the F1 transition from [j] to [a] is slightly lower when the onset contains a &plus;palatal segment. 
+This indicates that the hypothesized co-occurrence restriction may result in lengthening of the onset segment. 
+One possibility is that the participants may be producing a slightly longer segment in the palatal condition because of the fact that they cannot naturally produce both.
+In other words, participants might be trying to produce something, but because the target is illicit, they resort to lengthening.
 
+
+
+<!--
+To consider this issue further we conducted an exploratory analysis of the intensity measurement of the time course of the lengthened segment. 
+The should be lower than that of a glide. 
+- Why? More consonant-like productions have lower intensity than more vowel-like productions.
+
+
+#### [j] intensity time course
+
+
+- Analysis 3
+  - Generalized Additive Mixed Model
+  - Model: Intensity ~ preceding_consonant + time
+
+
+Summary
+- Sonoran speakers used variable strategies when producing the CGVGC sequences
+  - Importantly, they produced the GVG sequence at least some of the time (thus it is possible)
+  - Acoustic analysis shows that pre-vocalic segments are longer after palatal consonants
+  - Not shorter (i.e., elided because they are blocked)
+  - Analysis of the time course suggests the duration increase could be due to lengthening of onset (Strategy to avoid illicit sequence)
+
+Figure \@ref(fig:plot-carrier-task-int) shows the Intensity GAM stuff. 
+
+(ref:plot-carrier-task-int) Non-linear intensity trajectories of [j] when preceded by *palatal* and *non-palatal* onsets (panel A), and estimated differences (palatal &minus; other) in standardized values over the time course (panel b). In both panels, the thin lines represent 300 draws of plausible lines from the posterior distribution. The thicker lines outlined in white represent the model average for the population estimate.
+
+```{r, 'plot-carrier-task-int', out.width="100%", fig.cap="(ref:plot-carrier-task-int)"}
+knitr::include_graphics(here("figs", "manuscript", "carrier_gam_int.png"))
+```
+
+Figure \@ref(fig:plot-carrier-task-forest) shows the GAM forest plot 
+
+(ref:plot-carrier-task-forest) This is a figure caption for the forest plot of the gams.
+
+```{r, 'plot-carrier-task-forest', out.width="100%", fig.cap="(ref:plot-carrier-task-forest)"}
+knitr::include_graphics(here("figs", "manuscript", "carrier_gam_forest.png"))
+```
+
+-->
 
 
 
