@@ -1,14 +1,15 @@
 ## Bayesian Data Analysis
 
-In all cases we used Bayesian Data Analysis (BDA, CITE) for statistical inferences. 
+The present work uses Bayesian Data Analysis (BDA) for statistical inferences. 
+This implies that we do not focus on a single point estimate for a given parameter &beta;, but rather we use Bayes Theorem to derive a posterior distribution of plausible estimates of &beta;. 
+Importantly, we do not use p-values or any other decision rules for determining the importance of an effect. 
+BDA allows us to quantify our uncertainty in a more straightforward way with regard to our statistical models and focus on estimation.
 
-
-## Syllabification task
+## Syllable division task
 
 The first model analyzed the syllabification task data using multinomial logistic regression. 
 The participants responses (triphthong, hiatus, simplification) were modeled in a simple, intecept-only model, and as a function of the post-consonantal glide ([j], [w]). 
-
-Table \@ref(tab:syllabification-all-models-table) below.
+Table \@ref(tab:syllabification-all-models-table) below provides the complete output summary of the model.
 
 ```{r, syllabification-all-models-table}
 tab_multi_all %>% 
@@ -23,17 +24,18 @@ tab_multi_all %>%
 ```
 
 
-## Carrier task
+## Phrase reading task
 
 ### GAMMs
 
-GAMMs represent an extension to the linear model framework that allow non-linear functions called factor smooths to be applied to predictors. In this sense, the predictors can be classified into two types: parametric terms (equivalent to fixed effects in hierarchical model terminology) and smooth terms. 
+GAMMs represent an extension to the linear model framework that allow non-linear functions called factor smooths to be applied to predictors. 
+In this sense, the predictors can be classified into two types: parametric terms (equivalent to fixed effects in hierarchical model terminology) and smooth terms. 
 Random smooths are conceptually similar to random slopes and intercepts in the mixed-effects regression framework [@winter2016].
 Thus, they allow the by-subject trajectory shapes to vary as a function of a parametric effect and are essential in avoiding anti-conservative models.
 
 ### F1
 
-Table \@ref(tab:carrier-dur) below.
+The model summary output of the duration model is available in Table \@ref(tab:carrier-dur) here: 
 
 ```{r, carrier-dur}
 tab_dur %>% 
@@ -46,7 +48,48 @@ tab_dur %>%
     label = "carrier-dur")
 ```
 
-Table \@ref(tab:carrier-f1-gam) below.
+
+The full model specification used to fit the F1 GAMM is provided below, followed by the full output of the model summary in Table \@ref(tab:carrier-f1-gam). 
+
+```r
+# Set priors
+priors <- c(
+  prior(normal(0, 0.5), class = Intercept), 
+  prior(normal(0, 0.5), class = b), 
+  prior(
+    student_t(3, 0, 1), 
+    class = sds, 
+    coef = s(time_course_segment, bs = "cr", k = 3)), 
+  prior(
+    student_t(3, 0, 2.5), 
+    class = sds, 
+    coef = s(time_course_segment, by = is_palatal_ord, bs = "cr", k = 4)), 
+  prior(
+    student_t(3, 0, 2.5), 
+    class = sds, 
+    coef = s(time_course_segment, participant, bs = "fs", m = 1, k = 3)), 
+  prior(cauchy(0, 2), class = sigma)
+  )
+
+# Model formula
+mode_formula <- bf(
+ f1norm ~ is_palatal_ord + 
+  s(time_course_segment, bs = "cr", k = 3) + # ref smooth
+  s(time_course_segment, by = is_palatal_ord, bs = "cr", k = 4) + # diff
+  s(time_course_segment, participant, bs = "fs", m = 1, k = 3), # random 
+)
+
+# F1 GAM
+b_gam_f1 <- brm(
+  formula = model_formula
+  family = gaussian(), 
+  prior = priors, 
+  backend = "cmdstanr", iter = 2000, warmup = 1000, cores = 4,
+  control = list(adapt_delta = 0.999999, max_treedepth = 20), 
+  data = carrier_tc_final_gamm, 
+  )
+```
+
 
 ```{r, carrier-f1-gam}
 tab_gam_f1 %>% 
@@ -59,7 +102,7 @@ tab_gam_f1 %>%
     label = "carrier-f1-gam")
 ```
 
-Table \@ref(tab:carrier-int-gam) below.
+An exploratory model not reported on the time course of the intensity measurements is provided below in Table \@ref(tab:carrier-int-gam). 
 
 ```{r, carrier-int-gam}
 tab_gam_int %>% 
@@ -73,4 +116,15 @@ tab_gam_int %>%
 ```
 
 
+## Reproducibility information
 
+**About this document**  
+
+This document was written in RMarkdown using `papaja` [@R-papaja].  
+
+**Session info**  
+
+```{r, session-info, comment=""}
+devtools::session_info()$platform
+as.data.frame(devtools::package_info())[, c(3, 8)]
+```

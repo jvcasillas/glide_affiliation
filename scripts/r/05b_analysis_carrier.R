@@ -529,15 +529,15 @@ carrier_gam_forest_f1 <- gam_forest_data %>%
   ggplot(., aes(x = value, y = name, fill = term)) + 
     facet_grid(term ~ ., scales = "free", space = "free") + 
     geom_vline(xintercept = 0, lty = 3) + 
-    stat_halfeye(fill = "darkgrey", slab_type = "histogram", breaks = 30, 
-      outline_bars = T, slab_color = "white", slab_size = 0.3, 
-      point_fill = "white", pch = 21, show.legend = F) +
+    stat_halfeye(aes(fill = term), point_fill = "white", pch = 21, 
+      show.legend = F, slab_alpha = 0.7) +
     geom_text(data = gam_data_summary %>% filter(model == "F1"), 
       hjust = 1, family = "Times", size = 3, 
       aes(group = interaction(term, model), label = glue::glue("{value} [{.lower}, {.upper}]"),
         x = -0.6)) +
     coord_cartesian(xlim = c(-1.25, 3)) + 
     scale_y_discrete(limits = rev, position = "left") + 
+    scale_fill_viridis_d(option = "B", begin = 0.2, end = 0.8) + 
     labs(title = NULL, subtitle = NULL, y = NULL, x = "Estimate") + 
     ds4ling::ds4ling_bw_theme(base_family = "Times", base_size = 13) + 
     theme(
@@ -548,9 +548,8 @@ carrier_gam_forest_f1 <- gam_forest_data %>%
 ggsave(
   filename = "carrier_gam_forest_f1.png", 
   plot = carrier_gam_forest_f1, 
-  path = here("figs", "manuscript"), width = 7.5, height = 5.5, dpi = 600
+  path = here("figs", "manuscript"), width = 7.5, height = 4.5, dpi = 600
   )
-
 
 
 #
