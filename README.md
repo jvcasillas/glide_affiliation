@@ -1,6 +1,6 @@
 # Syllabic affiliation of glides in chicano
 
-## Last update: 2021-10-13
+## Last update: 2023-11-03
 
 1.  [data](./data/)
 2.  [scripts](./scripts/)
