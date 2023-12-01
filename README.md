@@ -1,12 +1,25 @@
 # Syllabic affiliation of glides in chicano
 
-## Last update: 2023-11-03
+## Last update: 2023-12-01
 
 1.  [data](./data/)
 2.  [scripts](./scripts/)
 3.  [sources](./sources/)
 
 ------------------------------------------------------------------------
+
+Paso 1 (hecho): grabar gente silabificando.
+
+Paso 2: Poner las grabaciones en línea para que otros raters den su
+juicio (i.e., ¿esta persona ha dicho la ka pi aisto? - nativos (de
+donde?) - cuantos participantes? - cuantas opciones? (mirar doc a ver si
+hay tendencias) - que se nos olvida?
+
+Paso 3: Reclutar más participantes para que hagan la tarea de
+silabificación en línea y las opciones serían las respuestas más comunes
+del piloto (paso 1) que han sido confirmadas por raters (paso 2). - ven
+texto - escogen entre dos opciones - nativos (de donde?) (dos grupos?) -
+cuantos participantes?
 
 # Analyses
 
@@ -113,7 +126,10 @@ trajectory over the course of the segment. If the participants are able
 to produce a glide in some contexts but not others we should see
 differences in F1 as a function of the preceding consonant.
 
-![gam-f1](./figs/plot_phrase_tc_f1.png)
+<figure>
+<img src="./figs/plot_phrase_tc_f1.png" alt="gam-f1" />
+<figcaption aria-hidden="true">gam-f1</figcaption>
+</figure>
 
 Again, the second possibility is that participants are lengthening the
 palatal consonant (not producing a glide) because of the fact that they
@@ -126,6 +142,12 @@ more vowel-like productions. Thus we analyze the time course of
 intensity in order to see how the two environments differ as they near
 the following \[a\].
 
-![gam-int](./figs/plot_phrase_tc_int.png)
+<figure>
+<img src="./figs/plot_phrase_tc_int.png" alt="gam-int" />
+<figcaption aria-hidden="true">gam-int</figcaption>
+</figure>
 
-![gam-int-dif](./figs/plot_phrase_tc_dff_int.png)
+<figure>
+<img src="./figs/plot_phrase_tc_dff_int.png" alt="gam-int-dif" />
+<figcaption aria-hidden="true">gam-int-dif</figcaption>
+</figure>

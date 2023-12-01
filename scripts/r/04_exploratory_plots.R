@@ -128,6 +128,7 @@ comparison_items_nonpalatals <- c(
  'piano'      # [p]
 )
 
+if(F) {
 carrier_tc_final <- carrier_tc %>% 
   filter(., item %in% c(critical_items_palatals, 
                         comparison_items_nonpalatals), 
@@ -135,6 +136,7 @@ carrier_tc_final <- carrier_tc %>%
   mutate(., pre_c = if_else(item %in% comparison_items_nonpalatals, 'other', 
                             if_else(item %in% c('chiaba', 'mebochiana', 'pachialo'), 'ch', 
                                     if_else(item == 'lliape', 'j', 'nh')))) 
+}
 
 hls_carrier_dur_p1 <- carrier_tc_final %>% 
   filter(., duration <= 375) %>% 
