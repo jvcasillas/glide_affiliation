@@ -112,6 +112,9 @@ get_data_from_gitlab <- function(
 
 # -----------------------------------------------------------------------------
 
+
+
+
 # Plotting functions ----------------------------------------------------------
 
 # create style theme
@@ -128,6 +131,9 @@ my_theme <- function(...) {
   )
 }
 
+
+
+
 my_empty <- function(...) {
   list(
     theme_minimal(...), 
@@ -141,15 +147,19 @@ my_empty <- function(...) {
   )
 }
 
+
 # Quick save function
 my_save <- function(file) {
   ggsave(file, width = 7, height = 4.5, units = "in")
 }
 
+
 # Viridis colors (colorblindness friendly)
 my_colors <- c("#f98e09", "#bc3754", "#57106e")
 
 # -----------------------------------------------------------------------------
+
+
 
 
 # Other helpers ---------------------------------------------------------------
