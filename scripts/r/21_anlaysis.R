@@ -107,6 +107,8 @@ phase_2 <- phase2_temp |>
 # Table for Phase_2
 view(phase_2)
 
+#color blind palette
+cbPalette <- c("#000000","#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#999999")
 
 # create rule for aligning Participant's response with Phase 1
 phase_2_match <- phase_2 %>%
@@ -125,7 +127,6 @@ phase_2_diphthong <- phase_2_match %>%
     response == op2~"hiatus",
     TRUE ~"No Match"))
 
-  
 print(phase_2_diphthong)
 table(phase_2_diphthong$match)
 
@@ -134,8 +135,6 @@ table(phase_2_diphthong$match)
 # 2202  3886 
 
 ## responses matched the diphthong, the hiatus or response was altered by participant
-
-cbPalette <- c("#000000","#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#999999")
 
 #distribution of responses
 
@@ -166,15 +165,14 @@ phase_2_triphthong <- phase_2_match %>%
   )
 
 print(phase_2_triphthong)
-#subset with only diphthongs
 
-table(phase_2_diphthong$match)
-
+#subset with only triphthongs
+table(phase_2_triphthong$match)
 #
 #FALSE  TRUE 
 #4074  6277 
-## responses matched the triphthong, falling diphthong, rising diphthong or response was altered by participant
 
+## responses matched the triphthong, falling diphthong, rising diphthong or response was altered by participant
 
 #distribution of responses
 
@@ -202,7 +200,7 @@ phase_2_f <- phase_2 %>%
   filter(match == "FALSE")
 
 
-## exploring non-matches by items
+## exploring mismatches by items
 
 phase_2_f %>%
   group_by(match, item) %>%
@@ -213,3 +211,4 @@ phase_2_f %>%
   xlab("item") +
   scale_fill_gradient(low = "#009E73", high = "#CC79A7") +
   my_save("Phase2_Feb25/plot_response_mismatches.png")
+
