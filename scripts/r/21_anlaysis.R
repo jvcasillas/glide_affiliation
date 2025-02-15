@@ -102,3 +102,114 @@ phase_2 <- phase2_temp |>
 
 # -----------------------------------------------------------------------------
 
+# -----------------------------------------------------------------------------
+# 02122025
+# Table for Phase_2
+view(phase_2)
+
+
+# create rule for aligning Participant's response with Phase 1
+phase_2_match <- phase_2 %>%
+  mutate(match = common_response == response) %>%
+  drop_na(match) %>%
+  arrange(item) %>%
+  group_by(item)
+
+#subset with only diphthongs. Returns rows where op3 is NA
+
+phase_2_diphthong <- phase_2_match %>%
+  filter(is.na(op3)) %>%
+  mutate(match = common_response == response,
+  matched_option = case_when(
+    response == op1~"diphthong",
+    response == op2~"hiatus",
+    TRUE ~"No Match"))
+
+  
+print(phase_2_diphthong)
+table(phase_2_diphthong$match)
+
+#
+# FALSE  TRUE 
+# 2202  3886 
+
+## responses matched the diphthong, the hiatus or response was altered by participant
+
+cbPalette <- c("#000000","#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#999999")
+
+#distribution of responses
+
+phase_2_diphthong %>%
+  count(match,matched_option) %>%
+  mutate(match = factor(match, levels = c("TRUE", "FALSE"))) %>%
+  ggplot(aes(x = match, y = n, fill = match)) +
+  stat_summary(fun="identity", geom = "bar", position= "dodge")+
+  geom_col() +
+  facet_wrap(~matched_option, scales = "free_x") +
+  labs(x = "Phase 2 = phase 1 response?", y = "count") +
+  theme(legend.position = "none") +
+  scale_color_manual(values=cbPalette[c(3,4)]) +
+  scale_fill_manual(values=cbPalette[c(3,4)]) +
+  my_save("Phase2_Feb25/plot_response_diphthongs.png")
+
+
+#subset with only triphthongs. Keeps only rows where op3 is NOT na
+
+phase_2_triphthong <- phase_2_match %>%
+  filter(!is.na(op3)) %>%
+  mutate(match = common_response == response,
+         matched_option = case_when(
+           response == op1~"triphthong",
+           response == op2~"FallingDiphthong",
+           response == op3~"RisingDiphthong",
+           TRUE ~"No Match")
+  )
+
+print(phase_2_triphthong)
+#subset with only diphthongs
+
+table(phase_2_diphthong$match)
+
+#
+#FALSE  TRUE 
+#4074  6277 
+## responses matched the triphthong, falling diphthong, rising diphthong or response was altered by participant
+
+
+#distribution of responses
+
+phase_2_triphthong %>%
+  count(match,matched_option) %>%
+  mutate(match = factor(match, levels = c("TRUE", "FALSE"))) %>%
+  ggplot(aes(x = match, y = n, fill = match)) +
+  stat_summary(fun="identity", geom = "bar", position= "dodge")+
+  geom_col() +
+  facet_wrap(~matched_option, scales = "free_x") +
+  labs(x = "Phase 2 = phase 1 response?", y = "count") +
+  theme(legend.position = "none") +
+  scale_color_manual(values=cbPalette[c(3,4)]) +
+  scale_fill_manual(values=cbPalette[c(3,4)]) +
+  my_save("Phase2_Feb25/plot_response_triphthongs.png")
+
+
+## order by item
+
+phase_2_f <- phase_2 %>%
+  mutate(match = common_response == response) %>%
+  drop_na(match) %>%
+  arrange(item) %>%
+  group_by(item) %>%
+  filter(match == "FALSE")
+
+
+## exploring non-matches by items
+
+phase_2_f %>%
+  group_by(match, item) %>%
+  count(match) %>%
+  ggplot(aes(x=reorder(item,n), y=n, fill = n)) +
+  geom_col() +
+  coord_flip() +
+  xlab("item") +
+  scale_fill_gradient(low = "#009E73", high = "#CC79A7") +
+  my_save("Phase2_Feb25/plot_response_mismatches.png")
