@@ -165,7 +165,7 @@ p_multi_0 <- b_multi_0_post %>%
         {glide_cri[1, ]}
         {glide_cri[2, ]}
         {glide_cri[3, ]}")) +
-    ds4ling::ds4ling_bw_theme(base_size = 13, base_family = "Times") + 
+    ds4ling::ds4ling_bw_theme(base_size = 13) + 
     theme(legend.position = c(0.63, 0.6875), 
       legend.spacing.y = unit(0, 'cm'), 
       legend.key.height = unit(0.5, "cm"),
@@ -193,7 +193,7 @@ p_multi_i <- b_multi_1a_post %>%
         {glide_i_cri[1, 2]}
         {glide_i_cri[2, 2]}
         {glide_i_cri[3, 2]}")) +
-    ds4ling::ds4ling_bw_theme(base_size = 13, base_family = "Times") + 
+    ds4ling::ds4ling_bw_theme(base_size = 13) + 
     theme(legend.position = c(0.65, 0.7), 
       legend.spacing.y = unit(0, 'cm'), 
       legend.key.height = unit(0.5, "cm"),
@@ -221,7 +221,7 @@ p_multi_u <- b_multi_1b_post %>%
         {glide_u_cri[1, 2]}
         {glide_u_cri[2, 2]}
         {glide_u_cri[3, 2]}")) +
-    ds4ling::ds4ling_bw_theme(base_size = 13, base_family = "Times") + 
+    ds4ling::ds4ling_bw_theme(base_size = 13) + 
     theme(legend.position = c(0.65, 0.7), 
       legend.spacing.y = unit(0, 'cm'), 
       legend.key.height = unit(0.5, "cm"),
