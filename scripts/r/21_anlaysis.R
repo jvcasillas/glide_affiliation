@@ -51,6 +51,9 @@ phase2_temp <- dir_ls(path = here("data", "phase_2"), regexp = ".csv") |>
 #    not "text_option_1")
 #  - change uppercase responses to lowercase
 
+# Noticed something about these in Phase1, but can't remember what it is now
+labial_remove <- c("lakabuaisto", "lakafuaisto", "lakapuaisto")
+
 # Get critical items
 critical_items_triphthongs <- c(
   #      [j]            [w]
@@ -83,7 +86,8 @@ phase_2_structure <- phase2_temp |>
   ) |> 
   select(-response_other)
 
-
+# Now add columns to dataframe for glide and consonant info
+# Add classification labels for participant responses (hiatus, trip, etc.)
 phase_2 <- phase_2_structure |> 
   filter(item %in% critical_items_triphthongs) |> 
   separate(
@@ -122,16 +126,6 @@ phase_2 <- phase_2_structure |>
     resp_label
   )
 
-
-phase_2 |> 
-  count(resp_label) |> 
-  mutate(total = sum(n), prop = n / total)
-
-phase_2 |> 
-  group_by(glide) |> 
-  count(resp_label) |> 
-  mutate(total = sum(n), prop = n / total)
-
 # -----------------------------------------------------------------------------
 
 
@@ -139,59 +133,43 @@ phase_2 |>
 
 # Analyses --------------------------------------------------------------------
 
-# Miriam: 
-# You can start here. The dataframe you will work with is 'phase_2'
-# Don't worry about making any plots for now. Just do the analyses and we 
-# will go from there (the plots and other things will be slightly different 
-# so we can talk about that later). 
-# When you save models you have to make sure you give them new names so you 
-# save over the old ones. Ex: 
-#
-# Old example/name
-# file = here("models", "b_multi_0"))
-#
-# New example/name
-# file = here("models", "b_multi_0_phase2"))
-#
-# I'm sure I am forgetting something, so just give it a go and let me know 
-# if/when you have any issues. 
-#
-
 # Fit intercept-only multinomial model to get CrI around response rates
 b_multi_0 <- brm(
   resp_label ~ 1 + (1 | id) + (1 | speaker_id), 
   prior = c(
-    prior(normal(0, 20), class = Intercept, dpar = muSimplification), 
-    prior(normal(0, 20), class = Intercept, dpar = muTriphthong)
+    prior(normal(0, 10), class = Intercept, dpar = muSimplification), 
+    prior(normal(0, 10), class = Intercept, dpar = muTriphthong)
   ), 
   iter = 2000, warmup = 1000, cores = 4, backend = "cmdstanr", 
-  data = filter(phase_2), 
+  data = filter(phase_2, !(item %in% labial_remove)), 
   family = categorical(link = "logit"), 
   file = here("models", "b_multi_0_phase2")
 )
 
+# Same model with subset of glide == "i"
 b_multi_1a <- brm(
   resp_label ~ 1 + (1 | id) + (1 | speaker_id), 
   prior = c(
-    prior(normal(0, 20), class = Intercept, dpar = muSimplification), 
-    prior(normal(0, 20), class = Intercept, dpar = muTriphthong)
+    prior(normal(0, 10), class = Intercept, dpar = muSimplification), 
+    prior(normal(0, 10), class = Intercept, dpar = muTriphthong)
   ), 
   iter = 2000, warmup = 1000, cores = 4, backend = "cmdstanr", 
   control = list(adapt_delta = 0.99), 
-  data = filter(phase_2, glide == "i"),
+  data = filter(phase_2, !(item %in% labial_remove), glide == "i"),
   family = categorical(link = "logit"), 
   file = here("models", "b_multi_1a_phase2")
 )
 
+# Same model with subset of glide == "u"
 b_multi_1b <- brm(
   resp_label ~ 1 + (1 | id) + (1 | speaker_id), 
   prior = c(
-    prior(normal(0, 20), class = Intercept, dpar = muSimplification), 
-    prior(normal(0, 20), class = Intercept, dpar = muTriphthong)
+    prior(normal(0, 10), class = Intercept, dpar = muSimplification), 
+    prior(normal(0, 10), class = Intercept, dpar = muTriphthong)
   ), 
   iter = 2000, warmup = 1000, cores = 4, backend = "cmdstanr", 
   control = list(adapt_delta = 0.99), 
-  data = filter(phase_2, glide == "u"),
+  data = filter(phase_2, !(item %in% labial_remove), glide == "u"),
   family = categorical(link = "logit"), 
   file = here("models", "b_multi_1b_phase2")
 )
@@ -203,48 +181,106 @@ b_multi_1b <- brm(
 
 # Get posterior samples for each model and calculate phi ----------------------
 b_multi_0_post <- as_draws_df(b_multi_0) |> 
-  transmute(iter           = 1:n(),
-            Hiatus         = 0,  # recall this is the default
-            Simplification = b_muSimplification_Intercept, 
-            Triphthong     = b_muTriphthong_Intercept) |> 
-  pivot_longer(cols = -iter, names_to = "realization", values_to = "estimate") |> 
+  transmute(
+    iter           = 1:n(),
+    Hiatus         = 0,  # recall this is the default
+    Simplification = b_muSimplification_Intercept, 
+    Triphthong     = b_muTriphthong_Intercept
+  ) |> 
+  pivot_longer(
+    cols = -iter, 
+    names_to = "realization", 
+    values_to = "estimate"
+  ) |> 
   group_by(iter) |> 
   mutate(phi = exp(estimate) / sum(exp(estimate)))
 
 b_multi_1a_post <- as_draws_df(b_multi_1a) |> 
-  transmute(iter           = 1:n(),
-            Hiatus         = 0,  # recall this is the default
-            Simplification = b_muSimplification_Intercept, 
-            Triphthong     = b_muTriphthong_Intercept 
+  transmute(
+    iter           = 1:n(),
+    Hiatus         = 0,  # recall this is the default
+    Simplification = b_muSimplification_Intercept, 
+    Triphthong     = b_muTriphthong_Intercept 
   ) |> 
-  pivot_longer(cols = -iter, names_to = "realization", values_to = "estimate") |> 
+  pivot_longer(
+    cols = -iter, 
+    names_to = "realization", 
+    values_to = "estimate"
+  ) |> 
   group_by(iter) |>
   mutate(phi = exp(estimate) / sum(exp(estimate)))
 
 b_multi_1b_post <- as_draws_df(b_multi_1b) |> 
-  transmute(iter           = 1:n(),
-            Hiatus         = 0,  # recall this is the default
-            Simplification = b_muSimplification_Intercept, 
-            Triphthong     = b_muTriphthong_Intercept 
+  transmute(
+    iter           = 1:n(),
+    Hiatus         = 0,  # recall this is the default
+    Simplification = b_muSimplification_Intercept, 
+    Triphthong     = b_muTriphthong_Intercept 
   ) |> 
-  pivot_longer(cols = -iter, names_to = "realization", values_to = "estimate") |> 
+  pivot_longer(
+    cols = -iter, 
+    names_to = "realization", 
+    values_to = "estimate"
+  ) |> 
   group_by(iter) |>
   mutate(phi = exp(estimate) / sum(exp(estimate)))
 
-
-
-as_tibble(b_multi_0) |> 
+b_multi_2_post <- as_tibble(b_multi_0) |> 
   select(starts_with("r_speaker_id")) |> 
-  mutate(iter = 1:n(), Hiatus = 0) |> 
-  pivot_longer(cols = -iter, names_to = "realization", values_to = "estimate") |> 
-  separate(col = realization, into = c("realization", "speaker"), sep = "\\[") |> 
+  mutate(
+    iter = 1:n(), 
+    `r_speaker_id__muHiatus[p03,Intercept]` = 0, 
+    `r_speaker_id__muHiatus[p04,Intercept]` = 0, 
+    `r_speaker_id__muHiatus[p05,Intercept]` = 0, 
+    `r_speaker_id__muHiatus[p06,Intercept]` = 0, 
+    `r_speaker_id__muHiatus[p07,Intercept]` = 0, 
+    `r_speaker_id__muHiatus[p08,Intercept]` = 0
+  ) |> 
+  pivot_longer(
+    cols = -iter, 
+    names_to = "realization", 
+    values_to = "estimate"
+  ) |> 
+  separate(
+    col = realization, 
+    into = c("realization", "speaker"), 
+    sep = "\\["
+  ) |> 
   mutate(
     realization = str_remove(realization, "r_speaker_id__mu"), 
     speaker = str_remove(speaker, ",Intercept]")
   ) |> 
   group_by(iter, speaker) |>
-  mutate(phi = exp(estimate) / sum(exp(estimate))) 
+  mutate(phi = exp(estimate) / sum(exp(estimate)))
 
+b_multi_re_post <- as_tibble(b_multi_0) |> 
+  select(starts_with("sd")) |> 
+  mutate(
+    iter = 1:n(), 
+    sd_id__muHiatus_Intercept = 0, 
+    sd_speaker_id__muHiatus_Intercept = 0
+  ) |> 
+  pivot_longer(
+    cols = -iter, 
+    names_to = "realization", 
+    values_to = "estimate"
+  ) |> 
+  separate(realization, into = c("type", "realization"), sep = "__") |> 
+  mutate(
+    type = str_remove(type, "sd_"), 
+    realization = str_remove(realization, "mu"), 
+    realization = str_remove(realization, "_Intercept")
+  ) |> 
+  group_by(iter, type) |>
+  mutate(phi = exp(estimate) / sum(exp(estimate))) |> 
+  ungroup()
+
+
+b_multi_re_post |> 
+  ggplot() + 
+  aes(x = phi, y = realization) + 
+  facet_grid(. ~ type, scales = "free_x") + 
+  stat_halfeye()
 
 # -----------------------------------------------------------------------------
 
@@ -400,6 +436,45 @@ ggsave(
   path = here("figs", "manuscript"), width = 7, height = 5.75, dpi = 600
 )
 
+# Plot with population effects and grouping effects summary
+phase2_by_speaker_avg <- filter(phase_2, !(item %in% labial_remove)) |> 
+  group_by(speaker_id, resp_label) |> 
+  count() |> 
+  group_by(speaker_id) |> 
+  transmute(
+    speaker_id, 
+    realization = resp_label, 
+    prop = n / sum(n)
+  ) |> 
+  ungroup()
+
+b_multi_2_post |> 
+  ggplot() + 
+  aes(x = phi, y = realization, color = realization, fill = realization) + 
+  stat_eye(
+    data = b_multi_0_post, 
+    aes(x = phi, y = realization, color = realization, fill = realization), 
+    slab_alpha = 0.2, slab_color = "white", pch = 21, point_fill = "white", 
+    point_size = 5, show.legend = F
+  ) + 
+  stat_summary(
+    aes(group = speaker), 
+    fun = median, geom = "point", pch = 21, color = "white", size = 3, 
+    position = position_dodge(0.75), show.legend = F, 
+  ) + 
+  geom_point(
+    data = phase2_by_speaker_avg, 
+    aes(x = prop, y = realization, fill = realization, group = speaker_id), 
+    pch = 22, color = "white", size = 3, alpha = 0.5, 
+    position = position_dodge(0.75), show.legend = F
+  ) + 
+  scale_fill_manual(name = NULL, values = my_colors, labels = NULL) + 
+  scale_color_manual(name = NULL, values = my_colors, labels = NULL) + 
+  scale_x_continuous(labels = scales::percent, limits = c(0, 1)) + 
+  labs(y = NULL, x = NULL) + 
+  ds4ling::ds4ling_bw_theme(base_size = 13) + 
+  theme(axis.text.y = element_text(angle = 90, hjust = 0.5))
+
 # -----------------------------------------------------------------------------
 
 
@@ -437,123 +512,3 @@ bind_rows(
   saveRDS(file = here("tables", "tab_phase2_multi_all.rds"))
 
 # -----------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-# -----------------------------------------------------------------------------
-# 02122025
-# Table for Phase_2
-view(phase_2)
-
-#color blind palette
-cbPalette <- c("#000000","#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#999999")
-
-# create rule for aligning Participant's response with Phase 1
-phase_2_match <- phase_2 %>%
-  mutate(match = common_response == response) %>%
-  drop_na(match) %>%
-  arrange(item) %>%
-  group_by(item)
-
-#subset with only diphthongs. Returns rows where op3 is NA
-
-phase_2_diphthong <- phase_2_match %>%
-  filter(is.na(op3)) %>%
-  mutate(match = common_response == response,
-  matched_option = case_when(
-    response == op1~"diphthong",
-    response == op2~"hiatus",
-    TRUE ~"No Match"))
-
-print(phase_2_diphthong)
-table(phase_2_diphthong$match)
-
-#
-# FALSE  TRUE 
-# 2202  3886 
-
-## responses matched the diphthong, the hiatus or response was altered by participant
-
-#distribution of responses
-
-phase_2_diphthong %>%
-  count(match,matched_option) %>%
-  mutate(match = factor(match, levels = c("TRUE", "FALSE"))) %>%
-  ggplot(aes(x = match, y = n, fill = match)) +
-  stat_summary(fun="identity", geom = "bar", position= "dodge")+
-  geom_col() +
-  facet_wrap(~matched_option, scales = "free_x") +
-  labs(x = "Phase 2 = phase 1 response?", y = "count") +
-  theme(legend.position = "none") +
-  scale_color_manual(values=cbPalette[c(3,4)]) +
-  scale_fill_manual(values=cbPalette[c(3,4)]) +
-  my_save("Phase2_Feb25/plot_response_diphthongs.png")
-
-
-#subset with only triphthongs. Keeps only rows where op3 is NOT na
-
-phase_2_triphthong <- phase_2_match %>%
-  filter(!is.na(op3)) %>%
-  mutate(match = common_response == response,
-         matched_option = case_when(
-           response == op1~"triphthong",
-           response == op2~"FallingDiphthong",
-           response == op3~"RisingDiphthong",
-           TRUE ~"No Match")
-  )
-
-print(phase_2_triphthong)
-
-#subset with only triphthongs
-table(phase_2_triphthong$match)
-#
-#FALSE  TRUE 
-#4074  6277 
-
-## responses matched the triphthong, falling diphthong, rising diphthong or response was altered by participant
-
-#distribution of responses
-
-phase_2_triphthong %>%
-  count(match,matched_option) %>%
-  mutate(match = factor(match, levels = c("TRUE", "FALSE"))) %>%
-  ggplot(aes(x = match, y = n, fill = match)) +
-  stat_summary(fun="identity", geom = "bar", position= "dodge")+
-  geom_col() +
-  facet_wrap(~matched_option, scales = "free_x") +
-  labs(x = "Phase 2 = phase 1 response?", y = "count") +
-  theme(legend.position = "none") +
-  scale_color_manual(values=cbPalette[c(3,4)]) +
-  scale_fill_manual(values=cbPalette[c(3,4)]) +
-  my_save("Phase2_Feb25/plot_response_triphthongs.png")
-
-
-## order by item
-
-phase_2_f <- phase_2 %>%
-  mutate(match = common_response == response) %>%
-  drop_na(match) %>%
-  arrange(item) %>%
-  group_by(item) %>%
-  filter(match == "FALSE")
-
-
-## exploring mismatches by items
-
-phase_2_f %>%
-  group_by(match, item) %>%
-  count(match) %>%
-  ggplot(aes(x=reorder(item,n), y=n, fill = n)) +
-  geom_col() +
-  coord_flip() +
-  xlab("item") +
-  scale_fill_gradient(low = "#009E73", high = "#CC79A7") +
-  my_save("Phase2_Feb25/plot_response_mismatches.png")
-
